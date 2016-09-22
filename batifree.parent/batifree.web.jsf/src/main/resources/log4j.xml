@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="false"
+	xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- ############################################################ -->
+	<!-- Appender declaration -->
+	<!-- ( default logger id category is not defined) -->
+	<!-- ############################################################ -->
+
+	<appender class="org.apache.log4j.ConsoleAppender" name="CONSOLE">
+		<param name="Target" value="System.Out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{dd-MM-yyyy HH:mm:ss} %-8.8p - %t - %-30.30c{1} - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="file-rolling-daily-appender" class="org.apache.log4j.RollingFileAppender">
+		<param name="Append" value="true" />
+		<param name="File"
+			value="J:\\Mes documents\\BatiFree\\Appli\\logs\\batifree.log" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{dd-MM-yyyy HH:mm:ss} %-8.8p - %t - %-30.30c{1} - %m%n" />
+		</layout>
+	</appender>
+
+
+	<!-- ############################################################ -->
+	<!-- CATEGORY logger -->
+	<!-- ############################################################ -->
+
+	<!-- ############################################################ -->
+	<!-- logger generiques -->
+	<!-- ############################################################ -->
+
+	<!-- **************************************** -->
+	<!-- ***** logger externes a desactiver ***** -->
+	<!-- **************************************** -->
+	<logger name="httpclient">
+		<level value="OFF" />
+	</logger>
+
+	<logger name="org">
+		<level value="OFF" />
+	</logger>
+	<logger name="com">
+		<level value="OFF" />
+	</logger>
+	<logger name="fr">
+		<level value="OFF" />
+	</logger>
+	<logger name="ucar">
+		<level value="OFF" />
+	</logger>
+	<logger name="net">
+		<level value="OFF" />
+	</logger>
+
+
+	<!-- **************************************** -->
+	<!-- ***** logger projet ***** -->
+	<!-- **************************************** -->
+	<logger name="fr.ird">
+		<level value="DEBUG" />
+	</logger>
+
+	<logger name="org.hibernate">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.springframework">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.hibernate.dialect">
+		<level value="OFF" />
+	</logger>
+
+	<logger name="ucar.nc2">
+		<level value="INFO" />
+	</logger>
+
+	<!-- ############################################################ -->
+	<!-- ROOT logger -->
+	<!-- ############################################################ -->
+	<root>
+		<appender-ref ref="file-rolling-daily-appender" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</log4j:configuration>

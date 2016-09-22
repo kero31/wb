@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.password">root_BATIFREE_batifreeadmin</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/batifreem</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.default_schema">batifreem</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.hibenate.format_sql">true</property>
+		<property name="hibernate.javax.persistence.validation.mode">none</property>
+		<property name="hibernate.search.autoregister_listeners">false</property>
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- Liste des fichiers de Mapping hbm -->
+		<mapping class="batifree.api.metier.ejb.Activite" />
+		<mapping class="batifree.api.metier.ejb.Materiaux" />
+		<mapping class="batifree.api.metier.ejb.Etat" />
+		<mapping class="batifree.api.metier.ejb.Contact" />
+		<mapping class="batifree.api.metier.ejb.Localisation" />
+		<mapping class="batifree.api.metier.ejb.SoustraitantEtude" />
+		<mapping class="batifree.api.metier.ejb.Detailcnt" />
+		<mapping class="batifree.api.metier.ejb.Avoir" />
+		<mapping class="batifree.api.metier.ejb.TacheLotEtude" />
+		<mapping class="batifree.api.metier.ejb.Etude" />
+		<mapping class="batifree.api.metier.ejb.Groupecnt" />
+		<mapping class="batifree.api.metier.ejb.Pays" />
+		<mapping class="batifree.api.metier.ejb.Unite" />
+		<mapping class="batifree.api.metier.ejb.Diverscnt" />
+		<mapping class="batifree.api.metier.ejb.Mainoeuvre" />
+		<mapping class="batifree.api.metier.ejb.Situation" />
+		<mapping class="batifree.api.metier.ejb.MainoeuvreEtude" />
+		<mapping class="batifree.api.metier.ejb.Fournisseur" />
+		<mapping class="batifree.api.metier.ejb.TacheLotBib" />
+		<mapping class="batifree.api.metier.ejb.TacheLot" />
+		<mapping class="batifree.api.metier.ejb.Soustraitant" />
+		<mapping class="batifree.api.metier.ejb.FournisseurMateriaux" />
+		<mapping class="batifree.api.metier.ejb.Facture" />
+		<mapping class="batifree.api.metier.ejb.Accesdroit" />
+		<mapping class="batifree.api.metier.ejb.MainoeuvreBib" />
+		<mapping class="batifree.api.metier.ejb.Acompte" />
+		<mapping class="batifree.api.metier.ejb.Bibliotheque" />
+		<mapping class="batifree.api.metier.ejb.Famille" />
+		<mapping class="batifree.api.metier.ejb.Client" />
+		<mapping class="batifree.api.metier.ejb.Engin" />
+		<mapping class="batifree.api.metier.ejb.Binaire" />
+		<mapping class="batifree.api.metier.ejb.MateriauxEtude" />
+		<mapping class="batifree.api.metier.ejb.MateriauxBib" />
+		<mapping class="batifree.api.metier.ejb.Tva" />
+		<mapping class="batifree.api.metier.ejb.Codification" />
+		<mapping class="batifree.api.metier.ejb.SoustraitantBib" />
+		<mapping class="batifree.api.metier.ejb.Coordonneecnt" />
+		<mapping class="batifree.api.metier.ejb.Image" />
+		<mapping class="batifree.api.metier.ejb.Skin" />
+		<mapping class="batifree.api.metier.ejb.Categorie" />
+		<mapping class="batifree.api.metier.ejb.EnginEtude" />
+		<mapping class="batifree.api.metier.ejb.EcheancierReglement" />
+		<mapping class="batifree.api.metier.ejb.Devis" />
+		<mapping class="batifree.api.metier.ejb.Chantier" />
+		<mapping class="batifree.api.metier.ejb.Civilite" />
+		<mapping class="batifree.api.metier.ejb.Affaire" />
+		<mapping class="batifree.api.metier.ejb.Echeancier" />
+		<mapping class="batifree.api.metier.ejb.Reglement" />
+		<mapping class="batifree.api.metier.ejb.EnginBib" />
+		<mapping class="batifree.api.metier.ejb.Chargeaffaire" />
+		<mapping class="batifree.api.metier.ejb.Preference" />
+		<mapping class="batifree.api.metier.ejb.ModePaiement" />
+
+	</session-factory>
+</hibernate-configuration>

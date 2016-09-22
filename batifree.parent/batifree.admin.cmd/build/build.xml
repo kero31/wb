@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="CheckValidityUsers" name="batifree.admin.cmd">
+	<property file="build.properties" />
+	
+	<!-- Definition des proprietes du projet -->
+	<property name="projet.jar.executable"    value="../target/batifree.admin.cmd.jar"/>
+	<property name="projet.lib.dir"        value="../target/lib"/>
+	
+	<!-- Lancer JAVA CheckValidityUsers -->
+	<target name="CheckValidityUsers">
+		<!-- Definition du classpath du projet -->
+		<path id="projet.classpath">
+			<fileset dir="${projet.lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+			<pathelement location="${projet.jar.executable}" />
+		</path>
+
+		<!-- Lancer JAVA -->
+		<java classname="admin.cmd.application.CheckValidityUsers" fork="true">
+			<classpath refid="projet.classpath" />
+		</java>
+		
+	</target>
+	
+	<!-- Lancer JAVA CreateUserTest -->
+	<target name="CreateUserTest">
+		<!-- Definition du classpath du projet -->
+		<path id="projet.classpath">
+			<fileset dir="${projet.lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+			<pathelement location="${projet.jar.executable}" />
+		</path>
+
+		<!-- Lancer JAVA -->
+		<java classname="admin.cmd.application.CreateUserTest" fork="true">
+			<classpath refid="projet.classpath" />
+			<arg value="${CreateUserTest.project.code}"/>
+		</java>
+		
+	</target>
+	 
+</project>

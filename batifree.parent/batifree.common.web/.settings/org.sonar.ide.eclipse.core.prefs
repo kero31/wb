@@ -1,0 +1,6 @@
+analyseLocally=false
+eclipse.preferences.version=1
+extraProperties=sonar.jdbc.driver\=com.mysql.jdbc.Driver\r\nsonar.jdbc.password\=sonar\r\nsonar.jdbc.url\=jdbc\:mysql\://localhost\:3306/sonar\r\nsonar.jdbc.username\=sonar
+projectKey=batifree\:batifree.common.web
+serverUrl=http\://localhost\:9000
+version=2
