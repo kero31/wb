@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="CopyInterfacesFromConception" name="MonProjet">
+	<property file="build.properties" />
+	
+	<!-- parent param -->
+	<property name="parentDirectory" value="${basedir}${file.separator}.." />
+	
+	<!-- param -->
+	<property name="dao.interfaces" value="dao${file.separator}interfaces"/>
+	<property name="manager.interfaces" value="manager${file.separator}interfaces"/>
+	<property name="metier.interfaces" value="metier${file.separator}interfaces"/>
+	<property name="application.interfaces" value="application${file.separator}interfaces"/>
+	<property name="src.java" value="src${file.separator}main${file.separator}java"/>
+	<property name="src.resources" value="src${file.separator}main${file.separator}resources"/>
+	
+	<!-- projects -->
+	<property name="common.api.project" value="${parentDirectory}${file.separator}webbati.common.api${file.separator}${src.java}"/>
+	<property name="common.api.package" value="common${file.separator}api"/>
+	<property name="common.api.project.package" value="${common.api.project}${file.separator}${common.api.package}${file.separator}"/>
+	<property name="webbati.api.project" value="${parentDirectory}${file.separator}webbati.api2${file.separator}${src.java}"/>
+	<property name="webbati.api.package" value="webbati${file.separator}api"/>
+	<property name="webbati.api.project.package" value="${webbati.api.project}${file.separator}${webbati.api.package}${file.separator}"/>
+	<property name="webbati.api.resources" value="${parentDirectory}${file.separator}webbati.api2${file.separator}${src.resources}"/>
+	<property name="webbati.web.jsf.resources" value="${parentDirectory}${file.separator}webbati.web.jsf${file.separator}${src.resources}"/>
+	<property name="admin.api.project" value="${parentDirectory}${file.separator}webbati.admin.api${file.separator}${src.java}"/>
+	<property name="admin.api.package" value="admin${file.separator}api"/>
+	<property name="admin.api.project.package" value="${admin.api.project}${file.separator}${admin.api.package}${file.separator}"/>
+	
+	<target name="CopyInterfacesFromConception" depends="DeleteInterfacesDirectory, CopyInterfacesDirectory">
+		<!-- tests 
+		<echo message="Version d'Ant utilisée: ${ant.version} _ ${poweramc.source.folder} _ ${src.dir} _ ${src.home}" />
+		<echo message="parentDirectory= ${parentDirectory}"/>
+		<echo message="webbati.api.project= ${webbati.api.project}"/>
+		<echo message="deleteDir = ${webbati.api.project}${file.separator}${src.java}${file.separator}${webbati.api.package}${file.separator}${dao.interfaces}"/>
+		-->
+	</target>
+	
+	<!-- Suppression répertoires interfaces -->
+	<target name="DeleteInterfacesDirectory">
+		<!-- webbati -->
+		<echo message="Suppression répertoires interfaces de webbati"/>
+		<delete dir="${webbati.api.project.package}${dao.interfaces}"/>
+		<delete dir="${webbati.api.project.package}${manager.interfaces}"/>
+		<delete dir="${webbati.api.project.package}${metier.interfaces}"/>
+		<delete dir="${webbati.api.project.package}${application.interfaces}"/>
+		
+		<!-- admin -->
+		<echo message="Suppression répertoires interfaces de admin"/>
+		<delete dir="${admin.api.project.package}${dao.interfaces}"/>
+		<delete dir="${admin.api.project.package}${manager.interfaces}"/>
+		<delete dir="${admin.api.project.package}${metier.interfaces}"/>
+		<delete dir="${admin.api.project.package}${application.interfaces}"/>
+
+		<!-- common -->
+		<echo message="Suppression répertoires interfaces de common"/>
+		<delete dir="${common.api.project.package}${dao.interfaces}"/>
+		<delete dir="${common.api.project.package}${manager.interfaces}"/>
+		<delete dir="${common.api.project.package}${metier.interfaces}"/>
+		<delete dir="${common.api.project.package}${application.interfaces}"/>
+	</target>
+	
+	<!-- Copie répertoires interfaces -->
+	<target name="CopyInterfacesDirectory">
+		<!-- webbati -->
+		<echo message="Copie répertoires interfaces de webbati"/>
+		<copy todir="${webbati.api.project.package}" preservelastmodified="true">
+			<fileset dir="${poweramc.source.folder}${file.separator}${webbati.api.package}" includes="**"/>
+		</copy>
+		
+		<!-- admin -->
+		<echo message="Copie répertoires interfaces de admin"/>
+		<copy todir="${admin.api.project.package}" preservelastmodified="true">
+			<fileset dir="${poweramc.source.folder}${file.separator}${admin.api.package}" includes="**"/>
+		</copy>
+		
+		<!-- common -->
+		<echo message="Copie répertoires interfaces de common"/>
+		<copy todir="${common.api.project.package}" preservelastmodified="true">
+			<fileset dir="${poweramc.source.folder}${file.separator}${common.api.package}" includes="**"/>
+		</copy>
+	</target>
+		
+	<!-- Remplacement de valeurs dans fichiers properties -->
+	<target name="ReplaceValueInProperties.key0" if="key0">
+		<propertyfile file="${filepath}" >
+			<entry key="${key0}" value="${value0}" />
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties.key1" if="key1">
+		<propertyfile file="${filepath}">
+			<entry key="${key1}" value="${value1}"/>
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties.key2" if="key2">
+		<propertyfile file="${filepath}">
+			<entry key="${key2}" value="${value2}"/>
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties.key3" if="key3">
+		<propertyfile file="${filepath}">
+			<entry key="${key3}" value="${value3}"/>
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties.key4" if="key4">
+		<propertyfile file="${filepath}">
+			<entry key="${key4}" value="${value4}"/>
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties.key5" if="key5">
+		<propertyfile file="${filepath}">
+			<entry key="${key5}" value="${value5}"/>
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties.key6" if="key6">
+		<propertyfile file="${filepath}">
+			<entry key="${key6}" value="${value6}"/>
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties.key7" if="key7">
+		<propertyfile file="${filepath}">
+			<entry key="${key7}" value="${value7}"/>
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties.key8" if="key8">
+		<propertyfile file="${filepath}">
+			<entry key="${key8}" value="${value8}"/>
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties.key9" if="key9">
+		<propertyfile file="${filepath}">
+			<entry key="${key9}" value="${value9}"/>
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties.key10" if="key10">
+		<propertyfile file="${filepath}">
+			<entry key="${key10}" value="${value10}"/>
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties.key11" if="key11">
+		<propertyfile file="${filepath}">
+			<entry key="${key11}" value="${value11}"/>
+		</propertyfile>
+	</target>
+	
+	<target name="ReplaceValueInProperties" depends="ReplaceValueInProperties.key0, ReplaceValueInProperties.key1, 
+		ReplaceValueInProperties.key2, ReplaceValueInProperties.key3, ReplaceValueInProperties.key4, 
+		ReplaceValueInProperties.key5, ReplaceValueInProperties.key6, ReplaceValueInProperties.key7, 
+		ReplaceValueInProperties.key8, ReplaceValueInProperties.key9, ReplaceValueInProperties.key10, 
+		ReplaceValueInProperties.key11"/>
+		
+	<!-- Copie répertoires interfaces -->
+	<target name="CopyResources">
+		<!-- webbati -->
+		<property name="rapports" value="${file.separator}rapports"/>
+		<echo message="Suppression répertoire resources de webbati web jsf"/>
+		<delete dir="${webbati.web.jsf.resources}${rapports}"/>
+		<echo message="Copie répertoire resources de webbati web jsf"/>
+		<mkdir dir="${webbati.web.jsf.resources}${rapports}" />
+		<copy todir="${webbati.web.jsf.resources}${rapports}" preservelastmodified="true">
+			<fileset dir="${webbati.api.resources}${rapports}" includes="**"/>
+		</copy>
+	</target>
+	 
+</project>
