@@ -15,7 +15,7 @@ import org.hibernate.criterion.Restrictions;
 import common.api.dao.hibernate.impl.HibernateDaoImpl;
 import common.api.dao.interfaces.ILigneHibernateDaoContainer;
 import common.api.dao.interfaces.ILigneWithModificationHibernateDaoContainer;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.ejb.ILigneEjb;
 import common.api.metier.interfaces.ILigne;
 
@@ -59,10 +59,10 @@ public class LigneHibernateDaoUtil {
 	 * @param <ILIGNE> ILigne
 	 * @param <ILIGNEEJB> ILigneEjb
 	 * @return liste de ligne EJ
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	private <ILIGNE extends ILigne<ILIGNE, ?>, ILIGNEEJB extends ILigneEjb> List<ILIGNEEJB> getListEjbFromMetier(ILIGNE pMetier)
-	        throws BatifreeException {
+	        throws WebbatiException {
 		if (pMetier != null) {
 			List<ILIGNE> listMetier = new ArrayList<>();
 			listMetier.add(getHighLigneFromMetier(pMetier));
@@ -96,10 +96,10 @@ public class LigneHibernateDaoUtil {
 	 * @param <ILIGNE> ILigne
 	 * @param <ILIGNEEJB> ILigneEjb
 	 * @return liste de ligne EJB
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	public <ILIGNE extends ILigne<ILIGNE, ?>, ILIGNEEJB extends ILigneEjb> List<ILIGNEEJB> getListEjbFromListMetier(List<ILIGNE> pListMetier)
-	        throws BatifreeException {
+	        throws WebbatiException {
 		return getListEjbFromListMetier(pListMetier, BORNE_GAUCHE_START, NIVEAU_START);
 	}
 
@@ -112,11 +112,11 @@ public class LigneHibernateDaoUtil {
 	 * @param <ILIGNE> ILigne
 	 * @param <ILIGNEEJB> ILigneEjb
 	 * @return liste de lignes EJB
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	@SuppressWarnings("unchecked")
 	protected <ILIGNE extends ILigne<ILIGNE, ?>, ILIGNEEJB extends ILigneEjb> List<ILIGNEEJB> getListEjbFromListMetier(List<ILIGNE> pListMetier,
-	        Integer pBorneGauche, Integer pNiveau) throws BatifreeException {
+	        Integer pBorneGauche, Integer pNiveau) throws WebbatiException {
 		List<ILIGNEEJB> listLigEjb = new ArrayList<>();
 
 		if (pListMetier != null && containerLigne != null) {
@@ -178,10 +178,10 @@ public class LigneHibernateDaoUtil {
 	 * @param <ILIGNE> ILigne
 	 * @param <ILIGNEEJB> ILigneEjb
 	 * @return collection d'arbre à partir d'une liste de ligne
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
 	public <ILIGNE, ILIGNEEJB extends ILigneEjb> List<ILIGNE> getListFromListLigneEjb(Collection<ILIGNEEJB> pSetLigneEjb, Class<ILIGNE> pClazzReturn)
-	        throws BatifreeException {
+	        throws WebbatiException {
 		List<ILIGNEEJB> listLigneEjb = new ArrayList<>();
 		if (pSetLigneEjb != null) {
 			listLigneEjb.addAll(pSetLigneEjb);
@@ -198,10 +198,10 @@ public class LigneHibernateDaoUtil {
 	 * @param <ILIGNE> ILigne
 	 * @param <ILIGNEEJB> ILigneEjb
 	 * @return collection d'arbre à partir d'une liste de ligne
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
 	public <ILIGNE, ILIGNEEJB extends ILigneEjb> List<ILIGNE> getListFromListLigneEjb(List<ILIGNEEJB> pListLigneEjb, Class<ILIGNE> pClazzReturn)
-	        throws BatifreeException {
+	        throws WebbatiException {
 		// Tri la liste EJB par BorneGauche
 		Collections.sort(pListLigneEjb, new Comparator<ILIGNEEJB>() {
 
@@ -228,12 +228,12 @@ public class LigneHibernateDaoUtil {
 	 * @param <ILIGNEEJB> ILigneEjb
 	 * @param <ILIGNELIST> ILIGNELIST
 	 * @return collection d'arbre à partir d'une liste de ligne
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
 	@SuppressWarnings("unchecked")
 	private <ILIGNE extends ILigne<ILIGNE, ?>, ILIGNELIST, ILIGNEEJB extends ILigneEjb> List<ILIGNELIST> getListFromListLigneEjb(
 	        List<ILIGNEEJB> pListLigneEjb, Integer pNiveau, Integer pBorneGauche, Integer pBorneDroite, Class<ILIGNELIST> pClazzReturn,
-	        ILIGNE pBibParent) throws BatifreeException {
+	        ILIGNE pBibParent) throws WebbatiException {
 		List<ILIGNELIST> listLigMetier = new ArrayList<>();
 
 		// Récup de la liste avec ses enfants
@@ -271,7 +271,7 @@ public class LigneHibernateDaoUtil {
 						try {
 							newMetier = clazzMetierImpl.newInstance();
 						} catch (InstantiationException | IllegalAccessException e) {
-							throw new BatifreeException("getListFromListLigneEjb : Erreur création new instance Metier Impl");
+							throw new WebbatiException("getListFromListLigneEjb : Erreur création new instance Metier Impl");
 						}
 
 						// Mise à jour des éléments de l'ejb vers le métier
@@ -286,7 +286,7 @@ public class LigneHibernateDaoUtil {
 						// Ajout du nouvel objet metier
 						listLigMetier.add((ILIGNELIST) newMetier);
 					} else {
-						throw new BatifreeException("getListFromListLigneEjb : Erreur clazzMetierImpl est NULL, ligEjb_id=" + ligEjb.getId());
+						throw new WebbatiException("getListFromListLigneEjb : Erreur clazzMetierImpl est NULL, ligEjb_id=" + ligEjb.getId());
 					}
 				}
 			}
@@ -303,10 +303,10 @@ public class LigneHibernateDaoUtil {
 	 * @param <ILIGNE> ILigne
 	 * @param <ILIGNEEJB> ILigneEjb
 	 * @return liste liste de Iligne
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	public <ILIGNE extends ILigne<ILIGNE, ?>, ILIGNEEJB extends ILigneEjb> List<ILIGNE> getList(Criteria pCriteriaMain,
-	        Class<ILIGNE> pClazzILigneMetier) throws BatifreeException {
+	        Class<ILIGNE> pClazzILigneMetier) throws WebbatiException {
 		// Liste globale de tous les métier ligne
 		List<ILIGNE> listLigneMetier = new ArrayList<>();
 
@@ -364,9 +364,9 @@ public class LigneHibernateDaoUtil {
 	 * 
 	 * @param pLigneEjbToDelete ligne ejb
 	 * @param <ILIGNEEJB> ILigneEjb
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public <ILIGNEEJB extends ILigneEjb> void deleteLigneEjb(ILIGNEEJB pLigneEjbToDelete) throws BatifreeException {
+	public <ILIGNEEJB extends ILigneEjb> void deleteLigneEjb(ILIGNEEJB pLigneEjbToDelete) throws WebbatiException {
 		// Supprime tous les bib rattaché à la bib
 		if (pLigneEjbToDelete != null && containerModifLigne != null) {
 			Criteria critSousElement = containerModifLigne.getCriteriaSessionForLigneDao()
@@ -403,10 +403,10 @@ public class LigneHibernateDaoUtil {
 	 * @param <ILIGNE> ILigne
 	 * @param <ILIGNEEJB> ILigneEjb
 	 * @return liste de métier
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 * */
 	public <ILIGNE extends ILigne<ILIGNE, ?>, ILIGNEEJB extends ILigneEjb> List<ILIGNE> getListFromMetierForSaveLigne(ILIGNE pMetier,
-	        Class<ILIGNE> pClazzILigneMetier) throws BatifreeException {
+	        Class<ILIGNE> pClazzILigneMetier) throws WebbatiException {
 		if (pMetier != null && containerModifLigne != null) {
 			ILIGNE ligne = pMetier;
 
@@ -458,9 +458,9 @@ public class LigneHibernateDaoUtil {
 	 * @param pNewListEjb nouvelle liste d'ejb
 	 * @param pEjbParent le parent
 	 * @param <ILIGNEEJB> ILigneEjb
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private <ILIGNEEJB extends ILigneEjb> void deleteLigneObsolete(List<ILIGNEEJB> pNewListEjb, ILIGNEEJB pEjbParent) throws BatifreeException {
+	private <ILIGNEEJB extends ILigneEjb> void deleteLigneObsolete(List<ILIGNEEJB> pNewListEjb, ILIGNEEJB pEjbParent) throws WebbatiException {
 		// Supprime tous les bib rattaché à la bib
 		if (pNewListEjb != null && pEjbParent != null && containerModifLigne != null) {
 			Criteria critSousElement = containerModifLigne.getCriteriaSessionForLigneDao().add(Restrictions.eq("superParentId", pEjbParent.getId()));
@@ -503,9 +503,9 @@ public class LigneHibernateDaoUtil {
 	 * @param pNewLigneEjb ejb qui doit être mis à jour
 	 * @param <ILIGNEEJB> ILigneEjb
 	 * @return nouvel ejb
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private <ILIGNEEJB extends ILigneEjb> ILIGNEEJB getUpdatedLigneEjbFromLigneEjb(ILIGNEEJB pNewLigneEjb) throws BatifreeException {
+	private <ILIGNEEJB extends ILigneEjb> ILIGNEEJB getUpdatedLigneEjbFromLigneEjb(ILIGNEEJB pNewLigneEjb) throws WebbatiException {
 		ILIGNEEJB newLigneEjb = pNewLigneEjb;
 		if (newLigneEjb != null && newLigneEjb.getId() != null && containerModifLigne != null) {
 			@SuppressWarnings("unchecked")
@@ -526,9 +526,9 @@ public class LigneHibernateDaoUtil {
 	 * @param pId id
 	 * @param pClazzILigne classe interfacede l'objet de retour
 	 * @return objet
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public <ILIGNE extends ILigne<ILIGNE, ?>> ILIGNE getById(Integer pId, Class<ILIGNE> pClazzILigne) throws BatifreeException {
+	public <ILIGNE extends ILigne<ILIGNE, ?>> ILIGNE getById(Integer pId, Class<ILIGNE> pClazzILigne) throws WebbatiException {
 		// Liste globale de tous les métier ligne de l'objet
 		if (pId != null && containerModifLigne != null) {
 			Criteria crit = containerModifLigne.getCriteriaSessionForLigneDao();

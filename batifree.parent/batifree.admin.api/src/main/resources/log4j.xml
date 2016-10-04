@@ -19,7 +19,7 @@
 	<appender name="file-rolling-daily-appender" class="org.apache.log4j.RollingFileAppender">
 		<param name="Append" value="true" />
 		<param name="File"
-			value="J:\\Mes documents\\BatiFree\\Appli\\logs\\batifree.log" />
+			value="C:\\Users\\Kero\\Documents\\Developpements\\logs\\webbati.log" />
 		<param name="MaxFileSize" value="10MB" />
 		<param name="MaxBackupIndex" value="10" />
 		<layout class="org.apache.log4j.PatternLayout">

@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import common.api.application.impl.PropertiesAppImpl;
 import common.api.application.interfaces.IPropertiesApp;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Classe/Interface <TestProperties>
@@ -17,7 +17,7 @@ import common.api.exception.BatifreeException;
 public class TestProperties {
 
 	@Test
-	public void loadProperties() throws BatifreeException {
+	public void loadProperties() throws WebbatiException {
 		IPropertiesApp prop = new PropertiesAppImpl();
 		String value = prop.getProperty(IPropertiesApp.BD_ADMIN_URL);
 		Assert.assertNotNull(value);

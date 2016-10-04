@@ -15,7 +15,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import common.api.dao.interfaces.IDao;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.impl.MetierImpl;
 import common.api.metier.interfaces.IMetier;
 import common.api.util.MyBeanUtils;
@@ -50,9 +50,9 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 	 * @param pMetier objet à transformer
 	 * @return EJB à partir d'un objet Metier
 	 * @param <ITIE> IMetier
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected <ITIE extends IMetier<ID>> T getEjbFromMetier(ITIE pMetier) throws BatifreeException {
+	protected <ITIE extends IMetier<ID>> T getEjbFromMetier(ITIE pMetier) throws WebbatiException {
 		if (pMetier != null && pMetier.getId() != null) {
 
 			// Récupère les infos d'hibernate dans l'EJB à partir de l'ID
@@ -69,9 +69,9 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 	 * 
 	 * @param pMetier objet métier
 	 * @return TRUE si l'objet métier est un nouveau, FALSE sinon
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected boolean isMetierNew(ITI pMetier) throws BatifreeException {
+	protected boolean isMetierNew(ITI pMetier) throws WebbatiException {
 		if (pMetier != null) {
 			return pMetier.getId() == null;
 		}
@@ -83,10 +83,10 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 	 * 
 	 * @param pMetier objet à transformer
 	 * @return EJB à partir d'un objet Metier
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	@SuppressWarnings("unchecked")
-	protected T getEjbUpdatedFromMetier(ITI pMetier) throws BatifreeException {
+	protected T getEjbUpdatedFromMetier(ITI pMetier) throws WebbatiException {
 		if (pMetier != null) {
 
 			try {
@@ -110,7 +110,7 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 
 				return ejb;
 			} catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
-				throw new BatifreeException("Erreur getEjbUpdatedFromMetier à cause de : ", e);
+				throw new WebbatiException("Erreur getEjbUpdatedFromMetier à cause de : ", e);
 			}
 		}
 		return null;
@@ -124,9 +124,9 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 	 * @param <IMETIER> Metier
 	 * @param <TEJB> Ejb
 	 * @return EJB à partir d'un objet Metier
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public static <IMETIER extends IMetier<?>, TEJB> TEJB getEjbNewFromMetier(IMETIER pMetier, Class<TEJB> pEjbClass) throws BatifreeException {
+	public static <IMETIER extends IMetier<?>, TEJB> TEJB getEjbNewFromMetier(IMETIER pMetier, Class<TEJB> pEjbClass) throws WebbatiException {
 		if (pMetier != null) {
 			try {
 				TEJB ejb = pEjbClass.newInstance();
@@ -134,7 +134,7 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 
 				return ejb;
 			} catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-				throw new BatifreeException("Erreur getEjbFromMetier à cause de : ", e);
+				throw new WebbatiException("Erreur getEjbFromMetier à cause de : ", e);
 			}
 		}
 		return null;
@@ -148,12 +148,12 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 	 * @param <IMETIER> Metier
 	 * @param <TEJB> Ejb
 	 */
-	public static <IMETIER extends IMetier<?>, TEJB> void updateMetierFromEjb(IMETIER pMetierToUpdate, TEJB pEjb) throws BatifreeException {
+	public static <IMETIER extends IMetier<?>, TEJB> void updateMetierFromEjb(IMETIER pMetierToUpdate, TEJB pEjb) throws WebbatiException {
 		if (pMetierToUpdate != null && pEjb != null) {
 			try {
 				MyBeanUtils.getInstance().copyPropertiesEJB(pMetierToUpdate, pEjb);
 			} catch (IllegalAccessException | InvocationTargetException e) {
-				throw new BatifreeException("Erreur updateMetierFromEjb à cause de : ", e);
+				throw new WebbatiException("Erreur updateMetierFromEjb à cause de : ", e);
 			}
 		}
 	}
@@ -167,10 +167,10 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 	 * @param pEjbClass Classe EJB
 	 * @param <IMETIER> Metier
 	 * @param <TEJB> Ejb
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	protected <IMETIER extends IMetier<?>, TEJB> void updateEjbListFromMetier(List<IMETIER> pMetierList, Map<Serializable, TEJB> pEjbMap,
-	        Set<TEJB> pEjbList, Class<TEJB> pEjbClass) throws BatifreeException {
+	        Set<TEJB> pEjbList, Class<TEJB> pEjbClass) throws WebbatiException {
 
 		try {
 			List<IMETIER> listMetier = new ArrayList<>();
@@ -210,13 +210,13 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 			}
 			pEjbList.removeAll(listEjbToDelete);
 
-		} catch (BatifreeException e) {
-			throw new BatifreeException("Erreur getEjbListNewFromMetier à cause de : ", e);
+		} catch (WebbatiException e) {
+			throw new WebbatiException("Erreur getEjbListNewFromMetier à cause de : ", e);
 		}
 	}
 
 	@Override
-	public ITI getById(ID pId) throws BatifreeException {
+	public ITI getById(ID pId) throws WebbatiException {
 		ITI objectEJBI = null;
 		if (pId != null) {
 			try {
@@ -229,7 +229,7 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 					objectEJBI = getMetierFromEjb(ejb);
 				}
 			} catch (HibernateException e) {
-				throw new BatifreeException("Erreur de récupération du " + getPersistentClass().getSimpleName() + " avec l'id " + pId
+				throw new WebbatiException("Erreur de récupération du " + getPersistentClass().getSimpleName() + " avec l'id " + pId
 				        + " à cause de : ", e);
 			}
 		}
@@ -247,10 +247,10 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 	 * @param <IDD> classe id
 	 * @param <TEJB> classe ejb
 	 * @return Objet par rapport à son ID
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	protected <TMETIER, IDD extends Serializable, TEJB> TMETIER getByIdGeneric(IDD pId, Class<TEJB> pEjbClass, Class<TMETIER> pClazzMetier)
-	        throws BatifreeException {
+	        throws WebbatiException {
 		TMETIER objectEJBI = null;
 		if (pId != null && pEjbClass != null) {
 			try {
@@ -263,7 +263,7 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 					objectEJBI = getMetierFromEjb(ejb, pClazzMetier);
 				}
 			} catch (HibernateException e) {
-				throw new BatifreeException("Erreur de récupération du " + getPersistentClass().getSimpleName() + " avec l'id " + pId
+				throw new WebbatiException("Erreur de récupération du " + getPersistentClass().getSimpleName() + " avec l'id " + pId
 				        + " à cause de : ", e);
 			}
 		}
@@ -277,12 +277,12 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 	 * @param pMetierToSave objet métier
 	 * @param pEjbSaved ejb sauvé
 	 */
-	protected void actionAfterSave(ITI pMetierToSave, T pEjbSaved) throws BatifreeException {
+	protected void actionAfterSave(ITI pMetierToSave, T pEjbSaved) throws WebbatiException {
 
 	}
 
 	@Override
-	public ITI save(ITI pMetier) throws BatifreeException {
+	public ITI save(ITI pMetier) throws WebbatiException {
 		ITI ejbIReturn = null;
 		if (pMetier != null) {
 			T ejb = null;
@@ -297,7 +297,7 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 				// Action faite après le save
 				actionAfterSave(pMetier, ejb);
 			} catch (HibernateException e) {
-				throw new BatifreeException("Enregistrement du " + getPersistentClass().getSimpleName() + " échoué à cause de : ", e);
+				throw new WebbatiException("Enregistrement du " + getPersistentClass().getSimpleName() + " échoué à cause de : ", e);
 			}
 
 			// Récup de l'ejbI
@@ -311,14 +311,14 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 	 * Fait la sauvegarde de l'objet EJB.
 	 * 
 	 * @param pEjb objet EJB
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected void saveOrUpdateEjb(Object pEjb) throws BatifreeException {
+	protected void saveOrUpdateEjb(Object pEjb) throws WebbatiException {
 		getSession().saveOrUpdate(pEjb);
 	}
 
 	@Override
-	public void delete(ID pId) throws BatifreeException {
+	public void delete(ID pId) throws WebbatiException {
 		deleteGeneric(pId, getPersistentClass());
 	}
 
@@ -329,9 +329,9 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 	 * @param pClazzEjb classe ejb
 	 * @param <IDD> classe id
 	 * @param <TEJB> classe ejb
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public <TEJB, IDD extends Serializable> void deleteGeneric(IDD pId, Class<TEJB> pClazzEjb) throws BatifreeException {
+	public <TEJB, IDD extends Serializable> void deleteGeneric(IDD pId, Class<TEJB> pClazzEjb) throws WebbatiException {
 		if (pId != null) {
 			try {
 				Session session = getSession();
@@ -341,14 +341,14 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 					session.delete(objectEJB);
 				}
 			} catch (HibernateException e) {
-				throw new BatifreeException(
+				throw new WebbatiException(
 				        "Suppression du " + getPersistentClass().getSimpleName() + " avec l'id=" + pId + " échoué à cause de : ", e);
 			}
 		}
 	}
 
 	@Override
-	public void delete(ITI pMetier) throws BatifreeException {
+	public void delete(ITI pMetier) throws WebbatiException {
 		if (pMetier != null) {
 			delete(pMetier.getId());
 		}
@@ -356,7 +356,7 @@ public abstract class HibernateDaoImpl<T, TI extends MetierImpl<ID>, ITI extends
 
 	@Override
 	public <IMETIER extends IMetier<IDD>, IDD extends Serializable> void deleteMetierFromNewListMetier(List<IMETIER> pListActual,
-	        List<IMETIER> pListNew, IDao<IMETIER, IDD> pDao) throws BatifreeException {
+	        List<IMETIER> pListNew, IDao<IMETIER, IDD> pDao) throws WebbatiException {
 		if (pListActual != null && pListNew != null) {
 			for (IMETIER actual : pListActual) {
 				boolean bActualFindInNewMetier = pListNew.contains(actual);

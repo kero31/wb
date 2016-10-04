@@ -11,7 +11,7 @@ import admin.api.metier.interfaces.IProjectscript;
 import admin.api.metier.interfaces.IRole;
 
 import common.api.dao.interfaces.IDao;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Interface <b>IProjectDao</b><br/>
@@ -23,17 +23,17 @@ public interface IProjectDao extends IDao<IProject, Integer> {
 	 * 
 	 * @param pProject le projet
 	 * @return liste des rôles à partir du projet.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IRole> getListRole(IProject pProject) throws BatifreeException;
+	List<IRole> getListRole(IProject pProject) throws WebbatiException;
 
 	/**
 	 * Retourne la liste des scripts à partir du projet.
 	 * 
 	 * @param pProject le projet
 	 * @return liste des scripts à partir du projet
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IProjectscript> getListProjectscript(IProject pProject) throws BatifreeException;
+	List<IProjectscript> getListProjectscript(IProject pProject) throws WebbatiException;
 
 }

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-	<wb-module deploy-name="batifree.web.jsf-1.0">
+	<wb-module deploy-name="webbati.web.jsf-1.0">
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <dependent-module archiveName="batifree.api2-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/batifree.api2/batifree.api2">
+        <dependent-module archiveName="webbati.api-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/webbati.api/webbati.api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="batifree.admin.api-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/batifree.admin.api/batifree.admin.api">
+        <dependent-module archiveName="webbati.admin.api-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/webbati.admin.api/webbati.admin.api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="batifree.common.api-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/batifree.common.api/batifree.common.api">
+        <dependent-module archiveName="webbati.common.api-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/webbati.common.api/webbati.common.api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="batifree.common.web-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/batifree.common.web/batifree.common.web">
+        <dependent-module archiveName="webbati.common.web-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/webbati.common.web/webbati.common.web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-		<property name="java-output-path" value="/batifree-web-jsf/build/classes"/>
-		<property name="context-root" value="batifree.web.jsf"/>
+		<property name="java-output-path" value="/webbati-web-jsf/build/classes"/>
+        <property name="context-root" value="webbati.web.jsf"/>
 	</wb-module>
 </project-modules>

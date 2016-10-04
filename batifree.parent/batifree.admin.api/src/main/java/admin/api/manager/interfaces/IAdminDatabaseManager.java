@@ -10,7 +10,7 @@ import admin.api.metier.interfaces.IConnectiondb;
 import admin.api.metier.interfaces.IUserAppli;
 import admin.api.metier.interfaces.IUserproject;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Interface <b>IAdminDatabaseManager</b><br/>
@@ -34,9 +34,9 @@ public interface IAdminDatabaseManager {
 	 * @param pDateExpired date expiration
 	 * @param pMailUsername Mail Username
 	 * @return login/password
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	String createUserFromUsernameProject(String pUsername, String pCodeProject, Date pDateExpired, String pMailUsername) throws BatifreeException;
+	String createUserFromUsernameProject(String pUsername, String pCodeProject, Date pDateExpired, String pMailUsername) throws WebbatiException;
 
 	/**
 	 * Crée toutes les données user - project à partir de son username et de son code projet en utilisant la connection par défault Utilisateur qui
@@ -49,10 +49,10 @@ public interface IAdminDatabaseManager {
 	 * @param pConnectionId connection Id
 	 * @param pMailUsername email username
 	 * @return login/password
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
 	String createUserFromUsernameProject(String pUsername, String pCodeProject, Date pDateExpired, Integer pConnectionId, String pMailUsername)
-	        throws BatifreeException;
+	        throws WebbatiException;
 
 	/**
 	 * Crée toutes les données user - project à partir d'un code projet en utilisant la connection de démo. Envoie le résultat des infos de connexions
@@ -62,9 +62,9 @@ public interface IAdminDatabaseManager {
 	 * @param pCodeProject code projet
 	 * @param pMailUsername email username
 	 * @return login/password
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	String createUserDemoFromProject(String pCodeProject, String pMailUsername) throws BatifreeException;
+	String createUserDemoFromProject(String pCodeProject, String pMailUsername) throws WebbatiException;
 
 	/**
 	 * Crée toutes les données user - project à partir d'un code projet en utilisant la connection de test. Cet utilisateur contiendra les données
@@ -73,9 +73,9 @@ public interface IAdminDatabaseManager {
 	 * 
 	 * @param pCodeProject code projet
 	 * @return login/password
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	String createUserTestFromProject(String pCodeProject) throws BatifreeException;
+	String createUserTestFromProject(String pCodeProject) throws WebbatiException;
 
 	/**
 	 * Crée toutes les données user - project à partir de son username et de son code projet en spéciafiant le user parent. La connection sera
@@ -89,10 +89,10 @@ public interface IAdminDatabaseManager {
 	 * @param pUsernameParent username parent
 	 * @param pPasswordUsernameParent password de l'username parent
 	 * @return login/password
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
 	String createUserFromUsernameProject(String pUsername, String pCodeProject, Date pDateExpired, Integer pConnectionId, String pMailUsername,
-	        String pUsernameParent, String pPasswordUsernameParent) throws BatifreeException;
+	        String pUsernameParent, String pPasswordUsernameParent) throws WebbatiException;
 
 	/**
 	 * Crée toutes les données user - project à partir de son username et de son code projet en spéciafiant le user parent. La connection sera
@@ -106,10 +106,10 @@ public interface IAdminDatabaseManager {
 	 * @param pUsernameParent username parent
 	 * @param pPasswordUsernameParent password de l'username parent
 	 * @return login/password
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
 	String createUserFromUsernameProject(String pUsername, String pCodeProject, Date pDateExpired, String pMailUsername, String pUsernameParent,
-	        String pPasswordUsernameParent) throws BatifreeException;
+	        String pPasswordUsernameParent) throws WebbatiException;
 
 	/**
 	 * Ajoute à l'utilisateur user le projet avec le codeProject sur une connection par défaut et crée la base de données du projet pour cet
@@ -118,9 +118,9 @@ public interface IAdminDatabaseManager {
 	 * 
 	 * @param pUser user
 	 * @param pCodeProject codeProject
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void addProjectToUser(IUserAppli pUser, String pCodeProject) throws BatifreeException;
+	void addProjectToUser(IUserAppli pUser, String pCodeProject) throws WebbatiException;
 
 	/**
 	 * Ajoute à l'utilisateur user le projet avec le codeProject et crée la base de données du projet pour cet utilisateur
@@ -130,36 +130,36 @@ public interface IAdminDatabaseManager {
 	 * @param pCodeProject codeProject
 	 * @param pConnection connection
 	 * @return userproject IUserproject
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IUserproject addProjectToUser(IUserAppli pUser, String pCodeProject, IConnectiondb pConnection) throws BatifreeException;
+	IUserproject addProjectToUser(IUserAppli pUser, String pCodeProject, IConnectiondb pConnection) throws WebbatiException;
 
 	/**
 	 * Vérifie la validité des comptes des utilisateurs Si la date d'expiration est supérieure à celle du jour, alors on bloque : LOCK Si la date
 	 * d'expiration est supérieure de + de USER_NB_JOURS_DELETED jours, alors on supprime l'utilisateur
 	 * 
 	 * 
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void checkValidityUsers() throws BatifreeException;
+	void checkValidityUsers() throws WebbatiException;
 
 	/**
 	 * Supprime le userproject et sa database appartennant à cet utilisateur
 	 * 
 	 * 
 	 * @param pUserproject userproject à supprimer
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void deleteUserProjectAndDatabase(IUserproject pUserproject) throws BatifreeException;
+	void deleteUserProjectAndDatabase(IUserproject pUserproject) throws WebbatiException;
 
 	/**
 	 * Supprime l'utilisateur (avec tous ses projets) et ses databases appartennant à cet utilisateur
 	 * 
 	 * 
 	 * @param pUser utilisateur à supprimer ses database
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void deleteUserAndDatabase(IUserAppli pUser) throws BatifreeException;
+	void deleteUserAndDatabase(IUserAppli pUser) throws WebbatiException;
 
 	/**
 	 * Retourne la connection la plus appropriée => Celle qui a le plus petit nombre d'utilisateur restant avant d'atteindre la limite user alert =>
@@ -168,17 +168,17 @@ public interface IAdminDatabaseManager {
 	 * 
 	 * 
 	 * @return connection la plus appropriée
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IConnectiondb getConnectionDefault() throws BatifreeException;
+	IConnectiondb getConnectionDefault() throws WebbatiException;
 
 	/**
 	 * Mets à jour toutes les database des users appartenant au projet codeProject
 	 * 
 	 * 
 	 * @param pCodeProject code projet sur lequel va s'appliquer les mises à jour
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void updateDatabases(String pCodeProject) throws BatifreeException;
+	void updateDatabases(String pCodeProject) throws WebbatiException;
 
 }

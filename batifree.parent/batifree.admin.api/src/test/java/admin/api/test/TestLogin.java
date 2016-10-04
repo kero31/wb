@@ -15,7 +15,7 @@ import admin.api.metier.interfaces.IUserAppli;
 import admin.api.metier.interfaces.IUserproject;
 import admin.api.test.commun.TestCommunAdminApi;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.IUserApp;
 
 /**
@@ -34,13 +34,13 @@ public class TestLogin extends TestCommunAdminApi {
 	private boolean isExecutionEnabled() {
 		try {
 			return "1".equals(app.getProperties().getProperty("test.login.enabled", "0"));
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			return false;
 		}
 	}
 
 	@Test
-	public void createUserAndCheckValidityAndDeleteAll() throws BatifreeException {
+	public void createUserAndCheckValidityAndDeleteAll() throws WebbatiException {
 		if (isExecutionEnabled()) {
 			String codeProjet = "BF";
 
@@ -88,24 +88,24 @@ public class TestLogin extends TestCommunAdminApi {
 	}
 
 	@Test
-	public void updateDatabases() throws BatifreeException {
+	public void updateDatabases() throws WebbatiException {
 		String codeProjet = "BF";
 		app.getAdminDatabaseManager().updateDatabases(codeProjet);
 	}
 
 	@Test
-	public void checkValidityUsers() throws BatifreeException {
+	public void checkValidityUsers() throws WebbatiException {
 		// Check validity
 		app.getAdminDatabaseManager().checkValidityUsers();
 	}
 
 	@Test
-	public void testConnectionDefault() throws BatifreeException {
+	public void testConnectionDefault() throws WebbatiException {
 		Assert.assertNotNull(app.getAdminDatabaseManager().getConnectionDefault());
 	}
 
 	@Test
-	public void createDemo() throws BatifreeException {
+	public void createDemo() throws WebbatiException {
 		if (isExecutionEnabled()) {
 			String codeProject = "BF";
 
@@ -136,7 +136,7 @@ public class TestLogin extends TestCommunAdminApi {
 	}
 
 	@Test
-	public void createUserConnectionSpecifique() throws BatifreeException {
+	public void createUserConnectionSpecifique() throws WebbatiException {
 		if (isExecutionEnabled()) {
 			String login = "test_user_specif";
 			// Création du user
@@ -158,7 +158,7 @@ public class TestLogin extends TestCommunAdminApi {
 	}
 
 	@Test
-	public void createUserAndAddOtherProjet() throws BatifreeException {
+	public void createUserAndAddOtherProjet() throws WebbatiException {
 		if (isExecutionEnabled()) {
 			String codeProjet = "BF";
 
@@ -210,7 +210,7 @@ public class TestLogin extends TestCommunAdminApi {
 	}
 
 	@Test
-	public void createUserWithUserParent() throws BatifreeException {
+	public void createUserWithUserParent() throws WebbatiException {
 		if (isExecutionEnabled()) {
 			String codeProjet = "BF";
 

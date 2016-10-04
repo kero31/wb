@@ -10,7 +10,7 @@ import admin.api.metier.interfaces.IRole;
 import admin.api.metier.interfaces.IUserAppli;
 import admin.api.metier.interfaces.IUserproject;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.manager.interfaces.IManager;
 
 /**
@@ -23,26 +23,26 @@ public interface IUserAppliManager extends IManager<IUserAppli, Integer> {
 	 * 
 	 * @param pUsername login de l'utilisateur
 	 * @return utilisateur à partir de son login.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IUserAppli getUserByUsername(String pUsername) throws BatifreeException;
+	IUserAppli getUserByUsername(String pUsername) throws WebbatiException;
 
 	/**
 	 * Retourne la liste des Userproject associé à l'utilisateur.
 	 * 
 	 * @param pUserAppli l'utilisateur
 	 * @return liste des Userproject associé à l'utilisateur.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IUserproject> getListUserproject(IUserAppli pUserAppli) throws BatifreeException;
+	List<IUserproject> getListUserproject(IUserAppli pUserAppli) throws WebbatiException;
 
 	/**
 	 * Retourne la liste des roles associé à l'utilisateur.
 	 * 
 	 * @param pUserAppli l'utilisateur
 	 * @return liste des roles associé à l'utilisateur.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IRole> getListRole(IUserAppli pUserAppli) throws BatifreeException;
+	List<IRole> getListRole(IUserAppli pUserAppli) throws WebbatiException;
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import admin.api.metier.interfaces.IVScriptUpdate;
 
 import common.api.dao.interfaces.IViewDao;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Interface <b>IVScriptUpdateDao</b><br/>
@@ -21,8 +21,8 @@ public interface IVScriptUpdateDao extends IViewDao<IVScriptUpdate> {
 	 * 
 	 * @param pProjectId id du projet
 	 * @return liste de la vue en fonction de l'id du projet.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IVScriptUpdate> getListByProjectId(Integer pProjectId) throws BatifreeException;
+	List<IVScriptUpdate> getListByProjectId(Integer pProjectId) throws WebbatiException;
 
 }

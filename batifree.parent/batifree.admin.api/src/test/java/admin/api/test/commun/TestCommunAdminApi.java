@@ -10,7 +10,7 @@ import admin.api.application.impl.ApplicationAdmin;
 import admin.api.application.interfaces.IApplication;
 
 import common.api.application.interfaces.IApplicationCommun;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * 
@@ -22,7 +22,7 @@ public abstract class TestCommunAdminApi extends TestCommunApi {
 	protected IApplication app = null;
 
 	@Override
-	protected IApplicationCommun getApplication() throws BatifreeException {
+	protected IApplicationCommun getApplication() throws WebbatiException {
 		app = ApplicationAdmin.getApplicationSingleton();
 		return app;
 	}

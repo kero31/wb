@@ -8,7 +8,7 @@ import admin.api.metier.interfaces.IProjectscript;
 import admin.api.metier.interfaces.IUserAppli;
 import admin.api.metier.interfaces.IUserproject;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.impl.MetierImpl;
 
 /**
@@ -44,9 +44,9 @@ public class UserprojectImpl extends MetierImpl<UserprojectId> implements IUserp
 	 * 
 	 * @param pUserAppli userAppli
 	 * @param pProject project
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public UserprojectImpl(IUserAppli pUserAppli, IProject pProject) throws BatifreeException {
+	public UserprojectImpl(IUserAppli pUserAppli, IProject pProject) throws WebbatiException {
 		if (pUserAppli == null || pProject == null || pUserAppli.getId() == null || pProject.getId() == null) {
 			String userIdException = "";
 			String projectIdException = "";
@@ -56,7 +56,7 @@ public class UserprojectImpl extends MetierImpl<UserprojectId> implements IUserp
 			if (pProject != null) {
 				projectIdException = ", ProjectId=" + pProject.getId();
 			}
-			throw new BatifreeException("Le UserAppli et le Project ainsi que leurs IDs ne peuvent pas être vide. " + "UserAppli=" + pUserAppli
+			throw new WebbatiException("Le UserAppli et le Project ainsi que leurs IDs ne peuvent pas être vide. " + "UserAppli=" + pUserAppli
 			        + userIdException + ", Project=" + pProject + projectIdException);
 		}
 
@@ -94,35 +94,35 @@ public class UserprojectImpl extends MetierImpl<UserprojectId> implements IUserp
 	}
 
 	@Override
-	public IUserAppli getUserappli() throws BatifreeException {
+	public IUserAppli getUserappli() throws WebbatiException {
 		return ApplicationAdmin.getApplication().getUserAppliManager().getById(getId().getUseId());
 	}
 
 	@Override
-	public void setUserappli(IUserAppli pUserAppli) throws BatifreeException {
+	public void setUserappli(IUserAppli pUserAppli) throws WebbatiException {
 		if (pUserAppli != null && pUserAppli.getId() != null) {
 			getId().setUseId(pUserAppli.getId());
 		} else {
-			throw new BatifreeException("Le UserAppli ne peut pas être vide");
+			throw new WebbatiException("Le UserAppli ne peut pas être vide");
 		}
 	}
 
 	@Override
-	public IProject getProject() throws BatifreeException {
+	public IProject getProject() throws WebbatiException {
 		return ApplicationAdmin.getApplication().getProjectManager().getById(getId().getProId());
 	}
 
 	@Override
-	public void setProject(IProject pProject) throws BatifreeException {
+	public void setProject(IProject pProject) throws WebbatiException {
 		if (pProject != null) {
 			getId().setProId(pProject.getId());
 		} else {
-			throw new BatifreeException("Le Projet ne peut pas être vide");
+			throw new WebbatiException("Le Projet ne peut pas être vide");
 		}
 	}
 
 	@Override
-	public IConnectiondb getConnectiondb() throws BatifreeException {
+	public IConnectiondb getConnectiondb() throws WebbatiException {
 		return ApplicationAdmin.getApplication().getConnectiondbManager().getById(connectiondbId);
 	}
 
@@ -136,7 +136,7 @@ public class UserprojectImpl extends MetierImpl<UserprojectId> implements IUserp
 	}
 
 	@Override
-	public IProjectscript getProjectscript() throws BatifreeException {
+	public IProjectscript getProjectscript() throws WebbatiException {
 		return ApplicationAdmin.getApplication().getProjectscriptManager().getById(projectscriptId);
 	}
 

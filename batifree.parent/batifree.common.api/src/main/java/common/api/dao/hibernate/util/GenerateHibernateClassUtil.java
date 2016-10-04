@@ -25,7 +25,7 @@ public class GenerateHibernateClassUtil extends GenerateClassUtil {
 	 * 
 	 * Constructeur.
 	 * 
-	 * @param pProjectName nom du projet utilisé pour les noms de packages. Exemple : batifree, admin
+	 * @param pProjectName nom du projet utilisé pour les noms de packages. Exemple : webbati, admin
 	 * @param pProjectCode code du projet utilisé pour les noms de services. Exemple : BF, ADMIN
 	 * @param pProjectType type du projetutilisé pour les noms de packages. Exemple : api, common, web
 	 * @param pProjectClassPrefix prefixe de la classe du projet utilisé pour les noms de classes. Exemple : Bf, Admin
@@ -78,7 +78,7 @@ public class GenerateHibernateClassUtil extends GenerateClassUtil {
 		buffTxt.add("import java.io.Serializable;", 2);
 		buffTxt.add("import " + getInterfaceCommonApplication() + ";", 1);
 		buffTxt.add("import " + getClassCommonDaoImpl() + ";", 1);
-		buffTxt.add("import " + getClassCommonBatifreeException() + ";", 1);
+		buffTxt.add("import " + getClassCommonWebbatiException() + ";", 1);
 		buffTxt.add("import " + getClassCommonMetierImpl() + ";", 1);
 		buffTxt.add("import " + getInterfaceCommonMetier() + ";", 2);
 		buffTxt.add("import " + getClassApplicationImpl() + ";", 2);
@@ -110,7 +110,7 @@ public class GenerateHibernateClassUtil extends GenerateClassUtil {
 
 		// Opérations
 		buffTxt.addInClass("@Override", 1);
-		buffTxt.addInClass("public " + INTERFACE_COMMON_APPLICATION + " getApplication() throws " + CLASS_COMMON_EXCEPTION_BATIFREE + " {", 1);
+		buffTxt.addInClass("public " + INTERFACE_COMMON_APPLICATION + " getApplication() throws " + CLASS_COMMON_EXCEPTION_WEBBATI + " {", 1);
 		buffTxt.addInMethod("return " + getClassNameApplicationImpl() + ".getApplication();", 1);
 		buffTxt.addInClass("}", 1);
 

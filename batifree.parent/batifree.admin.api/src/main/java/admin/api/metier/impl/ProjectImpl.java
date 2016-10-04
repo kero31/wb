@@ -7,7 +7,7 @@ import admin.api.metier.interfaces.IProject;
 import admin.api.metier.interfaces.IProjectscript;
 import admin.api.metier.interfaces.IRole;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.impl.MetierImpl;
 
 /**
@@ -46,12 +46,12 @@ public class ProjectImpl extends MetierImpl<Integer> implements IProject {
 	}
 
 	@Override
-	public List<IRole> getListRole() throws BatifreeException {
+	public List<IRole> getListRole() throws WebbatiException {
 		return ApplicationAdmin.getApplication().getProjectManager().getListRole(this);
 	}
 
 	@Override
-	public List<IProjectscript> getListProjectscript() throws BatifreeException {
+	public List<IProjectscript> getListProjectscript() throws WebbatiException {
 		return ApplicationAdmin.getApplication().getProjectManager().getListProjectscript(this);
 	}
 }

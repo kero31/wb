@@ -18,7 +18,7 @@ import admin.api.metier.interfaces.IUserAppli;
 import admin.api.metier.interfaces.IUserproject;
 
 import common.api.dao.interfaces.IDao;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Classe <UserAppliManagerImpl>.
@@ -43,7 +43,7 @@ public class UserAppliManagerImpl extends AdminGenericManagerImpl<IUserAppli, In
 	}
 
 	@Override
-	public IUserAppli getUserByUsername(String pUsername) throws BatifreeException {
+	public IUserAppli getUserByUsername(String pUsername) throws WebbatiException {
 		if (pUsername != null) {
 			try {
 				List<IUserAppli> list = getList();
@@ -55,7 +55,7 @@ public class UserAppliManagerImpl extends AdminGenericManagerImpl<IUserAppli, In
 					}
 				}
 				LOGGER.info("Not Find");
-			} catch (BatifreeException e) {
+			} catch (WebbatiException e) {
 				LOGGER.info("Erreur : " + e.getMessage());
 			}
 		}
@@ -63,17 +63,17 @@ public class UserAppliManagerImpl extends AdminGenericManagerImpl<IUserAppli, In
 	}
 
 	@Override
-	public List<IUserproject> getListUserproject(IUserAppli pUserAppli) throws BatifreeException {
+	public List<IUserproject> getListUserproject(IUserAppli pUserAppli) throws WebbatiException {
 		return getListDaoFromObject(pUserAppli, userAppliDao.getListUserproject(pUserAppli));
 	}
 
 	@Override
-	public List<IRole> getListRole(IUserAppli pUserAppli) throws BatifreeException {
+	public List<IRole> getListRole(IUserAppli pUserAppli) throws WebbatiException {
 		return getListDaoFromObject(pUserAppli, userAppliDao.getListRole(pUserAppli));
 	}
 
 	@Override
-	public void delete(IUserAppli pObject) throws BatifreeException {
+	public void delete(IUserAppli pObject) throws WebbatiException {
 		super.delete(pObject);
 	}
 }

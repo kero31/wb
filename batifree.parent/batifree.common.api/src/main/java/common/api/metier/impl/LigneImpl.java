@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 import org.apache.log4j.Logger;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.ILigne;
 
 /**
@@ -66,7 +66,7 @@ public abstract class LigneImpl<IT extends ILigne<IT, ID>, ID extends Serializab
 		if (listLigne == null) {
 			try {
 				listLigne = getListLigneFromManager();
-			} catch (BatifreeException e) {
+			} catch (WebbatiException e) {
 				LOGGER.error("Erreur récup list ligne manager", e);
 			}
 			if (listLigne == null) {
@@ -80,9 +80,9 @@ public abstract class LigneImpl<IT extends ILigne<IT, ID>, ID extends Serializab
 	 * Retourne la liste des sous éléments recherché via le manager.
 	 * 
 	 * @return liste des sous éléments
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected abstract List<IT> getListLigneFromManager() throws BatifreeException;
+	protected abstract List<IT> getListLigneFromManager() throws WebbatiException;
 
 	@Override
 	public void setListLigne(List<IT> pListLigne) {

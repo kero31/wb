@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import common.api.application.interfaces.ITransaction;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Classe <TransactionHibernateImpl> qui permet de gérer les transactions pour hibernate.
@@ -58,36 +58,36 @@ public class TransactionHibernateImpl implements ITransaction {
 	}
 
 	@Override
-	public void rollback() throws BatifreeException {
+	public void rollback() throws WebbatiException {
 		try {
 			if (nbTransactionAsked == 1 && sessionHibernate != null && transactionHibernate != null) {
 				transactionHibernate.rollback();
 			}
 		} catch (HibernateException e) {
-			throw new BatifreeException("Erreur rollback", e);
+			throw new WebbatiException("Erreur rollback", e);
 		}
 	}
 
 	@Override
-	public void commit() throws BatifreeException {
+	public void commit() throws WebbatiException {
 		try {
 			if (nbTransactionAsked == 1 && sessionHibernate != null && transactionHibernate != null) {
 				transactionHibernate.commit();
 			}
 		} catch (HibernateException e) {
-			throw new BatifreeException("Erreur commit", e);
+			throw new WebbatiException("Erreur commit", e);
 		}
 	}
 
 	@Override
-	public void close() throws BatifreeException {
+	public void close() throws WebbatiException {
 		try {
 			if (nbTransactionAsked <= 1 && sessionHibernate != null && sessionHibernate.isOpen()) {
 				sessionHibernate.close();
 				nbTransactionAsked = 1;
 			}
 		} catch (HibernateException e) {
-			throw new BatifreeException("Erreur close", e);
+			throw new WebbatiException("Erreur close", e);
 		} finally {
 			nbTransactionAsked--;
 		}

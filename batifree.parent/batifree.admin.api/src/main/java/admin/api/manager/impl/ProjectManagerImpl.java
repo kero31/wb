@@ -13,7 +13,7 @@ import admin.api.metier.interfaces.IProjectscript;
 import admin.api.metier.interfaces.IRole;
 
 import common.api.dao.interfaces.IDao;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Classe <ProjectManagerImpl>.
@@ -33,7 +33,7 @@ public class ProjectManagerImpl extends AdminGenericManagerImpl<IProject, Intege
 	}
 
 	@Override
-	public IProject getProjectByCode(String pCodeProject) throws BatifreeException {
+	public IProject getProjectByCode(String pCodeProject) throws WebbatiException {
 		if (pCodeProject != null && !pCodeProject.isEmpty()) {
 			List<IProject> list = getList();
 			if (list != null) {
@@ -48,12 +48,12 @@ public class ProjectManagerImpl extends AdminGenericManagerImpl<IProject, Intege
 	}
 
 	@Override
-	public List<IRole> getListRole(IProject pProject) throws BatifreeException {
+	public List<IRole> getListRole(IProject pProject) throws WebbatiException {
 		return getListDaoFromObject(pProject, projectDao.getListRole(pProject));
 	}
 
 	@Override
-	public List<IProjectscript> getListProjectscript(IProject pProject) throws BatifreeException {
+	public List<IProjectscript> getListProjectscript(IProject pProject) throws WebbatiException {
 		return getListDaoFromObject(pProject, projectDao.getListProjectscript(pProject));
 	}
 }

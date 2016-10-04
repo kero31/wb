@@ -19,7 +19,7 @@ import admin.api.metier.interfaces.IRole;
 import admin.api.metier.interfaces.IUserAppli;
 import admin.api.metier.interfaces.IUserproject;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * 
@@ -38,7 +38,7 @@ public class UserAppliDaoImpl extends AdminGenericHibernateDaoImpl<Userappli, Us
 	}
 
 	@Override
-	public List<IUserproject> getListUserproject(IUserAppli pUserAppli) throws BatifreeException {
+	public List<IUserproject> getListUserproject(IUserAppli pUserAppli) throws WebbatiException {
 		Userappli user = getEjbFromMetier(pUserAppli);
 		if (user != null) {
 			return getListMetierFromListEjb(user.getUserprojects(), UserprojectImpl.class, IUserproject.class);
@@ -47,7 +47,7 @@ public class UserAppliDaoImpl extends AdminGenericHibernateDaoImpl<Userappli, Us
 	}
 
 	@Override
-	public List<IRole> getListRole(IUserAppli pUserAppli) throws BatifreeException {
+	public List<IRole> getListRole(IUserAppli pUserAppli) throws WebbatiException {
 		Userappli user = getEjbFromMetier(pUserAppli);
 		if (user != null) {
 			return getListMetierFromListEjb(user.getRoles(), RoleImpl.class, IRole.class);
@@ -56,7 +56,7 @@ public class UserAppliDaoImpl extends AdminGenericHibernateDaoImpl<Userappli, Us
 	}
 
 	@Override
-	protected Userappli getEjbUpdatedFromMetier(IUserAppli pMetier) throws BatifreeException {
+	protected Userappli getEjbUpdatedFromMetier(IUserAppli pMetier) throws WebbatiException {
 		Userappli ejb = super.getEjbUpdatedFromMetier(pMetier);
 
 		Set<Role> listRoleEjb = ejb.getRoles();

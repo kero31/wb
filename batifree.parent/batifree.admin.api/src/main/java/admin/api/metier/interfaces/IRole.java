@@ -6,7 +6,7 @@ package admin.api.metier.interfaces;
 
 import java.util.List;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.IMetier;
 
 /**
@@ -32,17 +32,17 @@ public interface IRole extends IMetier<Integer> {
 	 * Retourne la liste des utilisateurs.
 	 * 
 	 * @return liste des utilisateurs.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IUserAppli> getListUserAppli() throws BatifreeException;
+	List<IUserAppli> getListUserAppli() throws WebbatiException;
 
 	/**
 	 * Retourne le projet.
 	 * 
 	 * @return projet.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IProject getProject() throws BatifreeException;
+	IProject getProject() throws WebbatiException;
 
 	/**
 	 * Met à jour le projet

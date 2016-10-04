@@ -12,7 +12,7 @@ import admin.api.metier.interfaces.IRole;
 import admin.api.metier.interfaces.IUserAppli;
 
 import common.api.dao.interfaces.IDao;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Classe <RoleManagerImpl>.
@@ -32,7 +32,7 @@ public class RoleManagerImpl extends AdminGenericManagerImpl<IRole, Integer> imp
 	}
 
 	@Override
-	public List<IUserAppli> getListUser(IRole pRole) throws BatifreeException {
+	public List<IUserAppli> getListUser(IRole pRole) throws WebbatiException {
 		return getListDaoFromObject(pRole, roleDao.getListUser(pRole));
 	}
 }

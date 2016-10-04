@@ -10,7 +10,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.IUserApp;
 
 /**
@@ -185,7 +185,7 @@ public class UserAppImpl implements IUserApp {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Boolean isValid() throws BatifreeException {
+	public Boolean isValid() throws WebbatiException {
 		return !locked;
 	}
 

@@ -1,6 +1,6 @@
 package common.api.application.interfaces;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Interface <b>IPropertiesApp</b><br/>
@@ -28,9 +28,9 @@ public interface IPropertiesApp {
 	 * 
 	 * @param pKey clé à rechercher
 	 * @return @return @return valeur pour la clé key, null si la properties n'a pu être ouverte ou si la clé n'a pas été trouvé
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	String getProperty(String pKey) throws BatifreeException;
+	String getProperty(String pKey) throws WebbatiException;
 
 	/**
 	 * Retourne la property pour la clé key avec valeur par défaut defaultValue
@@ -39,8 +39,8 @@ public interface IPropertiesApp {
 	 * @param pKey clé à rechercher
 	 * @param pDefaultValue valeur par défaut si la clé n'a pas été trouvé
 	 * @return @return @return valeur pour la clé key, null si la properties n'a pu être ouverte, defaultValue si la clé n'a pas été trouvé
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	String getProperty(String pKey, String pDefaultValue) throws BatifreeException;
+	String getProperty(String pKey, String pDefaultValue) throws WebbatiException;
 
 }

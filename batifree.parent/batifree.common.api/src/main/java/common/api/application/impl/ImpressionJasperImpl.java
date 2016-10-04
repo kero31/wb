@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 
 import common.api.application.interfaces.IApplicationCommun;
 import common.api.application.interfaces.IImpression;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Petite classe utilitaire pour lancer une impression d'un état JasperReport On suppose que cette classe est placée avec les difféents rapports dans
@@ -41,10 +41,10 @@ public class ImpressionJasperImpl implements IImpression {
 	 * @param pFormatSortie "Aperçu","Imprimante","Tableur","HTML","PDF"
 	 * @param pParams Map des différents paramètres passés au rapport (ID_CLIENT par exemple) pour utilisation par le rapport
 	 * @param pCheminFichierDeSortie chemin complet (avec extension) du fichier de sortie (HTML, Tableur, PDF). Indiquer null si Aperçu ou Imprimante
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	private void generateRepport(String pNomDuRapport, Connection pConnection, FormatOut pFormatSortie, Map<String, Object> pParams,
-			String pCheminFichierDeSortie) throws BatifreeException {
+			String pCheminFichierDeSortie) throws WebbatiException {
 
 		// on suppose que le package dans lequel se trouve le rapport est nommé "rapports"
 		pParams.put("SUBREPORT_DIR", FOLDER_REPORT);
@@ -104,20 +104,20 @@ public class ImpressionJasperImpl implements IImpression {
 
 			}
 		} catch (JRException ex) {
-			throw new BatifreeException("Erreur impression", ex);
+			throw new WebbatiException("Erreur impression", ex);
 		}
 
 	}
 
 	@Override
 	public void generateReport(String pNomDuRapport, FormatOut pFormatSortie, Map<String, Object> pParams, String pCheminFichierDeSortie,
-			IApplicationCommun pApplication) throws BatifreeException {
+			IApplicationCommun pApplication) throws WebbatiException {
 		generateRepport(pNomDuRapport, pApplication.getUserService().getConnectionSQL(), pFormatSortie, pParams, pCheminFichierDeSortie);
 	}
 
 	@Override
 	public void generateReport(byte[] pRapport, FormatOut pFormatSortie, Map<String, Object> pParams, String pCheminFichierDeSortie,
-			IApplicationCommun pApplication) throws BatifreeException {
+			IApplicationCommun pApplication) throws WebbatiException {
 		// generateRepport(pNomDuRapport, pApplication.getUserService().getConnectionSQL(), pFormatSortie, pParams, pCheminFichierDeSortie);
 		// TODO revoir
 

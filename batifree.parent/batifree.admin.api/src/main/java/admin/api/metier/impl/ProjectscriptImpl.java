@@ -4,7 +4,7 @@ import admin.api.application.impl.ApplicationAdmin;
 import admin.api.metier.interfaces.IProject;
 import admin.api.metier.interfaces.IProjectscript;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.impl.MetierImpl;
 
 /**
@@ -33,7 +33,7 @@ public class ProjectscriptImpl extends MetierImpl<Integer> implements IProjectsc
 	}
 
 	@Override
-	public IProject getProject() throws BatifreeException {
+	public IProject getProject() throws WebbatiException {
 		return ApplicationAdmin.getApplication().getProjectManager().getById(projectId);
 	}
 

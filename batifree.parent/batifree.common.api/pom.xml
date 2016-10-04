@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>batifree.common.api</artifactId>
+	<artifactId>webbati.common.api</artifactId>
 
 	<properties>
 		<spring.version>4.1.1.RELEASE</spring.version>
@@ -276,8 +276,8 @@
 	</dependencies>
 
 	<parent>
-		<groupId>batifree</groupId>
-		<artifactId>batifree.parent</artifactId>
+		<groupId>webbati</groupId>
+		<artifactId>webbati.parent</artifactId>
 		<version>1.0</version>
 	</parent>
 </project>

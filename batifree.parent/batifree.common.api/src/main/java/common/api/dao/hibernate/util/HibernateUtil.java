@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.IUserApp;
 import common.api.util.EncodingTools;
 
@@ -51,9 +51,9 @@ public class HibernateUtil {
 	 * @param pUserConfig user contenant les paramètres de connection
 	 * @return session factory
 	 * @throws HibernateException
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private SessionFactory configureSessionFactory(IUserApp pUserConfig) throws BatifreeException {
+	private SessionFactory configureSessionFactory(IUserApp pUserConfig) throws WebbatiException {
 		try {
 			Configuration configuration = new Configuration();
 
@@ -96,20 +96,20 @@ public class HibernateUtil {
 					configuration 
 					.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
 					.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver")
-					.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/batifreem")
-					.setProperty("hibernate.default_schema", "batifreem")
+					.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/webbatim")
+					.setProperty("hibernate.default_schema", "webbatim")
 					.setProperty("hibernate.connection.username", "root")
 					.setProperty("hibernate.connection.password", "");*/
 
 				} else {
-					throw new BatifreeException("Le mot de passe hibernate n'est pas correct");
+					throw new WebbatiException("Le mot de passe hibernate n'est pas correct");
 				}
 			}
 
 			ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
 			return configuration.buildSessionFactory(serviceRegistry);
 		} catch (HibernateException e) {
-			throw new BatifreeException("Erreur configuration hibernate", e);
+			throw new WebbatiException("Erreur configuration hibernate", e);
 		}
 	}
 
@@ -119,9 +119,9 @@ public class HibernateUtil {
 	 * @param pUser user contenant les paramètres de connection
 	 * @return session courante
 	 * @throws HibernateException
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public Session currentSession(IUserApp pUser) throws BatifreeException {
+	public Session currentSession(IUserApp pUser) throws WebbatiException {
 		Session s = session.get();
 		// Ouvre une nouvelle Session, si ce Thread n'en a aucune
 		if (s == null) {

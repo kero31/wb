@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import admin.api.application.impl.ApplicationAdmin;
 import admin.api.metier.interfaces.IUserAppli;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * 
@@ -52,7 +52,7 @@ public class DeleteUser {
 			admin.api.application.interfaces.IApplication app = ApplicationAdmin.getApplicationSingleton();
 			IUserAppli user = app.getUserAppliManager().getUserByUsername(username);
 			if (user == null) {
-				throw new BatifreeException("Le user " + username + " n existe pas");
+				throw new WebbatiException("Le user " + username + " n existe pas");
 			}
 			if (dropDB) {
 				app.getAdminDatabaseManager().deleteUserAndDatabase(user);
@@ -60,7 +60,7 @@ public class DeleteUser {
 				app.getUserAppliManager().delete(user);
 			}
 
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			LOGGER.error(e);
 		} finally {
 			if (context != null) {

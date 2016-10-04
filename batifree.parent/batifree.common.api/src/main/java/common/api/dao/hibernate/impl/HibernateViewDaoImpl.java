@@ -14,7 +14,7 @@ import org.hibernate.criterion.Projections;
 import common.api.application.interfaces.IApplicationCommun;
 import common.api.dao.hibernate.util.UserServiceHibernateImpl;
 import common.api.dao.interfaces.IViewDao;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.util.MyBeanUtils;
 
 /**
@@ -45,15 +45,15 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * 
 	 * @return l'application courante
 	 */
-	protected abstract IApplicationCommun getApplication() throws BatifreeException;
+	protected abstract IApplicationCommun getApplication() throws WebbatiException;
 
 	/**
 	 * Retourne la session courante.
 	 * 
 	 * @return Session
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected Session getSession() throws BatifreeException {
+	protected Session getSession() throws WebbatiException {
 		UserServiceHibernateImpl ush = (UserServiceHibernateImpl) getApplication().getUserService();
 		return ush.getSessionHibernate();
 	}
@@ -86,11 +86,11 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * @param <IMETIER> Interface Metier
 	 * @param <TEJB> Classe Ejb
 	 * @return liste d'objets Metier à partir d'une liste d'EJB
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	@SuppressWarnings("unchecked")
 	protected <TMETIER, IMETIER, TEJB> List<IMETIER> getListMetierFromListEjb(Collection<TEJB> pListEjb, Class<TMETIER> pClazzMetier,
-	        Class<IMETIER> pInterfaceMetier) throws BatifreeException {
+	        Class<IMETIER> pInterfaceMetier) throws WebbatiException {
 		if (pListEjb != null && pClazzMetier != null) {
 			return ((List<IMETIER>) MyBeanUtils.getInstance().copyPropertiesEJBList(pClazzMetier, pListEjb));
 		}
@@ -105,9 +105,9 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * @param <TMETIER> Classe Metier
 	 * @param <TEJB> Classe Ejb
 	 * @return objet Metier à partir d'un EJB
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected <TMETIER, TEJB> TMETIER getMetierFromEjb(TEJB pEjb, Class<TMETIER> pClazzMetier) throws BatifreeException {
+	protected <TMETIER, TEJB> TMETIER getMetierFromEjb(TEJB pEjb, Class<TMETIER> pClazzMetier) throws WebbatiException {
 		if (pEjb != null) {
 			try {
 				TMETIER metier = pClazzMetier.newInstance();
@@ -115,7 +115,7 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 
 				return metier;
 			} catch (HibernateException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-				throw new BatifreeException("Erreur getMetierFromEjb à cause de : ", e);
+				throw new WebbatiException("Erreur getMetierFromEjb à cause de : ", e);
 			}
 		}
 		return null;
@@ -131,10 +131,10 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * @param <IMETIER> Interface Metier
 	 * @param <TEJB> Classe Ejb
 	 * @return objet Metier à partir d'un EJB
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	protected <TMETIER, IMETIER, TEJB> IMETIER getMetierFromEjb(TEJB pEjb, Class<TMETIER> pClazzMetier, Class<IMETIER> pInterfaceMetier)
-	        throws BatifreeException {
+	        throws WebbatiException {
 		if (pEjb != null) {
 			try {
 				// Récupère la class MetierImpl
@@ -153,7 +153,7 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 
 				return metier;
 			} catch (InstantiationException | HibernateException | InvocationTargetException | IllegalAccessException e) {
-				throw new BatifreeException("Erreur getMetierFromEjb à cause de : ", e);
+				throw new WebbatiException("Erreur getMetierFromEjb à cause de : ", e);
 			}
 		}
 		return null;
@@ -165,7 +165,7 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * @param pEjb objet à transformer
 	 * @param <TEJB> Classe Ejb
 	 * @return class Metier à partir d'un EJB
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	protected <TEJB> Class<?> getClassMetierFromEjb(TEJB pEjb) {
 		return null;
@@ -176,15 +176,15 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * 
 	 * @param pEjb objet à transformer
 	 * @return objet Metier à partir d'un EJB
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	@SuppressWarnings("unchecked")
-	protected ITI getMetierFromEjb(T pEjb) throws BatifreeException {
+	protected ITI getMetierFromEjb(T pEjb) throws WebbatiException {
 		return (ITI) getMetierFromEjb(pEjb, persistentClassI);
 	}
 
 	@Override
-	public List<ITI> getList(int pMaxResult, int pFirstResult) throws BatifreeException {
+	public List<ITI> getList(int pMaxResult, int pFirstResult) throws WebbatiException {
 		return getList(getCriteria(pMaxResult, pFirstResult));
 	}
 
@@ -194,9 +194,9 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * @param pMaxResult max result
 	 * @param pFirstResult first result
 	 * @return criteria
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected Criteria getCriteria(int pMaxResult, int pFirstResult) throws BatifreeException {
+	protected Criteria getCriteria(int pMaxResult, int pFirstResult) throws WebbatiException {
 		Criteria criteria = getCriteriaSession();
 		if (pMaxResult > 0) {
 			criteria.setMaxResults(pMaxResult);
@@ -212,9 +212,9 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * Retourne le criteria de la session en prenant en compte l'ouverture de la session.
 	 * 
 	 * @return criteria de la session
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected Criteria getCriteriaSession() throws BatifreeException {
+	protected Criteria getCriteriaSession() throws WebbatiException {
 		return getCriteriaSession(persistentClass);
 	}
 
@@ -224,9 +224,9 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * @param pClass entité de la classe
 	 * @param <TEJB> Classe Ejb
 	 * @return criteria de la session
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected <TEJB> Criteria getCriteriaSession(Class<TEJB> pClass) throws BatifreeException {
+	protected <TEJB> Criteria getCriteriaSession(Class<TEJB> pClass) throws WebbatiException {
 		return getCriteriaSession(pClass, null);
 	}
 
@@ -237,9 +237,9 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * @param pAlias alias
 	 * @param <TEJB> Classe Ejb
 	 * @return criteria de la session
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected <TEJB> Criteria getCriteriaSession(Class<TEJB> pClass, String pAlias) throws BatifreeException {
+	protected <TEJB> Criteria getCriteriaSession(Class<TEJB> pClass, String pAlias) throws WebbatiException {
 		try {
 			Session sess = getSession();
 			Criteria crit = null;
@@ -250,19 +250,19 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 			}
 
 			if (crit == null) {
-				throw new BatifreeException("Le criteria de la classe" + persistentClass.getSimpleName() + "est NULL");
+				throw new WebbatiException("Le criteria de la classe" + persistentClass.getSimpleName() + "est NULL");
 			}
 			return crit;
-		} catch (BatifreeException e) {
-			throw new BatifreeException("Erreur de récupération du criteria " + persistentClass.getSimpleName() + " à cause de : ", e);
+		} catch (WebbatiException e) {
+			throw new WebbatiException("Erreur de récupération du criteria " + persistentClass.getSimpleName() + " à cause de : ", e);
 		}
 	}
 
 	@Override
-	public long getRowCount() throws BatifreeException {
+	public long getRowCount() throws WebbatiException {
 		Criteria criteria = getCriteriaSession();
 		if (criteria == null) {
-			throw new BatifreeException("Le criteria en paramètre est NULL");
+			throw new WebbatiException("Le criteria en paramètre est NULL");
 		}
 
 		try {
@@ -272,7 +272,7 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 
 			return result.longValue();
 		} catch (HibernateException e) {
-			throw new BatifreeException("Erreur de récupération du nombre d'enregistrement " + persistentClass.getSimpleName() + " à cause de : ", e);
+			throw new WebbatiException("Erreur de récupération du nombre d'enregistrement " + persistentClass.getSimpleName() + " à cause de : ", e);
 		}
 	}
 
@@ -281,10 +281,10 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * 
 	 * @param pCriteria criteria permettant de filtrer
 	 * @return liste des objets à partir d'un criteria
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<ITI> getList(Criteria pCriteria) throws BatifreeException {
+	protected List<ITI> getList(Criteria pCriteria) throws WebbatiException {
 		List<T> ts = getListEJB(pCriteria);
 		if (ts != null && !ts.isEmpty()) {
 			return (List<ITI>) getListMetierFromListEjb(ts, persistentClassI, persistentClassI);
@@ -298,10 +298,10 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * 
 	 * @param pCriteria criteria permettant de filtrer
 	 * @return liste des objets en EJB à partir d'un criteria
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<T> getListEJB(Criteria pCriteria) throws BatifreeException {
+	protected List<T> getListEJB(Criteria pCriteria) throws WebbatiException {
 		return (List<T>) getListEJBGeneric(pCriteria);
 	}
 
@@ -310,26 +310,26 @@ public abstract class HibernateViewDaoImpl<T, TI, ITI> implements IViewDao<ITI> 
 	 * 
 	 * @param pCriteria criteria permettant de filtrer
 	 * @return liste des objets en EJB à partir d'un criteria
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected List<?> getListEJBGeneric(Criteria pCriteria) throws BatifreeException {
+	protected List<?> getListEJBGeneric(Criteria pCriteria) throws WebbatiException {
 		if (pCriteria == null) {
-			throw new BatifreeException("Le criteria en paramètre est NULL");
+			throw new WebbatiException("Le criteria en paramètre est NULL");
 		}
 
 		try {
 			return pCriteria.list();
 		} catch (HibernateException e) {
-			throw new BatifreeException("Erreur de récupération des " + persistentClass.getSimpleName() + " à cause de : ", e);
+			throw new WebbatiException("Erreur de récupération des " + persistentClass.getSimpleName() + " à cause de : ", e);
 		}
 	}
 
 	@Override
-	public void close() throws BatifreeException {
+	public void close() throws WebbatiException {
 		try {
 			getSession().close();
 		} catch (HibernateException e) {
-			new BatifreeException("Erreur fermeture session hibernate", e);
+			new WebbatiException("Erreur fermeture session hibernate", e);
 		}
 	}
 }

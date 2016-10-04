@@ -4,7 +4,7 @@
 
 package common.api.application.interfaces;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Interface <b>ITransaction</b><br/>
@@ -18,23 +18,23 @@ public interface ITransaction {
 	 * Fait un rollback.
 	 * 
 	 * 
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void rollback() throws BatifreeException;
+	void rollback() throws WebbatiException;
 
 	/**
 	 * Fait un commit.
 	 * 
 	 * 
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void commit() throws BatifreeException;
+	void commit() throws WebbatiException;
 
 	/**
 	 * Ferme la transaction.
 	 * 
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void close() throws BatifreeException;
+	void close() throws WebbatiException;
 
 }

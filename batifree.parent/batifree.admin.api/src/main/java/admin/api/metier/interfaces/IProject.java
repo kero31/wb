@@ -6,7 +6,7 @@ package admin.api.metier.interfaces;
 
 import java.util.List;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.IMetier;
 
 /**
@@ -18,17 +18,17 @@ public interface IProject extends IMetier<Integer> {
 	 * Retourne la liste des rôles.
 	 * 
 	 * @return liste des rôles.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IRole> getListRole() throws BatifreeException;
+	List<IRole> getListRole() throws WebbatiException;
 
 	/**
 	 * Retourne la liste des scripts.
 	 * 
 	 * @return liste des scripts.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IProjectscript> getListProjectscript() throws BatifreeException;
+	List<IProjectscript> getListProjectscript() throws WebbatiException;
 
 	/**
 	 * Retourne le nom.

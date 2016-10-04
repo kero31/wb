@@ -11,7 +11,7 @@ import admin.api.metier.impl.UserAppliImpl;
 import admin.api.metier.interfaces.IRole;
 import admin.api.metier.interfaces.IUserAppli;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * 
@@ -30,7 +30,7 @@ public class RoleDaoImpl extends AdminGenericHibernateDaoImpl<Role, RoleImpl, IR
 	}
 
 	@Override
-	public List<IUserAppli> getListUser(IRole pRole) throws BatifreeException {
+	public List<IUserAppli> getListUser(IRole pRole) throws WebbatiException {
 		Role role = getEjbFromMetier(pRole);
 		if (role != null) {
 			return getListMetierFromListEjb(pRole.getListUserAppli(), UserAppliImpl.class, IUserAppli.class);

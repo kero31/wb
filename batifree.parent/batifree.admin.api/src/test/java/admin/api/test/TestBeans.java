@@ -30,7 +30,7 @@ import admin.api.metier.interfaces.IUserAppli;
 import admin.api.metier.interfaces.IUserproject;
 import admin.api.test.commun.TestCommunAdminApi;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * @author Kero
@@ -53,7 +53,7 @@ public class TestBeans extends TestCommunAdminApi {
 	private static final String USERPROJECT_BD_NAME = "TestUserProjectBdName";
 
 	@Test
-	public void testGet() throws BatifreeException {
+	public void testGet() throws WebbatiException {
 		IUserAppliManager userMng = app.getUserAppliManager();
 		List<IUserAppli> listUser = userMng.getList();
 		Assert.assertNotNull(listUser);
@@ -64,7 +64,7 @@ public class TestBeans extends TestCommunAdminApi {
 	}
 
 	@Test
-	public void manageBeans() throws BatifreeException {
+	public void manageBeans() throws WebbatiException {
 		beansAdd();
 		beansGet();
 		beansUpdate();
@@ -73,7 +73,7 @@ public class TestBeans extends TestCommunAdminApi {
 		beansRemove();
 	}
 
-	private void beansGet() throws BatifreeException {
+	private void beansGet() throws WebbatiException {
 		IUserAppliManager userMng = app.getUserAppliManager();
 		List<IUserAppli> listUser = userMng.getList();
 		boolean isUserFind = false;
@@ -110,7 +110,7 @@ public class TestBeans extends TestCommunAdminApi {
 		}
 	}
 
-	private void beansUpdateUserProject() throws BatifreeException {
+	private void beansUpdateUserProject() throws WebbatiException {
 		try {
 			beginTransaction();
 
@@ -135,7 +135,7 @@ public class TestBeans extends TestCommunAdminApi {
 			Assert.assertNull(userproject2.getConnectiondb());
 
 			commitTransaction();
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			rollbackTransaction();
 			throw e;
 		} finally {
@@ -143,7 +143,7 @@ public class TestBeans extends TestCommunAdminApi {
 		}
 	}
 
-	private void beansUpdate() throws BatifreeException {
+	private void beansUpdate() throws WebbatiException {
 		beginTransaction();
 		try {
 
@@ -178,7 +178,7 @@ public class TestBeans extends TestCommunAdminApi {
 			Assert.assertEquals(userproject2.getBdLogin(), newBdLogin);
 
 			commitTransaction();
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			rollbackTransaction();
 			throw e;
 		} finally {
@@ -186,7 +186,7 @@ public class TestBeans extends TestCommunAdminApi {
 		}
 	}
 
-	private void beansRemove() throws BatifreeException {
+	private void beansRemove() throws WebbatiException {
 		beginTransaction();
 		try {
 			// user manager
@@ -252,7 +252,7 @@ public class TestBeans extends TestCommunAdminApi {
 			userMng.delete(user1);
 
 			commitTransaction();
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			rollbackTransaction();
 			throw e;
 		} finally {
@@ -261,7 +261,7 @@ public class TestBeans extends TestCommunAdminApi {
 	}
 
 	@Test
-	public void manageBeansList() throws BatifreeException {
+	public void manageBeansList() throws WebbatiException {
 		beansAddList();
 		beansGetList();
 		beansUpdateList();
@@ -269,7 +269,7 @@ public class TestBeans extends TestCommunAdminApi {
 		beansRemoveList();
 	}
 
-	private void beansAddList() throws BatifreeException {
+	private void beansAddList() throws WebbatiException {
 		beginTransaction();
 		try {
 
@@ -288,7 +288,7 @@ public class TestBeans extends TestCommunAdminApi {
 			userMng.save(userList);
 
 			commitTransaction();
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			rollbackTransaction();
 			throw e;
 		} finally {
@@ -296,7 +296,7 @@ public class TestBeans extends TestCommunAdminApi {
 		}
 	}
 
-	private void beansGetList() throws BatifreeException {
+	private void beansGetList() throws WebbatiException {
 		// user - get list
 		IUserAppliManager userMng = app.getUserAppliManager();
 		List<IUserAppli> userList = userMng.getList();
@@ -310,7 +310,7 @@ public class TestBeans extends TestCommunAdminApi {
 		Assert.assertEquals(userGetList.size(), 2);
 	}
 
-	private void beansUpdateList() throws BatifreeException {
+	private void beansUpdateList() throws WebbatiException {
 		beginTransaction();
 		final String valueNew = "_0000";
 		try {
@@ -327,7 +327,7 @@ public class TestBeans extends TestCommunAdminApi {
 			userMng.save(userUpdateList);
 
 			commitTransaction();
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			rollbackTransaction();
 			throw e;
 		} finally {
@@ -335,7 +335,7 @@ public class TestBeans extends TestCommunAdminApi {
 		}
 	}
 
-	private void beansRemoveList() throws BatifreeException {
+	private void beansRemoveList() throws WebbatiException {
 		beginTransaction();
 		try {
 
@@ -354,7 +354,7 @@ public class TestBeans extends TestCommunAdminApi {
 			userMng.delete(userDeleteList);
 
 			commitTransaction();
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			rollbackTransaction();
 			throw e;
 		} finally {
@@ -362,7 +362,7 @@ public class TestBeans extends TestCommunAdminApi {
 		}
 	}
 
-	private void beansAdd() throws BatifreeException {
+	private void beansAdd() throws WebbatiException {
 		beginTransaction();
 		try {
 
@@ -462,7 +462,7 @@ public class TestBeans extends TestCommunAdminApi {
 			Assert.assertNotNull(userproject1.getProjectscript());
 
 			commitTransaction();
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			rollbackTransaction();
 			throw e;
 		} finally {

@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données: `batifreeadmin`
+-- Base de données: `webbatiadmin`
 --
 
 --
@@ -25,15 +25,15 @@ SET time_zone = "+00:00";
 --
 
 INSERT INTO `CONNECTIONDB` (`CON_ID`, `CON_DRIVER`, `CON_URL`, `CON_DIALECT`, `CON_LIMIT_USER_ALERT`, `CON_ROOT_LOGIN`, `CON_ROOT_PASSWORD`, `CON_ROOT_DBNAME`, `CON_ENABLED`) VALUES
-(1, 'com.mysql.jdbc.Driver', 'jdbc:mysql://192.168.9.17:3306/', 'org.hibernate.dialect.MySQLDialect', 1, 'root', 'rootBF', 'batifreeadmin', 1),
-(2, 'com.mysql.jdbc.Driver', 'jdbc:mysql://192.168.9.17:3306/', 'org.hibernate.dialect.MySQLDialect', 2, 'root', 'rootBF', 'batifreeadmin', 0);
+(1, 'com.mysql.jdbc.Driver', 'jdbc:mysql://192.168.9.17:3306/', 'org.hibernate.dialect.MySQLDialect', 1, 'root', 'rootBF', 'webbatiadmin', 1),
+(2, 'com.mysql.jdbc.Driver', 'jdbc:mysql://192.168.9.17:3306/', 'org.hibernate.dialect.MySQLDialect', 2, 'root', 'rootBF', 'webbatiadmin', 0);
 
 --
 -- Contenu de la table `project`
 --
 
 INSERT INTO `PROJECT` (`PRO_ID`, `PRO_NAME`, `PRO_CODE`) VALUES
-(1, 'Batifree', 'BF'),
+(1, 'Webbati', 'BF'),
 (2, 'Compta', 'COMPTA');
 
 --
@@ -41,8 +41,8 @@ INSERT INTO `PROJECT` (`PRO_ID`, `PRO_NAME`, `PRO_CODE`) VALUES
 --
 
 INSERT INTO `PROJECTSCRIPT` (`PSR_ID`, `PRO_ID`, `PSR_FILE_NAME`) VALUES
-(1, 1, '/usr/share/apache-tomcat-8.0.11/tomcat/.jenkins/workspace/Package/batifree.api2/src/main/resources/scriptsSQL/MYSQL/Batifree_crebas_V1.0.sql'),
-(2, 2, '/usr/share/apache-tomcat-8.0.11/tomcat/.jenkins/workspace/Package/batifree.api2/src/main/resources/scriptsSQL/MYSQL/Batifree_crebas_V1.0.sql');
+(1, 1, '/usr/share/apache-tomcat-8.0.11/tomcat/.jenkins/workspace/Package/webbati.api/src/main/resources/scriptsSQL/MYSQL/Webbati_crebas_V1.0.sql'),
+(2, 2, '/usr/share/apache-tomcat-8.0.11/tomcat/.jenkins/workspace/Package/webbati.api/src/main/resources/scriptsSQL/MYSQL/Webbati_crebas_V1.0.sql');
 
 --
 -- Contenu de la table `role`

@@ -6,10 +6,10 @@
 	<session-factory>
 		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.password">root_BATIFREE_batifreeadmin</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/batifreeadmin</property>
+		<property name="hibernate.connection.password">root_WEBBATI_webbatiadmin</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/webbatiadmin</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.default_schema">batifreeadmin</property>
+		<property name="hibernate.default_schema">webbatiadmin</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.hibenate.format_sql">true</property>
 		<property name="hibernate.javax.persistence.validation.mode">none</property>

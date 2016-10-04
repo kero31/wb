@@ -9,7 +9,7 @@ import admin.api.metier.interfaces.IProject;
 import admin.api.metier.interfaces.IUserAppli;
 import admin.api.metier.interfaces.IUserproject;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.manager.interfaces.IManager;
 
 /**
@@ -23,8 +23,8 @@ public interface IUserprojectManager extends IManager<IUserproject, UserprojectI
 	 * @param pUserAppli utilisateur
 	 * @param pProject projet
 	 * @return userproject à partir de l'utilisateur et du projet.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IUserproject getUserprojectFromUserAppliAndProject(IUserAppli pUserAppli, IProject pProject) throws BatifreeException;
+	IUserproject getUserprojectFromUserAppliAndProject(IUserAppli pUserAppli, IProject pProject) throws WebbatiException;
 
 }

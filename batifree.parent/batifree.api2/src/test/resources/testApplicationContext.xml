@@ -13,11 +13,11 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	<!-- Configuration des beans - BATIFREE -->
-	<context:component-scan base-package="batifree.api.dao.hibernate.impl" />
-	<context:component-scan base-package="batifree.api.dao.hibernate.util" />
-	<context:component-scan base-package="batifree.api.manager.impl" />
-	<context:component-scan base-package="batifree.api.application.impl" />
+	<!-- Configuration des beans - WEBBATI -->
+	<context:component-scan base-package="webbati.api.dao.hibernate.impl" />
+	<context:component-scan base-package="webbati.api.dao.hibernate.util" />
+	<context:component-scan base-package="webbati.api.manager.impl" />
+	<context:component-scan base-package="webbati.api.application.impl" />
 
 	<!-- Configuration des beans - ADMIN -->
 	<context:component-scan base-package="admin.api.dao.hibernate.impl" />
@@ -34,7 +34,7 @@
 
 	<!-- Configuration AOP -->
 	<aop:aspectj-autoproxy />
-	<context:component-scan base-package="batifree.api.aop" />
+	<context:component-scan base-package="webbati.api.aop" />
 	<context:component-scan base-package="common.api.aop" />
 
 </beans>

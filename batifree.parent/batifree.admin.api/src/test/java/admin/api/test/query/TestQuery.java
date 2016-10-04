@@ -12,7 +12,7 @@ import admin.api.test.commun.TestCommunAdminApi;
 
 import common.api.dao.hibernate.util.QueryHibernateUtil;
 import common.api.dao.hibernate.util.UserServiceHibernateImpl;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * @author Kero
@@ -21,7 +21,7 @@ import common.api.exception.BatifreeException;
 public class TestQuery extends TestCommunAdminApi {
 
 	@Test
-	public void executeQueryUniqueResult() throws BatifreeException {
+	public void executeQueryUniqueResult() throws WebbatiException {
 		QueryHibernateUtil queryUtil = new QueryHibernateUtil((UserServiceHibernateImpl) app.getUserService());
 
 		String reqMinUser = "select 50 from PROJECT LIMIT 1";
@@ -34,7 +34,7 @@ public class TestQuery extends TestCommunAdminApi {
 	}
 
 	@Test
-	public void executeQueriesFromExternConnection() throws BatifreeException {
+	public void executeQueriesFromExternConnection() throws WebbatiException {
 		/*
 		String queryH = "select * from V_SCRIPTUPDATE where PROJECT_ID=1";
 		List<VScriptupdate> listH = app.getQueryUtil().executeQuery(app.getDaoSession(), queryH, VScriptupdate.class);

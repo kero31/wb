@@ -16,8 +16,8 @@ import common.api.application.interfaces.IFormat;
 import common.api.application.interfaces.IImpression;
 import common.api.application.interfaces.IPropertiesApp;
 import common.api.application.interfaces.IUserService;
-import common.api.exception.BatifreeException;
-import common.api.exception.BatifreeUserException;
+import common.api.exception.WebbatiException;
+import common.api.exception.WebbatiUserException;
 import common.api.metier.interfaces.IUserApp;
 import common.api.util.ServiceBeanFactory;
 
@@ -77,7 +77,7 @@ public abstract class ApplicationCommun implements IApplicationCommun {
 				boolean bdPasswordEncoded;
 				try {
 					bdPasswordEncoded = new Boolean(getProperties().getProperty(IPropertiesApp.BD_ADMIN_PASSWORD_ENCODE, "false"));
-				} catch (BatifreeException e) {
+				} catch (WebbatiException e) {
 					bdPasswordEncoded = false;
 				}
 				userService.setBdPasswordEncoded(bdPasswordEncoded);
@@ -89,16 +89,16 @@ public abstract class ApplicationCommun implements IApplicationCommun {
 	}
 
 	@Override
-	public void loadUserByUsernamePassword(String pUsername, String pPassword) throws BatifreeUserException {
+	public void loadUserByUsernamePassword(String pUsername, String pPassword) throws WebbatiUserException {
 		UserDetails user;
 		try {
 			user = loadUserByUsername(pUsername);
 		} catch (UsernameNotFoundException e) {
-			throw new BatifreeUserException(e.getMessage());
+			throw new WebbatiUserException(e.getMessage());
 		}
 
 		if (user == null || pPassword == null || !pPassword.equals(user.getPassword())) {
-			throw new BatifreeUserException("Le mot de passe n'est pas correct");
+			throw new WebbatiUserException("Le mot de passe n'est pas correct");
 		}
 	}
 
@@ -136,7 +136,7 @@ public abstract class ApplicationCommun implements IApplicationCommun {
 					getGrantedAuthorities(pUserApp.getListRole()));
 
 			return user;
-		} catch (BatifreeUserException | BatifreeException e) {
+		} catch (WebbatiUserException | WebbatiException e) {
 			throw new UsernameNotFoundException(e.getMessage());
 		}
 	}
@@ -156,12 +156,12 @@ public abstract class ApplicationCommun implements IApplicationCommun {
 	}
 
 	@Override
-	public void setUserApp(IUserApp pUser) throws BatifreeUserException, BatifreeException {
+	public void setUserApp(IUserApp pUser) throws WebbatiUserException, WebbatiException {
 		getUserService().updateInfoUserApp(pUser);
 	}
 
 	@Override
-	public void deconnection() throws BatifreeException {
+	public void deconnection() throws WebbatiException {
 		getUserService().closeSessions();
 	}
 
@@ -186,9 +186,9 @@ public abstract class ApplicationCommun implements IApplicationCommun {
 	 * @param <T> classe
 	 * @param pClazz classe
 	 * @return Manager correspond à la classe clazz
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected <T> T getManager(Class<T> pClazz) throws BatifreeException {
+	protected <T> T getManager(Class<T> pClazz) throws WebbatiException {
 		checkValidUser();
 		return ServiceBeanFactory.getServiceBean(pClazz);
 	}
@@ -197,9 +197,9 @@ public abstract class ApplicationCommun implements IApplicationCommun {
 	 * Valide l'utilisateur
 	 * 
 	 * @return TRUE si l'user a été validé, FALSE sinon
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected boolean checkValidUser() throws BatifreeException {
+	protected boolean checkValidUser() throws WebbatiException {
 		return getUserService().checkValidUser();
 	}
 }

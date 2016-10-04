@@ -6,7 +6,7 @@ package common.api.application.interfaces;
 
 import java.util.Map;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Interface <b>IImpression</b><br/>
@@ -50,10 +50,10 @@ public interface IImpression {
 	 * @param pParams Map des différents paramètres passés au rapport (ID_CLIENT par exemple) pour utilisation par le rapport
 	 * @param pCheminFichierDeSortie Chemin complet (avec extension) du fichier de sortie (HTML, Tableur, PDF). Indiquer null si Aperçu ou Imprimante
 	 * @param pApplication Application courante.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
 	void generateReport(String pNomDuRapport, IImpression.FormatOut pFormatSortie, Map<String, Object> pParams, String pCheminFichierDeSortie,
-	        IApplicationCommun pApplication) throws BatifreeException;
+	        IApplicationCommun pApplication) throws WebbatiException;
 
 	/**
 	 * Génère un rapport
@@ -65,9 +65,9 @@ public interface IImpression {
 	 * @param pParams Map des différents paramètres passés au rapport (ID_CLIENT par exemple) pour utilisation par le rapport
 	 * @param pCheminFichierDeSortie Chemin complet (avec extension) du fichier de sortie (HTML, Tableur, PDF). Indiquer null si Aperçu ou Imprimante
 	 * @param pApplication Application courante.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
 	void generateReport(byte[] pRapport, IImpression.FormatOut pFormatSortie, Map<String, Object> pParams, String pCheminFichierDeSortie,
-	        IApplicationCommun pApplication) throws BatifreeException;
+	        IApplicationCommun pApplication) throws WebbatiException;
 
 }

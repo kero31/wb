@@ -21,7 +21,7 @@ import admin.api.metier.id.UserprojectId;
 import admin.api.test.commun.TestCommunAdminApi;
 
 import common.api.dao.hibernate.util.UserServiceHibernateImpl;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Classe <TestEJB>.
@@ -31,7 +31,7 @@ public class TestEJB extends TestCommunAdminApi {
 
 	@SuppressWarnings("unused")
 	// @Test
-	public void beansAddRoleUserEJB() throws BatifreeException {
+	public void beansAddRoleUserEJB() throws WebbatiException {
 		UserServiceHibernateImpl ush = (UserServiceHibernateImpl) app.getUserService();
 		Session session = ush.getSessionHibernate();
 		Transaction trans = session.beginTransaction();
@@ -65,7 +65,7 @@ public class TestEJB extends TestCommunAdminApi {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testGet() throws BatifreeException {
+	public void testGet() throws WebbatiException {
 		System.out.println("testGet");
 		UserServiceHibernateImpl ush = (UserServiceHibernateImpl) app.getUserService();
 		Session session = ush.getSessionHibernate();
@@ -90,7 +90,7 @@ public class TestEJB extends TestCommunAdminApi {
 
 	@SuppressWarnings({ "unchecked" })
 	@Test
-	public void testViews() throws BatifreeException {
+	public void testViews() throws WebbatiException {
 		System.out.println("testViews");
 		UserServiceHibernateImpl ush = (UserServiceHibernateImpl) app.getUserService();
 		Session session = ush.getSessionHibernate();
@@ -117,7 +117,7 @@ public class TestEJB extends TestCommunAdminApi {
 
 	@SuppressWarnings({ "unchecked", "unused" })
 	// @Test
-	public void testUserProject() throws BatifreeException {
+	public void testUserProject() throws WebbatiException {
 		UserServiceHibernateImpl ush = (UserServiceHibernateImpl) app.getUserService();
 		Session session = ush.getSessionHibernate();
 

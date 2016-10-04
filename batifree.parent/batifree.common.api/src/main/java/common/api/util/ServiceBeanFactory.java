@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * 
@@ -51,13 +51,13 @@ public class ServiceBeanFactory implements ApplicationContextAware {
 	 * @param pName Nom du bean
 	 * @param <T> Type du bean
 	 * @return Bean
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T getServiceBean(Class<T> pClazz, String pName) throws BatifreeException {
+	public static <T> T getServiceBean(Class<T> pClazz, String pName) throws WebbatiException {
 		T bean = (T) context.getBean(pName);
 		if (bean == null) {
-			throw new BatifreeException("Le bean " + pName + " de la classe " + pClazz.getName() + " est introuvable");
+			throw new WebbatiException("Le bean " + pName + " de la classe " + pClazz.getName() + " est introuvable");
 		}
 		return bean;
 	}
@@ -67,12 +67,12 @@ public class ServiceBeanFactory implements ApplicationContextAware {
 	 * 
 	 * @param pName Nom du bean
 	 * @return Bean
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public static Object getServiceBean(String pName) throws BatifreeException {
+	public static Object getServiceBean(String pName) throws WebbatiException {
 		Object bean = context.getBean(pName);
 		if (bean == null) {
-			throw new BatifreeException("Le bean " + pName + " est introuvable");
+			throw new WebbatiException("Le bean " + pName + " est introuvable");
 		}
 		return bean;
 	}
@@ -83,12 +83,12 @@ public class ServiceBeanFactory implements ApplicationContextAware {
 	 * @param pClazz Classe
 	 * @param <T> Type du bean
 	 * @return Bean
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public static <T> T getServiceBean(Class<T> pClazz) throws BatifreeException {
+	public static <T> T getServiceBean(Class<T> pClazz) throws WebbatiException {
 		T bean = context.getBean(pClazz);
 		if (bean == null) {
-			throw new BatifreeException("Le bean de la classe" + pClazz.getName() + " est introuvable");
+			throw new WebbatiException("Le bean de la classe" + pClazz.getName() + " est introuvable");
 		}
 		return bean;
 	}

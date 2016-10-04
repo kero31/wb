@@ -4,7 +4,7 @@
 
 package admin.api.metier.interfaces;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.IMetier;
 
 /**
@@ -30,9 +30,9 @@ public interface IProjectscript extends IMetier<Integer> {
 	 * Retourne le projet.
 	 * 
 	 * @return projet.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IProject getProject() throws BatifreeException;
+	IProject getProject() throws WebbatiException;
 
 	/**
 	 * Met à jour le projet

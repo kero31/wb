@@ -11,7 +11,7 @@ import admin.api.manager.interfaces.IRoleManager;
 import admin.api.manager.interfaces.IUserAppliManager;
 import admin.api.manager.interfaces.IUserprojectManager;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.IUserApp;
 
 /**
@@ -26,9 +26,9 @@ public interface IApplication extends common.api.application.interfaces.IApplica
 	 * @param pUsername login
 	 * @param pCodeProject code du projet
 	 * @return user en fonction du login et du code projet
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IUserApp getUserAppFromUsernameProject(String pUsername, String pCodeProject) throws BatifreeException;
+	IUserApp getUserAppFromUsernameProject(String pUsername, String pCodeProject) throws WebbatiException;
 
 	/**
 	 * Retourne le manager de l'administration de la base de données.

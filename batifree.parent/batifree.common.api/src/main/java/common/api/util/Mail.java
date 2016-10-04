@@ -15,7 +15,7 @@ import javax.mail.internet.MimeMessage;
 
 import common.api.application.impl.PropertiesAppImpl;
 import common.api.application.interfaces.IPropertiesApp;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * 
@@ -40,9 +40,9 @@ public class Mail {
 	 * @param pEmailTo email To
 	 * @param pMessageText message
 	 * @param pSubject sujet
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public static void sendMail(String pEmailTo, String pMessageText, String pSubject) throws BatifreeException {
+	public static void sendMail(String pEmailTo, String pMessageText, String pSubject) throws WebbatiException {
 		sendMail(pEmailTo, null, pMessageText, pSubject);
 	}
 
@@ -53,9 +53,9 @@ public class Mail {
 	 * @param pEmailCc email Cc
 	 * @param pMessageText message
 	 * @param pSubject sujet
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public static void sendMail(String pEmailTo, String pEmailCc, String pMessageText, String pSubject) throws BatifreeException {
+	public static void sendMail(String pEmailTo, String pEmailCc, String pMessageText, String pSubject) throws WebbatiException {
 		PropertiesAppImpl prop = ServiceBeanFactory.getServiceBean(PropertiesAppImpl.class);
 		sendMail(prop.getProperty(IPropertiesApp.EMAIL_FROM), pEmailTo, pEmailCc, pMessageText, pSubject,
 				prop.getProperty(IPropertiesApp.EMAIL_SMTP_HOST), prop.getProperty(IPropertiesApp.EMAIL_SMTP_PORT),
@@ -74,10 +74,10 @@ public class Mail {
 	 * @param pPort smptp port
 	 * @param pUsername mail username
 	 * @param pPassword mail password
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	public static void sendMail(String pEmailFrom, String pEmailTo, String pEmailCc, String pMessageText, String pSubject, String pHost,
-	        String pPort, final String pUsername, final String pPassword) throws BatifreeException {
+	        String pPort, final String pUsername, final String pPassword) throws WebbatiException {
 		sendMail(pEmailFrom, pEmailTo, pEmailCc, pMessageText, pSubject, pHost, pPort, pUsername, pPassword, false);
 	}
 
@@ -94,10 +94,10 @@ public class Mail {
 	 * @param pSmtpUsername mail username
 	 * @param pSmtpPassword mail password
 	 * @param pIsDebug TRUE si on veut voir le debug, FALSE sinon
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	public static void sendMail(String pEmailFrom, String pEmailTo, String pEmailCc, String pMessageText, String pSubject, String pSmtpHost,
-			String pSmtpPort, final String pSmtpUsername, final String pSmtpPassword, boolean pIsDebug) throws BatifreeException {
+			String pSmtpPort, final String pSmtpUsername, final String pSmtpPassword, boolean pIsDebug) throws WebbatiException {
 
 		// Initialisation
 		Properties props = new Properties();
@@ -142,7 +142,7 @@ public class Mail {
 			Transport.send(message);
 
 		} catch (MessagingException e) {
-			throw new BatifreeException("Erreur envoi de mail", e);
+			throw new WebbatiException("Erreur envoi de mail", e);
 		}
 	}
 }

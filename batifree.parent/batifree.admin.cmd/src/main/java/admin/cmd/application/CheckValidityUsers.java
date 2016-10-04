@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import admin.api.application.impl.ApplicationAdmin;
 import admin.api.application.interfaces.IApplication;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * 
@@ -38,7 +38,7 @@ public class CheckValidityUsers {
 		try {
 			IApplication app = ApplicationAdmin.getApplicationSingleton();
 			app.getAdminDatabaseManager().checkValidityUsers();
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			LOGGER.error(e);
 		} finally {
 			if (context != null) {

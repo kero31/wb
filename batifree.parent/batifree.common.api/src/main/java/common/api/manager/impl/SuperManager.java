@@ -5,7 +5,7 @@ package common.api.manager.impl;
 
 import common.api.application.interfaces.IApplicationCommun;
 import common.api.application.interfaces.ITransaction;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Classe <SuperManager>.
@@ -18,23 +18,23 @@ public abstract class SuperManager {
 	 * 
 	 * @return l'application courante
 	 */
-	protected abstract IApplicationCommun getApplication() throws BatifreeException;
+	protected abstract IApplicationCommun getApplication() throws WebbatiException;
 
 	/**
 	 * Retourne la transaction.
 	 * 
 	 * @return la transaction
 	 */
-	private ITransaction getTransaction() throws BatifreeException {
+	private ITransaction getTransaction() throws WebbatiException {
 		return getApplication().getUserService().getTransaction();
 	}
 
 	/**
 	 * Ferme la transaction.
 	 * 
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected void closeTransaction() throws BatifreeException {
+	protected void closeTransaction() throws WebbatiException {
 		ITransaction transaction = getTransaction();
 		if (transaction != null) {
 			transaction.close();
@@ -44,9 +44,9 @@ public abstract class SuperManager {
 	/**
 	 * Commence une transaction.
 	 * 
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected void beginTransaction() throws BatifreeException {
+	protected void beginTransaction() throws WebbatiException {
 		ITransaction transaction = getTransaction();
 		if (transaction != null) {
 			transaction.beginTransaction();
@@ -57,9 +57,9 @@ public abstract class SuperManager {
 	 * Fait un rollback.
 	 * 
 	 * 
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	protected void rollbackTransaction() throws BatifreeException {
+	protected void rollbackTransaction() throws WebbatiException {
 		ITransaction transaction = getTransaction();
 		if (transaction != null) {
 			transaction.rollback();
@@ -70,9 +70,9 @@ public abstract class SuperManager {
 	 * Fait un commit.
 	 * 
 	 * 
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	protected void commitTransaction() throws BatifreeException {
+	protected void commitTransaction() throws WebbatiException {
 		ITransaction transaction = getTransaction();
 		if (transaction != null) {
 			transaction.commit();

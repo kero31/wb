@@ -28,7 +28,7 @@ import common.api.application.impl.ApplicationCommun;
 import common.api.application.impl.UserAppImpl;
 import common.api.application.interfaces.IPropertiesApp;
 import common.api.application.interfaces.IUserService;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.IUserApp;
 import common.api.util.ServiceBeanFactory;
 
@@ -93,9 +93,9 @@ public class ApplicationAdmin extends ApplicationCommun implements IApplication 
 	 * Retourne l'application courante.
 	 * 
 	 * @return application courante
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public static IApplication getApplication() throws BatifreeException {
+	public static IApplication getApplication() throws WebbatiException {
 		return ServiceBeanFactory.getServiceBean(IApplication.class, "ADMIN_Application");
 	}
 
@@ -103,9 +103,9 @@ public class ApplicationAdmin extends ApplicationCommun implements IApplication 
 	 * Retourne l'application courante pour le singleton (no web session)
 	 * 
 	 * @return application courante
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public static IApplication getApplicationSingleton() throws BatifreeException {
+	public static IApplication getApplicationSingleton() throws WebbatiException {
 		IApplication app = ServiceBeanFactory.getServiceBean(IApplication.class, "ADMIN_Application");
 		app.loadUserByUsername("singleton");
 		return app;
@@ -137,7 +137,7 @@ public class ApplicationAdmin extends ApplicationCommun implements IApplication 
 			userAdmin.setListRole(listRole);
 
 			userdetails = getUserDetailsByUserApp(userAdmin);
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			throw new UsernameNotFoundException("Erreur loadUserByUsername(" + pUsername + ") avec code project = " + getCodeProject()
 					+ e.getMessage());
 		}
@@ -152,7 +152,7 @@ public class ApplicationAdmin extends ApplicationCommun implements IApplication 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IUserApp getUserAppFromUsernameProject(String pUsername, String pCodeProject) throws BatifreeException {
+	public IUserApp getUserAppFromUsernameProject(String pUsername, String pCodeProject) throws WebbatiException {
 		LOGGER.info("Before : getUserAppFromUsernameProject(" + pUsername + ", " + pCodeProject + ")");
 
 		// Récupération des infos de la base
@@ -160,28 +160,28 @@ public class ApplicationAdmin extends ApplicationCommun implements IApplication 
 		if (user == null) {
 			String sException = "L'utilisateur " + pUsername + " n'existe pas";
 			LOGGER.info(sException);
-			throw new BatifreeException(sException);
+			throw new WebbatiException(sException);
 		}
 		LOGGER.info("User trouvé");
 		IProject project = getProjectManager().getProjectByCode(pCodeProject);
 		if (project == null) {
 			String sException = "Le projet " + pCodeProject + " n'existe pas";
 			LOGGER.info(sException);
-			throw new BatifreeException(sException);
+			throw new WebbatiException(sException);
 		}
 		LOGGER.info("Project trouvé");
 		IUserproject userProject = getUserprojectManager().getUserprojectFromUserAppliAndProject(user, project);
 		if (userProject == null) {
 			String sException = "L'utilisateur " + pUsername + " n'est pas rattaché au projet " + pCodeProject;
 			LOGGER.info(sException);
-			throw new BatifreeException(sException);
+			throw new WebbatiException(sException);
 		}
 		LOGGER.info("UserProject trouvé");
 		IConnectiondb conn = userProject.getConnectiondb();
 		if (conn == null) {
 			String sException = "Aucune connection n'est rattaché à ce profil";
 			LOGGER.info(sException);
-			throw new BatifreeException(sException);
+			throw new WebbatiException(sException);
 		}
 		LOGGER.info("Connection trouvé");
 

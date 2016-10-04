@@ -4,13 +4,13 @@ import org.junit.Test;
 
 import common.api.application.impl.PropertiesAppImpl;
 import common.api.application.interfaces.IPropertiesApp;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.util.Mail;
 
 public class TestMail {
 
 	@Test
-	public void sendMail() throws BatifreeException {
+	public void sendMail() throws WebbatiException {
 		// String emailFrom = "damien.colomies@gmail.com";
 		IPropertiesApp prop = new PropertiesAppImpl();
 		String emailTo = "kero31@gmail.com";

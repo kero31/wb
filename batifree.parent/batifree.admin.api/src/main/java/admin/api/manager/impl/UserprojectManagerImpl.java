@@ -13,7 +13,7 @@ import admin.api.metier.interfaces.IUserAppli;
 import admin.api.metier.interfaces.IUserproject;
 
 import common.api.dao.interfaces.IDao;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Classe <UserprojectManagerImpl>.
@@ -36,7 +36,7 @@ public class UserprojectManagerImpl extends AdminGenericManagerImpl<IUserproject
 	}
 
 	@Override
-	public IUserproject getUserprojectFromUserAppliAndProject(IUserAppli pUserAppli, IProject pProject) throws BatifreeException {
+	public IUserproject getUserprojectFromUserAppliAndProject(IUserAppli pUserAppli, IProject pProject) throws WebbatiException {
 		if (pUserAppli != null && pProject != null) {
 			return getById(new UserprojectId(pUserAppli.getId(), pProject.getId()));
 		}

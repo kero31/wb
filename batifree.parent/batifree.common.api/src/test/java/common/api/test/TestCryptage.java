@@ -21,7 +21,7 @@ public class TestCryptage {
 
 	@Test
 	public void encoder() throws Exception {
-		System.out.println(EncodingTools.encode("bf_admin_BATIFREE_BF_ADMIN", "md5"));
+		System.out.println(EncodingTools.encode("bf_admin_WEBBATI_BF_ADMIN", "md5"));
 	}
 
 }

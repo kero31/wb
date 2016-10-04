@@ -19,7 +19,7 @@
 	<!-- Add Security Bean <import resource="securityBeans.xml" /> -->
 
 	<!-- Début de la configuration AOP -->
-	<context:component-scan base-package="batifree.*" />
+	<context:component-scan base-package="webbati.*" />
 	<context:component-scan base-package="common.*" />
 	<context:component-scan base-package="admin.*" />
 	<aop:aspectj-autoproxy />

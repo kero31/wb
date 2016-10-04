@@ -4,7 +4,7 @@ import java.util.List;
 
 import java.io.Serializable;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Interface <b>IViewManager</b><br/>
@@ -19,26 +19,26 @@ public interface IViewManager<IT, ID extends Serializable> {
 	 * 
 	 * @param pId Id de l'objet
 	 * @return Objet par rapport à son ID
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IT getById(ID pId) throws BatifreeException;
+	IT getById(ID pId) throws WebbatiException;
 
 	/**
 	 * Retourne une liste d'objets.
 	 * 
 	 * @return Liste d'objets
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IT> getList() throws BatifreeException;
+	List<IT> getList() throws WebbatiException;
 
 	/**
 	 * Retourne les pMax premiers de la liste d'objets.
 	 * 
 	 * @param pMaxResult Nombre max de résultat à retourner
 	 * @return pMax premiers de la liste d'objets
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IT> getList(int pMaxResult) throws BatifreeException;
+	List<IT> getList(int pMaxResult) throws WebbatiException;
 
 	/**
 	 * Retourne les pMax premiers de la liste d'objets à partir de l'index pFirstResult
@@ -46,25 +46,25 @@ public interface IViewManager<IT, ID extends Serializable> {
 	 * @param pMaxResult Nombre max de résultat à retourner
 	 * @param pFirstResult Index du premier objet à récupérer
 	 * @return pMax premiers de la liste d'objets à partir de l'index pFirstResult
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IT> getList(int pMaxResult, int pFirstResult) throws BatifreeException;
+	List<IT> getList(int pMaxResult, int pFirstResult) throws WebbatiException;
 
 	/**
 	 * Retourne le nombre d'enregistrement
 	 * 
 	 * @return nombre d'enregistrement
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	long getRowCount() throws BatifreeException;
+	long getRowCount() throws WebbatiException;
 
 	/**
 	 * Met à jour l'objet avec les nouvelles infos de la BD
 	 * 
 	 * @param pObject objet à mettre à jour
 	 * @return objet mis à jour
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IT refresh(IT pObject) throws BatifreeException;
+	IT refresh(IT pObject) throws WebbatiException;
 
 }

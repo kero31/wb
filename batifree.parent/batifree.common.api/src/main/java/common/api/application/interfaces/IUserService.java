@@ -6,8 +6,8 @@ package common.api.application.interfaces;
 
 import java.sql.Connection;
 
-import common.api.exception.BatifreeException;
-import common.api.exception.BatifreeUserException;
+import common.api.exception.WebbatiException;
+import common.api.exception.WebbatiUserException;
 import common.api.metier.interfaces.IUserApp;
 
 /**
@@ -28,9 +28,9 @@ public interface IUserService {
 	 * 
 	 * 
 	 * @return la transaction
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	ITransaction getTransaction() throws BatifreeException;
+	ITransaction getTransaction() throws WebbatiException;
 
 	/**
 	 * Retourne l'utilisateur courant.
@@ -38,35 +38,35 @@ public interface IUserService {
 	 * 
 	 * @return l'utilisateur courant
 	 * 
-	 * @throws BatifreeUserException, BatifreeException BatifreeUserException, BatifreeException
+	 * @throws WebbatiUserException, WebbatiException WebbatiUserException, WebbatiException
 	 */
-	IUserApp getUser() throws BatifreeUserException, BatifreeException;
+	IUserApp getUser() throws WebbatiUserException, WebbatiException;
 
 	/**
 	 * Met à jour les infos de user app.
 	 * 
 	 * 
 	 * @param pUserApp info à mettre à jour
-	 * @throws BatifreeUserException, BatifreeException BatifreeUserException, BatifreeException
+	 * @throws WebbatiUserException, WebbatiException WebbatiUserException, WebbatiException
 	 */
-	void updateInfoUserApp(IUserApp pUserApp) throws BatifreeUserException, BatifreeException;
+	void updateInfoUserApp(IUserApp pUserApp) throws WebbatiUserException, WebbatiException;
 
 	/**
 	 * Valide l'utilisateur.
 	 * 
 	 * 
 	 * @return TRUE si le check a été validé, FALSE sinon
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	boolean checkValidUser() throws BatifreeException;
+	boolean checkValidUser() throws WebbatiException;
 
 	/**
 	 * Ferme les sessions courante.
 	 * 
 	 * 
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void closeSessions() throws BatifreeException;
+	void closeSessions() throws WebbatiException;
 
 	/**
 	 * Retourne si on est en session WEB ou non
@@ -105,8 +105,8 @@ public interface IUserService {
 	 * 
 	 * 
 	 * @return connection SQL
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	Connection getConnectionSQL() throws BatifreeException;
+	Connection getConnectionSQL() throws WebbatiException;
 
 }

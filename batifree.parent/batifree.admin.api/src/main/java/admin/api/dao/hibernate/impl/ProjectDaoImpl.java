@@ -13,7 +13,7 @@ import admin.api.metier.interfaces.IProject;
 import admin.api.metier.interfaces.IProjectscript;
 import admin.api.metier.interfaces.IRole;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * 
@@ -32,7 +32,7 @@ public class ProjectDaoImpl extends AdminGenericHibernateDaoImpl<Project, Projec
 	}
 
 	@Override
-	public List<IRole> getListRole(IProject pProject) throws BatifreeException {
+	public List<IRole> getListRole(IProject pProject) throws WebbatiException {
 		Project project = getEjbFromMetier(pProject);
 		if (project != null) {
 			return getListMetierFromListEjb(project.getRoles(), RoleImpl.class, IRole.class);
@@ -41,7 +41,7 @@ public class ProjectDaoImpl extends AdminGenericHibernateDaoImpl<Project, Projec
 	}
 
 	@Override
-	public List<IProjectscript> getListProjectscript(IProject pProject) throws BatifreeException {
+	public List<IProjectscript> getListProjectscript(IProject pProject) throws WebbatiException {
 		Project project = getEjbFromMetier(pProject);
 		if (project != null) {
 			return getListMetierFromListEjb(project.getProjectscripts(), ProjectscriptImpl.class, IProjectscript.class);

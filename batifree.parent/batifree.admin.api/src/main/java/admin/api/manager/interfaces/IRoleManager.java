@@ -9,7 +9,7 @@ import java.util.List;
 import admin.api.metier.interfaces.IRole;
 import admin.api.metier.interfaces.IUserAppli;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.manager.interfaces.IManager;
 
 /**
@@ -22,8 +22,8 @@ public interface IRoleManager extends IManager<IRole, Integer> {
 	 * 
 	 * @param pRole le rôle
 	 * @return liste des userrole associés au rôle
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IUserAppli> getListUser(IRole pRole) throws BatifreeException;
+	List<IUserAppli> getListUser(IRole pRole) throws WebbatiException;
 
 }

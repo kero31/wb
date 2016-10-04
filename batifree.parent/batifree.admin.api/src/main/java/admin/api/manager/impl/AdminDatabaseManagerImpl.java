@@ -37,7 +37,7 @@ import admin.api.metier.interfaces.IVScriptUpdate;
 
 import common.api.application.interfaces.IApplicationCommun;
 import common.api.application.interfaces.IPropertiesApp;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.manager.impl.SuperManager;
 import common.api.util.EncodingTools;
 import common.api.util.Mail;
@@ -74,13 +74,13 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	/**
 	 * Init PostConstruct
 	 * 
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	@PostConstruct
-	private void init() throws BatifreeException {
+	private void init() throws WebbatiException {
 		try {
 			isBdPasswordEncoded = new Boolean(application.getProperties().getProperty(IPropertiesApp.BD_ADMIN_PASSWORD_ENCODE, "false"));
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			isBdPasswordEncoded = false;
 		}
 		bdClientHost = application.getProperties().getProperty(IPropertiesApp.BD_CLIENT_HOST);
@@ -88,28 +88,28 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 
 	@Override
 	public String createUserFromUsernameProject(String pUsername, String pCodeProject, Date pDateExpired, String pMailUsername)
-			throws BatifreeException {
+			throws WebbatiException {
 		return createUserFromUsernameProject(pUsername, pCodeProject, pDateExpired, getConnectionDefault(), pMailUsername, null, null);
 	}
 
 	@Override
 	public String createUserFromUsernameProject(String pUsername, String pCodeProject, Date pDateExpired, Integer pConnectionId, String pMailUsername)
-			throws BatifreeException {
+			throws WebbatiException {
 		return createUserFromUsernameProject(pUsername, pCodeProject, pDateExpired, pConnectionId, pMailUsername, null, null);
 	}
 
 	@Override
 	public String createUserFromUsernameProject(String pUsername, String pCodeProject, Date pDateExpired, String pMailUsername,
-			String pUsernameParent, String pPasswordUsernameParent) throws BatifreeException {
+			String pUsernameParent, String pPasswordUsernameParent) throws WebbatiException {
 
 		if (pCodeProject == null || pCodeProject.isEmpty()) {
-			throw new BatifreeException("codeProject est vide");
+			throw new WebbatiException("codeProject est vide");
 		}
 		if (StringUtils.isEmpty(pUsernameParent)) {
-			throw new BatifreeException("username parent est vide");
+			throw new WebbatiException("username parent est vide");
 		}
 		if (StringUtils.isEmpty(pPasswordUsernameParent)) {
-			throw new BatifreeException("mot de passe username parent est vide");
+			throw new WebbatiException("mot de passe username parent est vide");
 		}
 
 		// Recherche le userappli parent si le UsernameParent ainsi que sont mot de passe a été saisi
@@ -118,22 +118,22 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 		// Si le mot de passe de l'user trouvé correspond à celui donné en paramètre, on enregistre le user appli parent
 		// Sinon on gère les erreurs
 		if (userParent == null) {
-			throw new BatifreeException("le username du parent'" + pUsernameParent + "' n'existe pas");
+			throw new WebbatiException("le username du parent'" + pUsernameParent + "' n'existe pas");
 		}
 		if (passwordUsernameParentEncoded == null || !passwordUsernameParentEncoded.equals(userParent.getPassword())) {
-			throw new BatifreeException("le mot de passe du username parent'" + pUsernameParent + "' n'est pas correct");
+			throw new WebbatiException("le mot de passe du username parent'" + pUsernameParent + "' n'est pas correct");
 		}
 
 		// Récup du project
 		IProject project = application.getProjectManager().getProjectByCode(pCodeProject);
 		if (project == null) {
-			throw new BatifreeException("Le project '" + pCodeProject + "' n'existe pas");
+			throw new WebbatiException("Le project '" + pCodeProject + "' n'existe pas");
 		}
 
 		// A partir de ce user parent, recherche la connection
 		IUserproject userproject = application.getUserprojectManager().getUserprojectFromUserAppliAndProject(userParent, project);
 		if (userproject == null) {
-			throw new BatifreeException("Le userproject avec username '" + pUsernameParent + " et project '" + pCodeProject + "' n'existe pas");
+			throw new WebbatiException("Le userproject avec username '" + pUsernameParent + " et project '" + pCodeProject + "' n'existe pas");
 		}
 		IConnectiondb connection = userproject.getConnectiondb();
 
@@ -142,7 +142,7 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	}
 
 	@Override
-	public String createUserDemoFromProject(String pCodeProject, String pMailUsername) throws BatifreeException {
+	public String createUserDemoFromProject(String pCodeProject, String pMailUsername) throws WebbatiException {
 		// Crée une date d'expiration aujourd'hui + DEMO_NB_JOURS
 		Calendar dateExpired = new GregorianCalendar();
 		dateExpired.add(Calendar.DAY_OF_YEAR, DEMO_NB_JOURS);
@@ -152,7 +152,7 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 		try {
 			connectionId = new Integer(application.getProperties().getProperty(PropertiesAppAdminImpl.DEMO_CONNECTION_ID));
 		} catch (NumberFormatException e) {
-			throw new BatifreeException("Récupération de la connection démo impossible", e);
+			throw new WebbatiException("Récupération de la connection démo impossible", e);
 		}
 
 		// Crée le user démo
@@ -160,7 +160,7 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	}
 
 	@Override
-	public String createUserTestFromProject(String pCodeProject) throws BatifreeException {
+	public String createUserTestFromProject(String pCodeProject) throws WebbatiException {
 		// Crée une date d'expiration aujourd'hui + TEST_NB_JOURS
 		Calendar dateExpired = new GregorianCalendar();
 		dateExpired.add(Calendar.DAY_OF_YEAR, TEST_NB_JOURS);
@@ -178,13 +178,13 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 		try {
 			connectionId = new Integer(application.getProperties().getProperty(PropertiesAppAdminImpl.TEST_CONNECTION_ID));
 		} catch (NumberFormatException e) {
-			throw new BatifreeException("Récupération de la connection test impossible", e);
+			throw new WebbatiException("Récupération de la connection test impossible", e);
 		}
 
 		// Récupère la connection db
 		IConnectiondb connection = application.getConnectiondbManager().getById(connectionId);
 		if (connection == null) {
-			throw new BatifreeException("La connection '" + connectionId.toString() + "' n existe pas");
+			throw new WebbatiException("La connection '" + connectionId.toString() + "' n existe pas");
 		}
 
 		// Crée le user démo
@@ -194,7 +194,7 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 
 	@Override
 	public String createUserFromUsernameProject(String pUsername, String pCodeProject, Date pDateExpired, Integer pConnectionId,
-			String pMailUsername, String pUsernameParent, String pPasswordUsernameParent) throws BatifreeException {
+			String pMailUsername, String pUsernameParent, String pPasswordUsernameParent) throws WebbatiException {
 		// Récupère la connection db
 		IConnectiondb connection = application.getConnectiondbManager().getById(pConnectionId);
 		if (connection == null) {
@@ -204,7 +204,7 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 			} else {
 				conn = pConnectionId.toString();
 			}
-			throw new BatifreeException("La connection '" + conn + "' n existe pas");
+			throw new WebbatiException("La connection '" + conn + "' n existe pas");
 		}
 
 		// Crée le user avec connection spécifique
@@ -216,9 +216,9 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * Génère le username démo avec le prefixe et une chaine alétoire On vérifie aussi s'il n'existe pas
 	 * 
 	 * @return username démo
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private String getUsernameDemo() throws BatifreeException {
+	private String getUsernameDemo() throws WebbatiException {
 		String username = DEMO_USERNAME_PREFIXE + EncodingTools.generateUsername();
 		IUserAppli user = application.getUserAppliManager().getUserByUsername(username);
 		while (user != null) {
@@ -241,10 +241,10 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * @param pUsernameParent username parent
 	 * @param pPasswordUsernameParent password de l'username parent
 	 * @return login/password
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
 	private String createUserFromUsernameProject(String pUsername, String pCodeProject, Date pDateExpired, IConnectiondb pConnection,
-			String pMailUsername, String pUsernameParent, String pPasswordUsernameParent) throws BatifreeException {
+			String pMailUsername, String pUsernameParent, String pPasswordUsernameParent) throws WebbatiException {
 		return createUserFromUsernameProject(pUsername, null, pCodeProject, pDateExpired, pConnection, pMailUsername, pUsernameParent,
 				pPasswordUsernameParent);
 	}
@@ -262,22 +262,22 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * @param pUsernameParent username parent
 	 * @param pPasswordUsernameParent password de l'username parent
 	 * @return login/password
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
 	private String createUserFromUsernameProject(String pUsername, String pPasswordUsername, String pCodeProject, Date pDateExpired,
-			IConnectiondb pConnection, String pMailUsername, String pUsernameParent, String pPasswordUsernameParent) throws BatifreeException {
+			IConnectiondb pConnection, String pMailUsername, String pUsernameParent, String pPasswordUsernameParent) throws WebbatiException {
 
 		if (pUsername == null || pUsername.isEmpty()) {
-			throw new BatifreeException("username est vide");
+			throw new WebbatiException("username est vide");
 		}
 		if (pCodeProject == null || pCodeProject.isEmpty()) {
-			throw new BatifreeException("codeProject est vide");
+			throw new WebbatiException("codeProject est vide");
 		}
 		if (pDateExpired == null) {
-			throw new BatifreeException("dateExpired est vide");
+			throw new WebbatiException("dateExpired est vide");
 		}
 		if (pConnection == null) {
-			throw new BatifreeException("connection est vide");
+			throw new WebbatiException("connection est vide");
 		}
 
 		IUserAppli user = null;
@@ -295,13 +295,13 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 				// Si le mot de passe de l'user trouvé correspond à celui donné en paramètre, on enregistre le user appli parent
 				// Sinon on gère les erreurs
 				if (userParentFound == null) {
-					throw new BatifreeException("le username du parent'" + pUsernameParent + "' n'existe pas");
+					throw new WebbatiException("le username du parent'" + pUsernameParent + "' n'existe pas");
 
 				}
 				if (passwordUsernameParentEncoded != null && passwordUsernameParentEncoded.equals(userParentFound.getPassword())) {
 					userParent = userParentFound;
 				} else {
-					throw new BatifreeException("le mot de passe du username parent'" + pUsernameParent + "' n'est pas correct");
+					throw new WebbatiException("le mot de passe du username parent'" + pUsernameParent + "' n'est pas correct");
 				}
 			}
 
@@ -321,10 +321,10 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 			commitTransaction();
 
 			LOGGER.info("L'utilisateur " + user.getUsername() + " sur le projet " + pCodeProject + " a été créé");
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			// Fait le rollback si erreur
 			rollbackTransaction();
-			throw new BatifreeException("Création de l'utilisateur impossible", e);
+			throw new WebbatiException("Création de l'utilisateur impossible", e);
 		} finally {
 			closeTransaction();
 		}
@@ -333,7 +333,7 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 		if (pMailUsername != null && !pMailUsername.isEmpty()) {
 			try {
 				sendEmailCreateUser(user.getUsername(), password, pMailUsername);
-			} catch (BatifreeException e) {
+			} catch (WebbatiException e) {
 				LOGGER.error("Email non envoyé : " + e);
 			}
 		}
@@ -348,30 +348,30 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * @param pUsername username
 	 * @param pPassword password
 	 * @param pMailUsername mailde l'username
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private void sendEmailCreateUser(String pUsername, String pPassword, String pMailUsername) throws BatifreeException {
-		String subject = "Batifree - Connection à l'application web";
-		String message = "Bonjour" + "\nVoici ci-dessous les identifiants pour vous connecter à batifree web" + "\n\tLogin : " + pUsername
-				+ "\n\tMot de passe : " + pPassword + "\n\nBonne journée," + "\nCordialement" + "\n\nBatifree";
+	private void sendEmailCreateUser(String pUsername, String pPassword, String pMailUsername) throws WebbatiException {
+		String subject = "Webbati - Connection à l'application web";
+		String message = "Bonjour" + "\nVoici ci-dessous les identifiants pour vous connecter à webbati web" + "\n\tLogin : " + pUsername
+				+ "\n\tMot de passe : " + pPassword + "\n\nBonne journée," + "\nCordialement" + "\n\nWebbati";
 		Mail.sendMail(pMailUsername, message, subject);
 	}
 
 	@Override
-	public void addProjectToUser(IUserAppli pUser, String pCodeProject) throws BatifreeException {
+	public void addProjectToUser(IUserAppli pUser, String pCodeProject) throws WebbatiException {
 		addProjectToUser(pUser, pCodeProject, getConnectionDefault());
 	}
 
 	@Override
-	public IUserproject addProjectToUser(IUserAppli pUser, String pCodeProject, IConnectiondb pConnection) throws BatifreeException {
+	public IUserproject addProjectToUser(IUserAppli pUser, String pCodeProject, IConnectiondb pConnection) throws WebbatiException {
 		if (pUser == null) {
-			throw new BatifreeException("user est vide");
+			throw new WebbatiException("user est vide");
 		}
 		if (pCodeProject == null || pCodeProject.isEmpty()) {
-			throw new BatifreeException("codeProject est vide");
+			throw new WebbatiException("codeProject est vide");
 		}
 		if (pConnection == null) {
-			throw new BatifreeException("connection est vide");
+			throw new WebbatiException("connection est vide");
 		}
 
 		try {
@@ -399,17 +399,17 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 			LOGGER.info("L'utilisateur " + pUser.getUsername() + " a été ajouté au projet " + pCodeProject + " ainsi que sa base de données");
 
 			return userProject;
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			// Fait le rollback si erreur
 			rollbackTransaction();
-			throw new BatifreeException("Ajout de l'utilisateur " + pUser.getUsername() + " impossible au projet " + pCodeProject, e);
+			throw new WebbatiException("Ajout de l'utilisateur " + pUser.getUsername() + " impossible au projet " + pCodeProject, e);
 		} finally {
 			closeTransaction();
 		}
 	}
 
 	@Override
-	public void checkValidityUsers() throws BatifreeException {
+	public void checkValidityUsers() throws WebbatiException {
 		Calendar sysDate = new GregorianCalendar();
 		Calendar sysDateLock = new GregorianCalendar();
 		sysDateLock.add(Calendar.DAY_OF_YEAR, -USER_NB_JOURS_DELETED);
@@ -430,7 +430,7 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 
 				// Commit si pas d'erreur
 				commitTransaction();
-			} catch (BatifreeException e) {
+			} catch (WebbatiException e) {
 				// Fait le rollback si erreur
 				rollbackTransaction();
 				LOGGER.error("Erreur de checkValidityUsers - ", e);
@@ -444,18 +444,18 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * Supprime la database du userproject.
 	 * 
 	 * @param pUserproject userproject à supprimer
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	private void dropDataseUserProject(IUserproject pUserproject) throws BatifreeException {
+	private void dropDataseUserProject(IUserproject pUserproject) throws WebbatiException {
 		if (pUserproject != null) {
 			// Récupère les infos du user project
 			String bdDbName = pUserproject.getBdDbname();
 			if (bdDbName == null || bdDbName.isEmpty()) {
-				throw new BatifreeException("La databasename du userproject ne peut pas être vide");
+				throw new WebbatiException("La databasename du userproject ne peut pas être vide");
 			}
 			String bdLogin = pUserproject.getBdLogin();
 			if (bdLogin == null || bdLogin.isEmpty()) {
-				throw new BatifreeException("Le login admin de la connection du userproject ne peut pas être vide");
+				throw new WebbatiException("Le login admin de la connection du userproject ne peut pas être vide");
 			}
 
 			// Drop database
@@ -467,11 +467,11 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * Supprime les databases appartennant à cet utilisateur.
 	 * 
 	 * @param user utilisateur à supprimer ses database
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	/*private void dropDataseUser(IUserAppli user) throws BatifreeException {
+	/*private void dropDataseUser(IUserAppli user) throws WebbatiException {
 		if (user == null) {
-			throw new BatifreeException("Le user ne peut pas être vide");
+			throw new WebbatiException("Le user ne peut pas être vide");
 		}
 
 		// Parcours les databases appartennant à l'utilisateur
@@ -481,7 +481,7 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	}*/
 
 	@Override
-	public void deleteUserProjectAndDatabase(IUserproject pUserproject) throws BatifreeException {
+	public void deleteUserProjectAndDatabase(IUserproject pUserproject) throws WebbatiException {
 		try {
 			// Démarre la transaction
 			beginTransaction();
@@ -494,20 +494,20 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 
 			// Commit si pas d'erreur
 			commitTransaction();
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			// Fait le rollback si erreur
 			rollbackTransaction();
-			throw new BatifreeException("Suppression de l'userproject impossible", e);
+			throw new WebbatiException("Suppression de l'userproject impossible", e);
 		} finally {
 			closeTransaction();
 		}
 	}
 
 	@Override
-	public void deleteUserAndDatabase(IUserAppli pUser) throws BatifreeException {
+	public void deleteUserAndDatabase(IUserAppli pUser) throws WebbatiException {
 		// Vérifie les infos en entrées
 		if (pUser == null) {
-			throw new BatifreeException("Le user ne peut pas être vide");
+			throw new WebbatiException("Le user ne peut pas être vide");
 		}
 
 		// Supprime les user project associés à ce user
@@ -531,19 +531,19 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * @param pMailUsername mail username
 	 * @param pUserAppliParent UserAppli Parent
 	 * @return utilisateur
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	private IUserAppli createUserFromUsername(String pUsername, String pPassword, Date pDateExpired, String pMailUsername,
-			IUserAppli pUserAppliParent) throws BatifreeException {
+			IUserAppli pUserAppliParent) throws WebbatiException {
 		if (pUsername == null || pUsername.isEmpty()) {
-			throw new BatifreeException("Le username est vide");
+			throw new WebbatiException("Le username est vide");
 		}
 
 		// Recherche si le username existe déjà
 		IUserAppliManager manager = application.getUserAppliManager();
 		for (IUserAppli user : manager.getList()) {
 			if (pUsername.equals(user.getUsername())) {
-				throw new BatifreeException("Le username '" + pUsername + "' existe déjà");
+				throw new WebbatiException("Le username '" + pUsername + "' existe déjà");
 			}
 		}
 
@@ -569,16 +569,16 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * @param pProject project servant à créer le userproject
 	 * @param pConnectionDefault connection default
 	 * @return userproject
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	private IUserproject createUserProjectFromUserAndProject(IUserAppli pUser, IProject pProject, IConnectiondb pConnectionDefault)
-			throws BatifreeException {
+			throws WebbatiException {
 		// Vérifie les infos en entrées
 		if (pUser == null) {
-			throw new BatifreeException("Le user ne peut pas être vide");
+			throw new WebbatiException("Le user ne peut pas être vide");
 		}
 		if (pProject == null) {
-			throw new BatifreeException("Le project ne peut pas être vide");
+			throw new WebbatiException("Le project ne peut pas être vide");
 		}
 
 		// Crée user project
@@ -598,7 +598,7 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 		// S'il y a une erreur, alors on ne bloque pas la fonction
 		try {
 			alertNbUserConnection(pConnectionDefault);
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			LOGGER.error(e);
 		}
 
@@ -622,9 +622,9 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * @param pBdLogin login user
 	 * @param pBdDbName db name
 	 * @return password de la bd
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private String getBdPasswordFromBdLogin(String pBdLogin, String pBdDbName) throws BatifreeException {
+	private String getBdPasswordFromBdLogin(String pBdLogin, String pBdDbName) throws WebbatiException {
 		if (isBdPasswordEncoded) {
 			return EncodingTools.encode(getBdPasswordClearFromBdLogin(pBdLogin, pBdDbName), EncodingTools.ENCODING_MD5);
 		}
@@ -637,9 +637,9 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * @param pBdLogin login user
 	 * @param pBdDbName db name
 	 * @return password password de la bd en clair
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private String getBdPasswordClearFromBdLogin(String pBdLogin, String pBdDbName) throws BatifreeException {
+	private String getBdPasswordClearFromBdLogin(String pBdLogin, String pBdDbName) throws WebbatiException {
 		return pBdLogin + "_" + EncodingTools.ENCODING_KEY + "_" + pBdDbName;
 	}
 
@@ -647,9 +647,9 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * Retourne le password aléatoire de l'user.
 	 * 
 	 * @return password aléatoire de l'user
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private String getUserPasswordRandom() throws BatifreeException {
+	private String getUserPasswordRandom() throws WebbatiException {
 		return EncodingTools.generatePassword();
 
 	}
@@ -669,20 +669,20 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * Envoie un message d'alerte si le nombre de user pour la connection dépasse la limite alerte
 	 * 
 	 * @param pConnection connection à tester
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private void alertNbUserConnection(IConnectiondb pConnection) throws BatifreeException {
-		String subject = "Batifree - La connection '" + pConnection.getUrl() + "' a atteint la limite";
+	private void alertNbUserConnection(IConnectiondb pConnection) throws WebbatiException {
+		String subject = "Webbati - La connection '" + pConnection.getUrl() + "' a atteint la limite";
 		String message = "Connection : " + pConnection.getUrl() + "\nDriver : " + pConnection.getDriver() + "\nLimite : "
 				+ pConnection.getLimitUserAlert();
 		Mail.sendMail(EMAIL_ADMIN_DATABASE, message, subject);
 	}
 
 	@Override
-	public IConnectiondb getConnectionDefault() throws BatifreeException {
+	public IConnectiondb getConnectionDefault() throws WebbatiException {
 		Integer idConn = adminDatabaseDao.getConnectionIdDefault();
 		if (idConn == null) {
-			throw new BatifreeException("Pas de base trouvée");
+			throw new WebbatiException("Pas de base trouvée");
 		}
 		IConnectiondb conn = application.getConnectiondbManager().getById(idConn);
 		return conn;
@@ -692,27 +692,27 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * Crée la base de données à partir des infos du userproject
 	 * 
 	 * @param pUserproject user project
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private void createDatabaseForUserProject(IUserproject pUserproject) throws BatifreeException {
+	private void createDatabaseForUserProject(IUserproject pUserproject) throws WebbatiException {
 		if (pUserproject == null) {
-			throw new BatifreeException("Le userproject ne peut pas être vide");
+			throw new WebbatiException("Le userproject ne peut pas être vide");
 		}
 
 		// Récupère les infos du user project
 		String bdDbName = pUserproject.getBdDbname();
 		if (bdDbName == null || bdDbName.isEmpty()) {
-			throw new BatifreeException("La databasename du userproject ne peut pas être vide");
+			throw new WebbatiException("La databasename du userproject ne peut pas être vide");
 		}
 		String bdLogin = pUserproject.getBdLogin();
 		if (bdLogin == null || bdLogin.isEmpty()) {
-			throw new BatifreeException("Le login admin de la connection du userproject ne peut pas être vide");
+			throw new WebbatiException("Le login admin de la connection du userproject ne peut pas être vide");
 		}
 		String bdPassword = pUserproject.getBdPassword();
 		if (isBdPasswordEncoded) {
 			String bdPasswordEncoded = getBdPasswordFromBdLogin(bdLogin, bdDbName);
 			if (bdPasswordEncoded == null || !bdPasswordEncoded.equals(bdPassword)) {
-				throw new BatifreeException("createDatabaseForUserProject - Le mot de passe userproject est incorrect");
+				throw new WebbatiException("createDatabaseForUserProject - Le mot de passe userproject est incorrect");
 			}
 			bdPassword = getBdPasswordClearFromBdLogin(bdLogin, bdDbName);
 		}
@@ -720,26 +720,26 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 		// Récupère les infos de la connection du user project
 		IConnectiondb conn = pUserproject.getConnectiondb();
 		if (conn == null) {
-			throw new BatifreeException("La connection du userproject ne peut pas être vide");
+			throw new WebbatiException("La connection du userproject ne peut pas être vide");
 		}
 		String rootDbName = conn.getRootDbname();
 		if (rootDbName == null || rootDbName.isEmpty()) {
-			throw new BatifreeException("La db admin de la connection du userproject ne peut pas être vide");
+			throw new WebbatiException("La db admin de la connection du userproject ne peut pas être vide");
 		}
 		String url = conn.getUrl();
 		if (url == null || url.isEmpty()) {
-			throw new BatifreeException("L'url de la connection du userproject ne peut pas être vide");
+			throw new WebbatiException("L'url de la connection du userproject ne peut pas être vide");
 		}
 		String rootLogin = conn.getRootLogin();
 		if (rootLogin == null || rootLogin.isEmpty()) {
-			throw new BatifreeException("Le login admin de la connection du userproject ne peut pas être vide");
+			throw new WebbatiException("Le login admin de la connection du userproject ne peut pas être vide");
 		}
 		String rootPassword = conn.getRootPassword();
 		if (isBdPasswordEncoded) {
 			String rootPasswordClear = rootLogin + "_" + EncodingTools.ENCODING_KEY + "_" + rootDbName;
 			String rootPasswordEncoded = EncodingTools.encode(rootPasswordClear, EncodingTools.ENCODING_MD5);
 			if (rootPasswordEncoded == null || !rootPasswordEncoded.equals(rootPassword)) {
-				throw new BatifreeException("createDatabaseForUserProject - Le mot de passe connection est incorrect");
+				throw new WebbatiException("createDatabaseForUserProject - Le mot de passe connection est incorrect");
 			}
 			rootPassword = rootPasswordClear;
 		}
@@ -751,9 +751,9 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 
 			// Importe les scripts SQL depuis la 1ère version dans cette base
 			importAllScriptSQLIntoDatabaseFromUserProject(pUserproject, conn.getDriver(), url + bdDbName, rootLogin, rootPassword);
-		} catch (BatifreeException e) {
+		} catch (WebbatiException e) {
 			dropDataseUserProject(pUserproject);
-			throw new BatifreeException("Erreur sur la création et import de script SQL pour la bdName=" + bdDbName + " avec le bdLogin=" + bdLogin
+			throw new WebbatiException("Erreur sur la création et import de script SQL pour la bdName=" + bdDbName + " avec le bdLogin=" + bdLogin
 					+ " sur l'url " + url, e);
 		}
 	}
@@ -766,16 +766,16 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * @param pUrl url
 	 * @param pLogin login
 	 * @param pPassword password
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	private void importAllScriptSQLIntoDatabaseFromUserProject(IUserproject pUserproject, String pDriver, String pUrl, String pLogin,
-			String pPassword) throws BatifreeException {
+			String pPassword) throws WebbatiException {
 		if (pUserproject == null) {
-			throw new BatifreeException("Le userproject ne peut pas être vide");
+			throw new WebbatiException("Le userproject ne peut pas être vide");
 		}
 		IProject project = pUserproject.getProject();
 		if (project == null) {
-			throw new BatifreeException("Le project ne peut pas être vide");
+			throw new WebbatiException("Le project ne peut pas être vide");
 		}
 
 		// Pour chaque fichier trouvé, exécute le script et enregistre dans le user project dans la version courante du script
@@ -812,15 +812,15 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	}
 
 	@Override
-	public void updateDatabases(String pCodeProject) throws BatifreeException {
+	public void updateDatabases(String pCodeProject) throws WebbatiException {
 		if (pCodeProject == null || pCodeProject.isEmpty()) {
-			throw new BatifreeException("Le code project ne peut pas être vide");
+			throw new WebbatiException("Le code project ne peut pas être vide");
 		}
 
 		// Récup du projet à partir de son code
 		IProject project = application.getProjectManager().getProjectByCode(pCodeProject);
 		if (project == null) {
-			throw new BatifreeException("Le project n'existe pas");
+			throw new WebbatiException("Le project n'existe pas");
 		}
 
 		// Récupère tous les éléments de la vue
@@ -843,10 +843,10 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 
 				// Si pas de mise à effectuée, on envoie une exception
 				if (nbUpdated == 0) {
-					throw new BatifreeException("Aucune mise à jour effectuée sur le USERPROJECT UserAppli_ID=" + script.getUserAppliId()
+					throw new WebbatiException("Aucune mise à jour effectuée sur le USERPROJECT UserAppli_ID=" + script.getUserAppliId()
 							+ " et Project_ID=" + project.getId() + " avec ProjectScript_ID=" + script.getProjectscriptId());
 				}
-			} catch (BatifreeException e) {
+			} catch (WebbatiException e) {
 				LOGGER.error(e);
 				String info = "Login:" + script.getLogin() + "; URL:" + script.getUrl() + "; DRIVER:" + script.getDriver() + "; FILENAME:"
 						+ script.getFilename();
@@ -855,7 +855,7 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 		}
 
 		if (!erreurs.isEmpty()) {
-			throw new BatifreeException("Erreur dans la mise à jour de la base + \n" + erreurs);
+			throw new WebbatiException("Erreur dans la mise à jour de la base + \n" + erreurs);
 		}
 	}
 
@@ -864,15 +864,15 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * 
 	 * @param pUser user
 	 * @param pRole role
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private void createUserRoleFromUserAndRole(IUserAppli pUser, IRole pRole) throws BatifreeException {
+	private void createUserRoleFromUserAndRole(IUserAppli pUser, IRole pRole) throws WebbatiException {
 		// Vérifie les infos en entrées
 		if (pUser == null) {
-			throw new BatifreeException("Le user ne peut pas être vide");
+			throw new WebbatiException("Le user ne peut pas être vide");
 		}
 		if (pRole == null) {
-			throw new BatifreeException("Le role ne peut pas être vide");
+			throw new WebbatiException("Le role ne peut pas être vide");
 		}
 
 		// Crée le user role
@@ -890,9 +890,9 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	 * 
 	 * @param pProject project
 	 * @return role par défaut
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private IRole getRoleDefault(IProject pProject) throws BatifreeException {
+	private IRole getRoleDefault(IProject pProject) throws WebbatiException {
 		if (pProject != null) {
 			List<IRole> listRoleFromProject = pProject.getListRole();
 			if (listRoleFromProject != null) {
@@ -907,7 +907,7 @@ public class AdminDatabaseManagerImpl extends SuperManager implements IAdminData
 	}
 
 	@Override
-	protected IApplicationCommun getApplication() throws BatifreeException {
+	protected IApplicationCommun getApplication() throws WebbatiException {
 		return application;
 	}
 

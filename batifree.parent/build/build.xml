@@ -14,15 +14,15 @@
 	<property name="src.resources" value="src${file.separator}main${file.separator}resources"/>
 	
 	<!-- projects -->
-	<property name="common.api.project" value="${parentDirectory}${file.separator}batifree.common.api${file.separator}${src.java}"/>
+	<property name="common.api.project" value="${parentDirectory}${file.separator}webbati.common.api${file.separator}${src.java}"/>
 	<property name="common.api.package" value="common${file.separator}api"/>
 	<property name="common.api.project.package" value="${common.api.project}${file.separator}${common.api.package}${file.separator}"/>
-	<property name="batifree.api.project" value="${parentDirectory}${file.separator}batifree.api2${file.separator}${src.java}"/>
-	<property name="batifree.api.package" value="batifree${file.separator}api"/>
-	<property name="batifree.api.project.package" value="${batifree.api.project}${file.separator}${batifree.api.package}${file.separator}"/>
-	<property name="batifree.api.resources" value="${parentDirectory}${file.separator}batifree.api2${file.separator}${src.resources}"/>
-	<property name="batifree.web.jsf.resources" value="${parentDirectory}${file.separator}batifree.web.jsf${file.separator}${src.resources}"/>
-	<property name="admin.api.project" value="${parentDirectory}${file.separator}batifree.admin.api${file.separator}${src.java}"/>
+	<property name="webbati.api.project" value="${parentDirectory}${file.separator}webbati.api2${file.separator}${src.java}"/>
+	<property name="webbati.api.package" value="webbati${file.separator}api"/>
+	<property name="webbati.api.project.package" value="${webbati.api.project}${file.separator}${webbati.api.package}${file.separator}"/>
+	<property name="webbati.api.resources" value="${parentDirectory}${file.separator}webbati.api2${file.separator}${src.resources}"/>
+	<property name="webbati.web.jsf.resources" value="${parentDirectory}${file.separator}webbati.web.jsf${file.separator}${src.resources}"/>
+	<property name="admin.api.project" value="${parentDirectory}${file.separator}webbati.admin.api${file.separator}${src.java}"/>
 	<property name="admin.api.package" value="admin${file.separator}api"/>
 	<property name="admin.api.project.package" value="${admin.api.project}${file.separator}${admin.api.package}${file.separator}"/>
 	
@@ -30,19 +30,19 @@
 		<!-- tests 
 		<echo message="Version d'Ant utilisée: ${ant.version} _ ${poweramc.source.folder} _ ${src.dir} _ ${src.home}" />
 		<echo message="parentDirectory= ${parentDirectory}"/>
-		<echo message="batifree.api.project= ${batifree.api.project}"/>
-		<echo message="deleteDir = ${batifree.api.project}${file.separator}${src.java}${file.separator}${batifree.api.package}${file.separator}${dao.interfaces}"/>
+		<echo message="webbati.api.project= ${webbati.api.project}"/>
+		<echo message="deleteDir = ${webbati.api.project}${file.separator}${src.java}${file.separator}${webbati.api.package}${file.separator}${dao.interfaces}"/>
 		-->
 	</target>
 	
 	<!-- Suppression répertoires interfaces -->
 	<target name="DeleteInterfacesDirectory">
-		<!-- batifree -->
-		<echo message="Suppression répertoires interfaces de batifree"/>
-		<delete dir="${batifree.api.project.package}${dao.interfaces}"/>
-		<delete dir="${batifree.api.project.package}${manager.interfaces}"/>
-		<delete dir="${batifree.api.project.package}${metier.interfaces}"/>
-		<delete dir="${batifree.api.project.package}${application.interfaces}"/>
+		<!-- webbati -->
+		<echo message="Suppression répertoires interfaces de webbati"/>
+		<delete dir="${webbati.api.project.package}${dao.interfaces}"/>
+		<delete dir="${webbati.api.project.package}${manager.interfaces}"/>
+		<delete dir="${webbati.api.project.package}${metier.interfaces}"/>
+		<delete dir="${webbati.api.project.package}${application.interfaces}"/>
 		
 		<!-- admin -->
 		<echo message="Suppression répertoires interfaces de admin"/>
@@ -61,10 +61,10 @@
 	
 	<!-- Copie répertoires interfaces -->
 	<target name="CopyInterfacesDirectory">
-		<!-- batifree -->
-		<echo message="Copie répertoires interfaces de batifree"/>
-		<copy todir="${batifree.api.project.package}" preservelastmodified="true">
-			<fileset dir="${poweramc.source.folder}${file.separator}${batifree.api.package}" includes="**"/>
+		<!-- webbati -->
+		<echo message="Copie répertoires interfaces de webbati"/>
+		<copy todir="${webbati.api.project.package}" preservelastmodified="true">
+			<fileset dir="${poweramc.source.folder}${file.separator}${webbati.api.package}" includes="**"/>
 		</copy>
 		
 		<!-- admin -->
@@ -161,14 +161,14 @@
 		
 	<!-- Copie répertoires interfaces -->
 	<target name="CopyResources">
-		<!-- batifree -->
+		<!-- webbati -->
 		<property name="rapports" value="${file.separator}rapports"/>
-		<echo message="Suppression répertoire resources de batifree web jsf"/>
-		<delete dir="${batifree.web.jsf.resources}${rapports}"/>
-		<echo message="Copie répertoire resources de batifree web jsf"/>
-		<mkdir dir="${batifree.web.jsf.resources}${rapports}" />
-		<copy todir="${batifree.web.jsf.resources}${rapports}" preservelastmodified="true">
-			<fileset dir="${batifree.api.resources}${rapports}" includes="**"/>
+		<echo message="Suppression répertoire resources de webbati web jsf"/>
+		<delete dir="${webbati.web.jsf.resources}${rapports}"/>
+		<echo message="Copie répertoire resources de webbati web jsf"/>
+		<mkdir dir="${webbati.web.jsf.resources}${rapports}" />
+		<copy todir="${webbati.web.jsf.resources}${rapports}" preservelastmodified="true">
+			<fileset dir="${webbati.api.resources}${rapports}" includes="**"/>
 		</copy>
 	</target>
 	 

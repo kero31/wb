@@ -6,7 +6,7 @@ package common.api.metier.interfaces;
 
 import java.util.List;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Interface <b>IUserApp</b><br/>
@@ -115,9 +115,9 @@ public interface IUserApp {
 	 * 
 	 * 
 	 * @return @return TRUE si ok, FALSE sinon
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	Boolean isValid() throws BatifreeException;
+	Boolean isValid() throws WebbatiException;
 
 	/**
 	 * Retourne si bloqué ou pas.

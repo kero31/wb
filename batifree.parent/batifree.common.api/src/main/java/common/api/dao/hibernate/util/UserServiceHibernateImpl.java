@@ -15,8 +15,8 @@ import org.hibernate.service.jdbc.connections.spi.ConnectionProvider;
 
 import common.api.application.impl.UserServiceSessionImpl;
 import common.api.application.interfaces.ITransaction;
-import common.api.exception.BatifreeException;
-import common.api.exception.BatifreeUserException;
+import common.api.exception.WebbatiException;
+import common.api.exception.WebbatiUserException;
 import common.api.util.ServiceBeanFactory;
 
 /**
@@ -35,7 +35,7 @@ public abstract class UserServiceHibernateImpl extends UserServiceSessionImpl {
 	private TransactionHibernateImpl transaction;
 
 	@Override
-	public ITransaction getTransaction() throws BatifreeException {
+	public ITransaction getTransaction() throws WebbatiException {
 		transaction.setSessionHibernate(getSessionHibernate());
 		return transaction;
 	}
@@ -51,9 +51,9 @@ public abstract class UserServiceHibernateImpl extends UserServiceSessionImpl {
 	 * Retourne la session Hibernate en fonction du l'user courant et du projet.
 	 * 
 	 * @return session Hibernate
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public Session getSessionHibernate() throws BatifreeException {
+	public Session getSessionHibernate() throws WebbatiException {
 		Session session = null;
 		HibernateUtil util = null;
 		try {
@@ -66,20 +66,20 @@ public abstract class UserServiceHibernateImpl extends UserServiceSessionImpl {
 			util.setBdPasswordEncoded(isBdPasswordEncoded());
 			session = util.currentSession(getUser());
 			if (session == null) {
-				throw new BatifreeUserException("Récupération de la session SPRING impossible");
+				throw new WebbatiUserException("Récupération de la session SPRING impossible");
 			}
 			if (!session.isOpen()) {
-				throw new BatifreeUserException("Ouverture de la session impossible");
+				throw new WebbatiUserException("Ouverture de la session impossible");
 			}
-		} catch (BatifreeUserException e) {
-			throw new BatifreeException("Erreur sur la récupération de la session : " + e.getMessage());
+		} catch (WebbatiUserException e) {
+			throw new WebbatiException("Erreur sur la récupération de la session : " + e.getMessage());
 		}
 
 		return session;
 	}
 
 	@Override
-	public void closeSessions() throws BatifreeException {
+	public void closeSessions() throws WebbatiException {
 		// Ferme la session Hibernate
 		Session sessionHibernate = getSessionHibernate();
 		if (sessionHibernate != null) {
@@ -87,7 +87,7 @@ public abstract class UserServiceHibernateImpl extends UserServiceSessionImpl {
 				sessionHibernate.disconnect();
 				sessionHibernate.close();
 			} catch (HibernateException e) {
-				new BatifreeException("Erreur fermeture session hibernate", e);
+				new WebbatiException("Erreur fermeture session hibernate", e);
 			}
 		}
 
@@ -99,17 +99,17 @@ public abstract class UserServiceHibernateImpl extends UserServiceSessionImpl {
 	 * Crée une connection à partir du session hibernate.
 	 * 
 	 * @return connection à partir du session hibernate
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	@Override
-	public Connection getConnectionSQL() throws BatifreeException {
+	public Connection getConnectionSQL() throws WebbatiException {
 		SessionFactoryImplementor sessionFactory = (SessionFactoryImplementor) getSessionHibernate().getSessionFactory();
 		@SuppressWarnings("deprecation")
 		ConnectionProvider connectionProvider = sessionFactory.getConnectionProvider();
 		try {
 			return connectionProvider.getConnection();
 		} catch (SQLException e) {
-			throw new BatifreeException("Erreur récup connection", e);
+			throw new WebbatiException("Erreur récup connection", e);
 		}
 	}
 

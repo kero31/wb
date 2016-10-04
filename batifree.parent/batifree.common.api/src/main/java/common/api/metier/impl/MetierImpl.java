@@ -8,7 +8,7 @@ import java.util.List;
 
 import java.io.Serializable;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.IMetier;
 
 /**
@@ -100,11 +100,11 @@ public abstract class MetierImpl<ID extends Serializable> implements IMetier<ID>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <METIER extends IMetier<ID>> METIER getNewInstance() throws BatifreeException {
+	public <METIER extends IMetier<ID>> METIER getNewInstance() throws WebbatiException {
 		try {
 			return (METIER) getClass().newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-			throw new BatifreeException(e);
+			throw new WebbatiException(e);
 		}
 	}
 

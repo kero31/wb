@@ -10,7 +10,7 @@ import admin.api.metier.interfaces.IRole;
 import admin.api.metier.interfaces.IUserAppli;
 
 import common.api.dao.interfaces.IDao;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Interface <b>IRoleDao</b><br/>
@@ -22,8 +22,8 @@ public interface IRoleDao extends IDao<IRole, Integer> {
 	 * 
 	 * @param pRole le rôle
 	 * @return liste des userrole associés au rôle
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IUserAppli> getListUser(IRole pRole) throws BatifreeException;
+	List<IUserAppli> getListUser(IRole pRole) throws WebbatiException;
 
 }

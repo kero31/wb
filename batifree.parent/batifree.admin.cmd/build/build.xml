@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="CheckValidityUsers" name="batifree.admin.cmd">
+<project default="CheckValidityUsers" name="webbati.admin.cmd">
 	<property file="build.properties" />
 	
 	<!-- Definition des proprietes du projet -->
-	<property name="projet.jar.executable"    value="../target/batifree.admin.cmd.jar"/>
+	<property name="projet.jar.executable"    value="../target/webbati.admin.cmd.jar"/>
 	<property name="projet.lib.dir"        value="../target/lib"/>
 	
 	<!-- Lancer JAVA CheckValidityUsers -->

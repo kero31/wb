@@ -8,7 +8,7 @@ import admin.api.metier.interfaces.IRole;
 import admin.api.metier.interfaces.IUserAppli;
 import admin.api.metier.interfaces.IUserproject;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.impl.MetierImpl;
 
 /**
@@ -33,7 +33,7 @@ public class UserAppliImpl extends MetierImpl<Integer> implements IUserAppli {
 	private Integer userappliParentId;
 
 	@Override
-	public final List<IRole> getListRole() throws BatifreeException {
+	public final List<IRole> getListRole() throws WebbatiException {
 		return listRole == null ? ApplicationAdmin.getApplication().getUserAppliManager().getListRole(this) : listRole;
 	}
 
@@ -53,7 +53,7 @@ public class UserAppliImpl extends MetierImpl<Integer> implements IUserAppli {
 	}
 
 	@Override
-	public List<IUserproject> getListUserproject() throws BatifreeException {
+	public List<IUserproject> getListUserproject() throws WebbatiException {
 		return ApplicationAdmin.getApplication().getUserAppliManager().getListUserproject(this);
 	}
 
@@ -135,7 +135,7 @@ public class UserAppliImpl extends MetierImpl<Integer> implements IUserAppli {
 	}
 
 	@Override
-	public IUserAppli getUserappliParent() throws BatifreeException {
+	public IUserAppli getUserappliParent() throws WebbatiException {
 		return ApplicationAdmin.getApplication().getUserAppliManager().getById(userappliParentId);
 	}
 

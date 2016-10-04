@@ -9,7 +9,7 @@ import java.util.List;
 import java.io.Serializable;
 
 import common.api.dao.interfaces.IDao;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.manager.interfaces.IViewManager;
 import common.api.metier.interfaces.IMetier;
 
@@ -46,21 +46,21 @@ public abstract class ViewManagerImpl<IT extends IMetier<ID>, ID extends Seriali
 	 * 
 	 * @return le mainDao
 	 */
-	protected IDao<IT, ID> getDao() throws BatifreeException {
+	protected IDao<IT, ID> getDao() throws WebbatiException {
 		IDao<IT, ID> dao = getMainDao();
 		if (dao == null) {
-			throw new BatifreeException("Le main DAO est NULL !");
+			throw new WebbatiException("Le main DAO est NULL !");
 		}
 
 		return dao;
 	}
 
 	@Override
-	public IT getById(ID pId) throws BatifreeException {
+	public IT getById(ID pId) throws WebbatiException {
 		try {
 			return getDao().getById(pId);
-		} catch (BatifreeException e) {
-			throw new BatifreeException("Erreur récupération de l'objet avec l'id " + pId.toString() + " échoué à cause de : ", e);
+		} catch (WebbatiException e) {
+			throw new WebbatiException("Erreur récupération de l'objet avec l'id " + pId.toString() + " échoué à cause de : ", e);
 		}
 	}
 
@@ -74,17 +74,17 @@ public abstract class ViewManagerImpl<IT extends IMetier<ID>, ID extends Seriali
 	}
 
 	@Override
-	public List<IT> getList() throws BatifreeException {
+	public List<IT> getList() throws WebbatiException {
 		return getList(NB_ROW_DEFAULT, 0);
 	}
 
 	@Override
-	public List<IT> getList(int pMaxResult) throws BatifreeException {
+	public List<IT> getList(int pMaxResult) throws WebbatiException {
 		return getList(pMaxResult, 0);
 	}
 
 	@Override
-	public List<IT> getList(int pMaxResult, int pFirstResult) throws BatifreeException {
+	public List<IT> getList(int pMaxResult, int pFirstResult) throws WebbatiException {
 		int maxResult = pMaxResult;
 		try {
 
@@ -94,18 +94,18 @@ public abstract class ViewManagerImpl<IT extends IMetier<ID>, ID extends Seriali
 			}
 
 			return getDao().getList(maxResult, pFirstResult);
-		} catch (BatifreeException e) {
-			throw new BatifreeException("Erreur récupération de la liste des objets avec comme paramètres pMaxResult=" + pMaxResult
+		} catch (WebbatiException e) {
+			throw new WebbatiException("Erreur récupération de la liste des objets avec comme paramètres pMaxResult=" + pMaxResult
 			        + ", maxResultNew=" + maxResult + " et pFirstResult=" + pFirstResult, e);
 		}
 	}
 
 	@Override
-	public long getRowCount() throws BatifreeException {
+	public long getRowCount() throws WebbatiException {
 		try {
 			return getDao().getRowCount();
-		} catch (BatifreeException e) {
-			throw new BatifreeException("Erreur récupération du nombre d'objets", e);
+		} catch (WebbatiException e) {
+			throw new WebbatiException("Erreur récupération du nombre d'objets", e);
 		}
 	}
 

@@ -14,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import admin.api.application.impl.ApplicationAdmin;
 import admin.api.application.interfaces.IApplication;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * 
@@ -77,7 +77,7 @@ public class CreateUser {
 			LOGGER.info("Mot de passe : " + password);
 
 			LOGGER.info("Le user " + username + " a ete cree avec succes sur le projet " + codeProject);
-		} catch (BatifreeException | ParseException | BeansException e) {
+		} catch (WebbatiException | ParseException | BeansException e) {
 			LOGGER.error(e);
 			System.exit(1);
 		} finally {

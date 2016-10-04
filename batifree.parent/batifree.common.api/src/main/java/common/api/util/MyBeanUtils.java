@@ -14,7 +14,7 @@ import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.log4j.Logger;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * 
@@ -48,10 +48,10 @@ public class MyBeanUtils extends BeanUtilsBean {
 	 * @param pMapClazzDest map classe objet destination : key=classe origine; value=classe destination
 	 * @param pListOrig list objet origine
 	 * @return list objet destination
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	public <TDEST, TORIG> List<? extends TDEST> copyPropertiesEJBList(Map<Class<? extends TORIG>, Class<? extends TDEST>> pMapClazzDest,
-	        Collection<? extends TORIG> pListOrig) throws BatifreeException {
+	        Collection<? extends TORIG> pListOrig) throws WebbatiException {
 
 		// Validate existence of the specified beans
 		if (pMapClazzDest == null) {
@@ -89,9 +89,9 @@ public class MyBeanUtils extends BeanUtilsBean {
 	 * @param pClazzDest classe objet destination
 	 * @param pListOrig list objet origine
 	 * @return list objet destination
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public <TDEST, TORIG> List<TDEST> copyPropertiesEJBList(Class<TDEST> pClazzDest, Collection<? extends TORIG> pListOrig) throws BatifreeException {
+	public <TDEST, TORIG> List<TDEST> copyPropertiesEJBList(Class<TDEST> pClazzDest, Collection<? extends TORIG> pListOrig) throws WebbatiException {
 		return copyPropertiesEJBList(null, pClazzDest, pListOrig);
 	}
 
@@ -104,10 +104,10 @@ public class MyBeanUtils extends BeanUtilsBean {
 	 * @param pClazzDest classe objet destination
 	 * @param pListOrig list objet origine
 	 * @return list objet destination
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	private <TDEST, TORIG> List<TDEST> copyPropertiesEJBList(Class<? extends TORIG> pClazzOrigin, Class<TDEST> pClazzDest,
-	        Collection<? extends TORIG> pListOrig) throws BatifreeException {
+	        Collection<? extends TORIG> pListOrig) throws WebbatiException {
 		// Validate existence of the specified beans
 		if (pClazzDest == null) {
 			throw new IllegalArgumentException("No destination bean specified");
@@ -143,7 +143,7 @@ public class MyBeanUtils extends BeanUtilsBean {
 					destTemplate = clazzDestTemplate.newInstance();
 				} catch (IllegalAccessException | InstantiationException e) {
 					LOGGER.error("Erreur newInstance", e);
-					throw new BatifreeException("Erreur newInstance", e);
+					throw new WebbatiException("Erreur newInstance", e);
 				}
 
 				// Property Utils Bean
@@ -168,7 +168,7 @@ public class MyBeanUtils extends BeanUtilsBean {
 						}
 					} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
 						LOGGER.error("Erreur copyPropertiesEJB", e);
-						throw new BatifreeException("Erreur copyPropertiesEJB", e);
+						throw new WebbatiException("Erreur copyPropertiesEJB", e);
 					}
 				}
 

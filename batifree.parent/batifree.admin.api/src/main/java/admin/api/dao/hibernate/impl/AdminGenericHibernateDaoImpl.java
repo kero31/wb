@@ -6,14 +6,14 @@ import admin.api.application.impl.ApplicationAdmin;
 
 import common.api.application.interfaces.IApplicationCommun;
 import common.api.dao.hibernate.impl.HibernateDaoImpl;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.impl.MetierImpl;
 import common.api.metier.interfaces.IMetier;
 
 /**
  * 
  * Classe/Interface <b>AdminGenericHibernateDaoImpl</b><br/>
- * Classe comprenant toutes les classes génériques DAO pour le projet BATIFREE
+ * Classe comprenant toutes les classes génériques DAO pour le projet WEBBATI
  * 
  * @param <T> ejb
  * @param <TI> MetierImpl
@@ -34,7 +34,7 @@ HibernateDaoImpl<T, TI, ITI, ID> {
 	}
 
 	@Override
-	public IApplicationCommun getApplication() throws BatifreeException {
+	public IApplicationCommun getApplication() throws WebbatiException {
 		return ApplicationAdmin.getApplication();
 	}
 }

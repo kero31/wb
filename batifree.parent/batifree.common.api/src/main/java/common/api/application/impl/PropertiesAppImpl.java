@@ -11,7 +11,7 @@ import java.io.InputStream;
 import org.springframework.stereotype.Service;
 
 import common.api.application.interfaces.IPropertiesApp;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * @author Kero
@@ -22,7 +22,7 @@ public class PropertiesAppImpl implements IPropertiesApp {
 
 	private Properties properties = null;
 	private String fileName = "";
-	protected static final String PROPERTIES_FILENAME = "/batifree.properties";
+	protected static final String PROPERTIES_FILENAME = "/webbati.properties";
 
 	/**
 	 * 
@@ -35,9 +35,9 @@ public class PropertiesAppImpl implements IPropertiesApp {
 	 * Charge la liste des propriétés contenu dans le fichier spécifié
 	 * 
 	 * @return un objet Properties contenant les propriétés du fichier
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected Properties getProperties() throws BatifreeException {
+	protected Properties getProperties() throws WebbatiException {
 		if (properties != null) {
 			return properties;
 		}
@@ -45,7 +45,7 @@ public class PropertiesAppImpl implements IPropertiesApp {
 		Properties prop = new Properties();
 		InputStream input = getClass().getResourceAsStream(fileName);
 		if (input == null) {
-			throw new BatifreeException("Erreur de chargement du getSystemResourceAsStream(" + fileName + ") à cause de : fichier introuvable");
+			throw new WebbatiException("Erreur de chargement du getSystemResourceAsStream(" + fileName + ") à cause de : fichier introuvable");
 		}
 
 		try {
@@ -53,12 +53,12 @@ public class PropertiesAppImpl implements IPropertiesApp {
 			// Enregistrement de la properties
 			properties = prop;
 		} catch (IOException e) {
-			throw new BatifreeException("Erreur de chargement du fichier " + fileName, e);
+			throw new WebbatiException("Erreur de chargement du fichier " + fileName, e);
 		} finally {
 			try {
 				input.close();
 			} catch (IOException e) {
-				throw new BatifreeException("Erreur de fermeture du fichier " + fileName, e);
+				throw new WebbatiException("Erreur de fermeture du fichier " + fileName, e);
 			}
 		}
 
@@ -82,7 +82,7 @@ public class PropertiesAppImpl implements IPropertiesApp {
 	}
 
 	@Override
-	public String getProperty(String pKey) throws BatifreeException {
+	public String getProperty(String pKey) throws WebbatiException {
 		Properties prop = getProperties();
 		if (prop != null) {
 			return prop.getProperty(pKey);
@@ -92,7 +92,7 @@ public class PropertiesAppImpl implements IPropertiesApp {
 	}
 
 	@Override
-	public String getProperty(String pKey, String pDefaultValue) throws BatifreeException {
+	public String getProperty(String pKey, String pDefaultValue) throws WebbatiException {
 		Properties prop = getProperties();
 		if (prop != null) {
 			return prop.getProperty(pKey, pDefaultValue);

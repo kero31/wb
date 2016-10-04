@@ -1,8 +1,8 @@
 package common.api.application.impl;
 
 import common.api.application.interfaces.IUserService;
-import common.api.exception.BatifreeException;
-import common.api.exception.BatifreeUserException;
+import common.api.exception.WebbatiException;
+import common.api.exception.WebbatiUserException;
 import common.api.metier.interfaces.IUserApp;
 import common.api.util.ServiceBeanFactory;
 
@@ -37,7 +37,7 @@ public abstract class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public void closeSessions() throws BatifreeException {
+	public void closeSessions() throws WebbatiException {
 	}
 
 	/**
@@ -48,7 +48,7 @@ public abstract class UserServiceImpl implements IUserService {
 	public abstract IUserApp getUserAppSession();
 
 	@Override
-	public IUserApp getUser() throws BatifreeUserException, BatifreeException {
+	public IUserApp getUser() throws WebbatiUserException, WebbatiException {
 		IUserApp user = null;
 		if (sessionWeb) {
 			user = getUserAppSession();
@@ -57,24 +57,24 @@ public abstract class UserServiceImpl implements IUserService {
 		}
 
 		if (user == null) {
-			throw new BatifreeUserException("Récupération de l'utilisateur SPRING impossible");
+			throw new WebbatiUserException("Récupération de l'utilisateur SPRING impossible");
 		}
 
 		return user;
 	}
 
 	@Override
-	public void updateInfoUserApp(IUserApp pUserApp) throws BatifreeUserException, BatifreeException {
+	public void updateInfoUserApp(IUserApp pUserApp) throws WebbatiUserException, WebbatiException {
 		getUser().updateInfoUserApp(pUserApp);
 	}
 
 	@Override
-	public boolean checkValidUser() throws BatifreeException {
+	public boolean checkValidUser() throws WebbatiException {
 		boolean bValid = false;
 		try {
 			bValid = getUser().isValid();
-		} catch (BatifreeException | BatifreeUserException e) {
-			throw new BatifreeException("L'utilisateur courant ne peut pas pour accéder à l'application à cause de :" + e.getMessage());
+		} catch (WebbatiException | WebbatiUserException e) {
+			throw new WebbatiException("L'utilisateur courant ne peut pas pour accéder à l'application à cause de :" + e.getMessage());
 		}
 
 		return bValid;

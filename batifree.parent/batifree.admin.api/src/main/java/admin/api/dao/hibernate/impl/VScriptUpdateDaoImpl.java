@@ -18,7 +18,7 @@ import common.api.application.interfaces.IApplicationCommun;
 import common.api.dao.hibernate.impl.HibernateViewDaoImpl;
 import common.api.dao.hibernate.util.QueryHibernateUtil;
 import common.api.dao.hibernate.util.UserServiceHibernateImpl;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * Classe <VScriptUpdateDaoImpl>.
@@ -38,14 +38,14 @@ public class VScriptUpdateDaoImpl extends HibernateViewDaoImpl<VScriptupdate, VS
 	}
 
 	@Override
-	protected IApplicationCommun getApplication() throws BatifreeException {
+	protected IApplicationCommun getApplication() throws WebbatiException {
 		return ApplicationAdmin.getApplication();
 	}
 
 	@Override
-	public List<IVScriptUpdate> getListByProjectId(Integer pProjectId) throws BatifreeException {
+	public List<IVScriptUpdate> getListByProjectId(Integer pProjectId) throws WebbatiException {
 		if (pProjectId == null) {
-			throw new BatifreeException("L'id du projet ne peut pas être vide.");
+			throw new WebbatiException("L'id du projet ne peut pas être vide.");
 		}
 		// Résultats
 		List<IVScriptUpdate> listRet = new ArrayList<IVScriptUpdate>();
@@ -64,15 +64,15 @@ public class VScriptUpdateDaoImpl extends HibernateViewDaoImpl<VScriptupdate, VS
 			int ind = 0;
 			String url = (String) line[ind++];
 			if (url == null) {
-				throw new BatifreeException("url NULL");
+				throw new WebbatiException("url NULL");
 			}
 			String driver = (String) line[ind++];
 			if (driver == null) {
-				throw new BatifreeException("driver NULL");
+				throw new WebbatiException("driver NULL");
 			}
 			String login = (String) line[ind++];
 			if (login == null) {
-				throw new BatifreeException("login NULL");
+				throw new WebbatiException("login NULL");
 			}
 			String password = (String) line[ind++];
 			if (password == null) {
@@ -81,11 +81,11 @@ public class VScriptUpdateDaoImpl extends HibernateViewDaoImpl<VScriptupdate, VS
 			String filename = (String) line[ind++];
 			Integer userproject_id = (Integer) line[ind++];
 			if (userproject_id == null) {
-				throw new BatifreeException("userproject_id NULL");
+				throw new WebbatiException("userproject_id NULL");
 			}
 			Integer projectScript_id = (Integer) line[ind++];
 			if (projectScript_id == null) {
-				throw new BatifreeException("projectScript_id NULL");
+				throw new WebbatiException("projectScript_id NULL");
 			}
 
 			VScriptUpdateImpl resultat = new VScriptUpdateImpl();

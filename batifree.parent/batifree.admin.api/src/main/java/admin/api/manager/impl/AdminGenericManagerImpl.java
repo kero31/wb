@@ -8,7 +8,7 @@ import java.io.Serializable;
 import admin.api.application.impl.ApplicationAdmin;
 
 import common.api.application.interfaces.IApplicationCommun;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.manager.impl.ManagerImpl;
 import common.api.metier.interfaces.IMetier;
 
@@ -24,7 +24,7 @@ import common.api.metier.interfaces.IMetier;
 public abstract class AdminGenericManagerImpl<IT extends IMetier<ID>, ID extends Serializable> extends ManagerImpl<IT, ID> {
 
 	@Override
-	public IApplicationCommun getApplication() throws BatifreeException {
+	public IApplicationCommun getApplication() throws WebbatiException {
 		return ApplicationAdmin.getApplication();
 	}
 }

@@ -1,23 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>batifree</groupId>
-	<artifactId>batifree.parent</artifactId>
+	<groupId>webbati</groupId>
+	<artifactId>webbati.parent</artifactId>
 	<version>1.0</version>
 	<packaging>pom</packaging>
-	<name>batifree.parent</name>
+	<name>webbati.parent</name>
 
 	<modules>
-		<module>batifree.common.api</module>
-		<module>batifree.common.web</module>
+		<module>webbati.common.api</module>
+		<module>webbati.common.web</module>
 
-		<module>batifree.admin.api</module>
-		<module>batifree.admin.cmd</module>
+		<module>webbati.admin.api</module>
+		<module>webbati.admin.cmd</module>
 		<!-- A voir plus tard
-		<module>batifree.admin.web.jsf</module> -->
+		<module>webbati.admin.web.jsf</module> -->
 
-		<module>batifree.api2</module>
-		<module>batifree.web.jsf</module>
+		<module>webbati.api</module>
+		<module>webbati.web.jsf</module>
 	</modules>
 
 	<pluginRepositories>

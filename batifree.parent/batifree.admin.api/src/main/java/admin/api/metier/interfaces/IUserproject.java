@@ -6,7 +6,7 @@ package admin.api.metier.interfaces;
 
 import admin.api.metier.id.UserprojectId;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.IMetier;
 
 /**
@@ -60,41 +60,41 @@ public interface IUserproject extends IMetier<UserprojectId> {
 	 * Récupère l'utilisateur.
 	 * 
 	 * @return l'utilisateur.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IUserAppli getUserappli() throws BatifreeException;
+	IUserAppli getUserappli() throws WebbatiException;
 
 	/**
 	 * Met à jour l'utilisateur.
 	 * 
 	 * @param pUserAppli l'utiliateur
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void setUserappli(IUserAppli pUserAppli) throws BatifreeException;
+	void setUserappli(IUserAppli pUserAppli) throws WebbatiException;
 
 	/**
 	 * Récupère le projet.
 	 * 
 	 * @return projet.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IProject getProject() throws BatifreeException;
+	IProject getProject() throws WebbatiException;
 
 	/**
 	 * Met à jour le projet.
 	 * 
 	 * @param pProject le projet
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void setProject(IProject pProject) throws BatifreeException;
+	void setProject(IProject pProject) throws WebbatiException;
 
 	/**
 	 * Récupère la connection BD.
 	 * 
 	 * @return connection BD.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IConnectiondb getConnectiondb() throws BatifreeException;
+	IConnectiondb getConnectiondb() throws WebbatiException;
 
 	/**
 	 * Met à jour la connection BD.
@@ -107,9 +107,9 @@ public interface IUserproject extends IMetier<UserprojectId> {
 	 * Récupère le script du projet.
 	 * 
 	 * @return script du projet.
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IProjectscript getProjectscript() throws BatifreeException;
+	IProjectscript getProjectscript() throws WebbatiException;
 
 	/**
 	 * Met à jour le script du projet.

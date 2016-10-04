@@ -51,7 +51,7 @@ public abstract class GenerateClassUtil {
 	protected final static String INTERFACE_COMMON_DAO = INTERFACE_PREFIXE + "Dao";
 	protected final static String INTERFACE_APPLICATION = INTERFACE_PREFIXE + CLASS_APPLICATION_IMPL;
 
-	protected final static String CLASS_COMMON_EXCEPTION_BATIFREE = "BatifreeException";
+	protected final static String CLASS_COMMON_EXCEPTION_WEBBATI = "WebbatiException";
 	protected final static String CLASS_COMMON_MANAGER = "Manager";
 	protected final static String CLASS_COMMON_MANAGER_IMPL = CLASS_COMMON_MANAGER + IMPLEMENTATION_SUFFIXE;
 	protected final static String CLASS_COMMON_DAO = "Dao";
@@ -64,11 +64,11 @@ public abstract class GenerateClassUtil {
 
 	private static final Logger LOGGER = Logger.getLogger(GenerateClassUtil.class);
 
-	/** nom du projet utilisé pour les noms de packages. Exemple : batifree, admin. */
+	/** nom du projet utilisé pour les noms de packages. Exemple : webbati, admin. */
 	protected final String projectName;
 	/** type du projetutilisé pour les noms de packages. Exemple : api, common, web. */
 	protected final String projectType;
-	/** code du projet utilisé pour les noms de services. Exemple : BF, ADMIN. */
+	/** code du projet utilisé pour les noms de services. Exemple : WB, ADMIN. */
 	protected final String projectCode;
 
 	/** prefixe de la classe du projet utilisé pour les noms de classes. Exemple : Bf, Admin. */
@@ -81,7 +81,7 @@ public abstract class GenerateClassUtil {
 	 * 
 	 * Constructeur.
 	 * 
-	 * @param pProjectName nom du projet utilisé pour les noms de packages. Exemple : batifree, admin
+	 * @param pProjectName nom du projet utilisé pour les noms de packages. Exemple : webbati, admin
 	 * @param pProjectCode code du projet utilisé pour les noms de services. Exemple : BF, ADMIN
 	 * @param pProjectType type du projetutilisé pour les noms de packages. Exemple : api, common, web
 	 * @param pProjectClassPrefix prefixe de la classe du projet utilisé pour les noms de classes. Exemple : Bf, Admin
@@ -702,12 +702,12 @@ public abstract class GenerateClassUtil {
 	}
 
 	/**
-	 * Return ClassCommonBatifreeException
+	 * Return ClassCommonWebbatiException
 	 * 
-	 * @return ClassCommonBatifreeException
+	 * @return ClassCommonWebbatiException
 	 */
-	protected String getClassCommonBatifreeException() {
-		return getPackage(PROJECT_COMMUN, API) + ".exception." + CLASS_COMMON_EXCEPTION_BATIFREE;
+	protected String getClassCommonWebbatiException() {
+		return getPackage(PROJECT_COMMUN, API) + ".exception." + CLASS_COMMON_EXCEPTION_WEBBATI;
 	}
 
 	/**
@@ -806,13 +806,14 @@ public abstract class GenerateClassUtil {
 	}
 
 	/**
-	 * Retourne le servcie du manager à partir du nom de la classe.
+	 * Retourne le service du manager à partir du nom de la classe.
 	 * 
 	 * @param pClassName nom de la classe. Exemple "Bibliotheque, Materiaux
 	 * @return la classe du manager
 	 */
 	protected String getServiceManager(String pClassName) {
 		return projectCode + "_" + getClassNameManager(pClassName);
+		//return "Application" + projectClassPrefix + ".CODE_PROJECT" + "_" + getClassNameManager(pClassName);
 	}
 
 	/**
@@ -1024,9 +1025,9 @@ public abstract class GenerateClassUtil {
 		buffTxt.addInClass(" * Retourne l'application courante.", 1);
 		buffTxt.addInClass(" * ", 1);
 		buffTxt.addInClass(" * @return application courante", 1);
-		buffTxt.addInClass(" * @throws BatifreeException", 1);
+		buffTxt.addInClass(" * @throws WebbatiException", 1);
 		buffTxt.addInClass(" */", 1);
-		buffTxt.addInClass("public static IApplication getApplication() throws BatifreeException {", 1);
+		buffTxt.addInClass("public static IApplication getApplication() throws WebbatiException {", 1);
 		buffTxt.addInMethod("return ServiceBeanFactory.getServiceBean(Application.class);", 1);
 		buffTxt.addInClass("}", 2);
 
@@ -1049,7 +1050,7 @@ public abstract class GenerateClassUtil {
 		buffTxt.add("package " + getPackageManagerImpl() + ";", 2);
 		buffTxt.add("import java.io.Serializable;", 2);
 		buffTxt.add("import " + getInterfaceCommonApplication() + ";", 1);
-		buffTxt.add("import " + getClassCommonBatifreeException() + ";", 1);
+		buffTxt.add("import " + getClassCommonWebbatiException() + ";", 1);
 		buffTxt.add("import " + getClassCommonManagerImpl() + ";", 1);
 		buffTxt.add("import " + getInterfaceCommonMetier() + ";", 2);
 		buffTxt.add("import " + getClassApplicationImpl() + ";", 2);
@@ -1068,7 +1069,7 @@ public abstract class GenerateClassUtil {
 
 		// Opérations
 		buffTxt.addInClass("@Override", 1);
-		buffTxt.addInClass("public " + INTERFACE_COMMON_APPLICATION + " getApplication() throws " + CLASS_COMMON_EXCEPTION_BATIFREE + " {", 1);
+		buffTxt.addInClass("public " + INTERFACE_COMMON_APPLICATION + " getApplication() throws " + CLASS_COMMON_EXCEPTION_WEBBATI + " {", 1);
 		buffTxt.addInMethod("return " + getClassNameApplicationImpl() + ".getApplication();", 1);
 		buffTxt.addInClass("}", 1);
 

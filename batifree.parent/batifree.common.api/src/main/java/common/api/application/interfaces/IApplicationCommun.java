@@ -4,8 +4,8 @@
 
 package common.api.application.interfaces;
 
-import common.api.exception.BatifreeException;
-import common.api.exception.BatifreeUserException;
+import common.api.exception.WebbatiException;
+import common.api.exception.WebbatiUserException;
 import common.api.metier.interfaces.IUserApp;
 
 /**
@@ -27,9 +27,9 @@ public interface IApplicationCommun {
 	 * 
 	 * 
 	 * @param pUser user à enregistré
-	 * @throws BatifreeUserException, BatifreeException BatifreeUserException, BatifreeException
+	 * @throws WebbatiUserException, WebbatiException WebbatiUserException, WebbatiException
 	 */
-	void setUserApp(IUserApp pUser) throws BatifreeUserException, BatifreeException;
+	void setUserApp(IUserApp pUser) throws WebbatiUserException, WebbatiException;
 
 	/**
 	 * Met à jour le user à partir du username.
@@ -37,9 +37,9 @@ public interface IApplicationCommun {
 	 * 
 	 * @param pUsername login
 	 * @param pPassword mot de passe
-	 * @throws BatifreeUserException BatifreeUserException
+	 * @throws WebbatiUserException WebbatiUserException
 	 */
-	void loadUserByUsernamePassword(String pUsername, String pPassword) throws BatifreeUserException;
+	void loadUserByUsernamePassword(String pUsername, String pPassword) throws WebbatiUserException;
 
 	/**
 	 * Retourne le format applicatif
@@ -62,9 +62,9 @@ public interface IApplicationCommun {
 	 * Déconnecte l'application en fermant les sesssions.
 	 * 
 	 * 
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	void deconnection() throws BatifreeException;
+	void deconnection() throws WebbatiException;
 
 	/**
 	 * Retourne le service Impression.

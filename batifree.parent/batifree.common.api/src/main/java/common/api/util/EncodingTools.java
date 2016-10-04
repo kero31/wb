@@ -7,7 +7,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 
 /**
  * 
@@ -25,7 +25,7 @@ public class EncodingTools {
 	public static final String ENCODING_SHA_384 = "SHA-384";
 	public static final String ENCODING_SHA_512 = "SHA-512";
 
-	public static final String ENCODING_KEY = "BATIFREE";
+	public static final String ENCODING_KEY = "WEBBATI";
 
 	private static String IV = "AAAAAAAAAAAAAAAA";
 
@@ -140,13 +140,13 @@ public class EncodingTools {
 	 * @return password encodé
 	 * @throws NoSuchAlgorithmException
 	 */
-	public static String encode(String pTexte, String pAlgorithm) throws BatifreeException {
+	public static String encode(String pTexte, String pAlgorithm) throws WebbatiException {
 		byte[] hash = null;
 		try {
 			MessageDigest md = MessageDigest.getInstance(pAlgorithm);
 			hash = md.digest(pTexte.getBytes());
 		} catch (NoSuchAlgorithmException e) {
-			throw new BatifreeException("Erreur encodage", e);
+			throw new WebbatiException("Erreur encodage", e);
 		}
 		StringBuilder sb = new StringBuilder();
 		for (byte element : hash) {

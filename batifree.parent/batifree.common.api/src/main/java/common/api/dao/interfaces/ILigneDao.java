@@ -8,7 +8,7 @@ import java.util.List;
 
 import java.io.Serializable;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.ILigne;
 import common.api.metier.interfaces.IMetier;
 
@@ -28,8 +28,8 @@ public interface ILigneDao<IT extends IMetier<ID>, ID extends Serializable, ITLI
 	 * @param pFirstResult Index du premier objet à récupérer
 	 * @param pWithChildren TRUE si on charge avec les enfants, FALSE sinon
 	 * @return liste des lignes
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IT> getList(int pMaxResult, int pFirstResult, boolean pWithChildren) throws BatifreeException;
+	List<IT> getList(int pMaxResult, int pFirstResult, boolean pWithChildren) throws WebbatiException;
 
 }

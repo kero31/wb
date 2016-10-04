@@ -7,7 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.util.QueryUtil;
 
 /**
@@ -25,14 +25,14 @@ public class QueryHibernateUtil extends QueryUtil {
 	 * Constructeur.
 	 * 
 	 * @param pUserService User Service
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public QueryHibernateUtil(UserServiceHibernateImpl pUserService) throws BatifreeException {
+	public QueryHibernateUtil(UserServiceHibernateImpl pUserService) throws WebbatiException {
 		userService = pUserService;
 
 		// Génére une exception si le userService est NULL
 		if (userService == null) {
-			throw new BatifreeException("Le userService est NULL.");
+			throw new WebbatiException("Le userService est NULL.");
 		}
 	}
 
@@ -40,14 +40,14 @@ public class QueryHibernateUtil extends QueryUtil {
 	 * Retourne la session
 	 * 
 	 * @return session
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	private Session getSession() throws BatifreeException {
+	private Session getSession() throws WebbatiException {
 		Session sess = userService.getSessionHibernate();
 
 		// Génére une exception si la session hibernate est NULL
 		if (sess == null) {
-			throw new BatifreeException("La session hibernate est NULL.");
+			throw new WebbatiException("La session hibernate est NULL.");
 		}
 
 		return sess;
@@ -60,17 +60,17 @@ public class QueryHibernateUtil extends QueryUtil {
 	 * @param pQuery requête SQL
 	 * @param pClazz classe de retour
 	 * @return liste de données
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public <T> List<T> executeQuery(String pQuery, Class<T> pClazz) throws BatifreeException {
+	public <T> List<T> executeQuery(String pQuery, Class<T> pClazz) throws WebbatiException {
 		try {
 			Query que = getSession().createSQLQuery(pQuery).addEntity(pClazz);
 			@SuppressWarnings("unchecked")
 			List<T> list = que.list();
 			// return que.list();
 			return list;
-		} catch (HibernateException | BatifreeException e) {
-			throw new BatifreeException("Erreur executeQuery", e);
+		} catch (HibernateException | WebbatiException e) {
+			throw new WebbatiException("Erreur executeQuery", e);
 		}
 	}
 
@@ -79,14 +79,14 @@ public class QueryHibernateUtil extends QueryUtil {
 	 * 
 	 * @param pQuery requête SQL
 	 * @return liste de données
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public List<?> executeQuery(String pQuery) throws BatifreeException {
+	public List<?> executeQuery(String pQuery) throws WebbatiException {
 		try {
 			Query que = getSession().createSQLQuery(pQuery);
 			return que.list();
-		} catch (HibernateException | BatifreeException e) {
-			throw new BatifreeException("Erreur executeQuery", e);
+		} catch (HibernateException | WebbatiException e) {
+			throw new WebbatiException("Erreur executeQuery", e);
 		}
 	}
 
@@ -95,12 +95,12 @@ public class QueryHibernateUtil extends QueryUtil {
 	 * 
 	 * @param pQuery requête SQL
 	 * @return The number of entities updated or deleted.
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public int executeUpdateQuery(String pQuery) throws BatifreeException {
+	public int executeUpdateQuery(String pQuery) throws WebbatiException {
 		Session session = getSession();
 		if (session == null) {
-			throw new BatifreeException("Session ne peut pas être vide");
+			throw new WebbatiException("Session ne peut pas être vide");
 		}
 
 		Transaction transaction = null;
@@ -116,7 +116,7 @@ public class QueryHibernateUtil extends QueryUtil {
 			if (transaction != null) {
 				transaction.rollback();
 			}
-			throw new BatifreeException("Erreur executeUpdateQuery", e);
+			throw new WebbatiException("Erreur executeUpdateQuery", e);
 		}
 	}
 
@@ -125,14 +125,14 @@ public class QueryHibernateUtil extends QueryUtil {
 	 * 
 	 * @param pQuery requête SQL
 	 * @return donnée unique
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	public Object executeQueryUniqueResult(String pQuery) throws BatifreeException {
+	public Object executeQueryUniqueResult(String pQuery) throws WebbatiException {
 		try {
 			Query que = getSession().createSQLQuery(pQuery);
 			return que.uniqueResult();
-		} catch (HibernateException | BatifreeException e) {
-			throw new BatifreeException("Erreur executeQueryUniqueResult", e);
+		} catch (HibernateException | WebbatiException e) {
+			throw new WebbatiException("Erreur executeQueryUniqueResult", e);
 		}
 	}
 
@@ -143,10 +143,10 @@ public class QueryHibernateUtil extends QueryUtil {
 	 * @param pClazz classe de retour
 	 * @param <T> classe
 	 * @return donnée unique
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T executeQueryUniqueResult(String pQuery, Class<T> pClazz) throws BatifreeException {
+	public <T> T executeQueryUniqueResult(String pQuery, Class<T> pClazz) throws WebbatiException {
 		Query que = getSession().createSQLQuery(pQuery);
 		return (T) que.uniqueResult();
 	}

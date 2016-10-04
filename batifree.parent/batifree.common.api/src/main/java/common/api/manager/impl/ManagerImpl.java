@@ -9,7 +9,7 @@ import java.util.List;
 import java.io.Serializable;
 
 import common.api.dao.interfaces.IDao;
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.manager.interfaces.IManager;
 import common.api.metier.interfaces.IMetier;
 
@@ -47,7 +47,7 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 	 * 
 	 * @param pObject objet métier
 	 * @return TRUE si l'objet métier est un nouveau, FALSE sinon
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	protected boolean isNewObject(IMetier<ID> pObject) {
 		if (pObject != null) {
@@ -57,7 +57,7 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 	}
 
 	@Override
-	public IT save(IT pObjectMetier) throws BatifreeException {
+	public IT save(IT pObjectMetier) throws WebbatiException {
 		if (pObjectMetier != null && checkDataCorrect(pObjectMetier)) {
 
 			// Met à jour l'objet en fonction d'une création ou d'une modification
@@ -74,9 +74,9 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 				commitTransaction();
 
 				return ejb;
-			} catch (BatifreeException e) {
+			} catch (WebbatiException e) {
 				rollbackTransaction();
-				throw new BatifreeException("Enregistrement du " + pObjectMetier.getClass().getSimpleName() + " échoué à cause de : ", e);
+				throw new WebbatiException("Enregistrement du " + pObjectMetier.getClass().getSimpleName() + " échoué à cause de : ", e);
 			} finally {
 				closeTransaction();
 			}
@@ -86,7 +86,7 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 	}
 
 	@Override
-	public void save(List<IT> pListObjects) throws BatifreeException {
+	public void save(List<IT> pListObjects) throws WebbatiException {
 		if (pListObjects != null && pListObjects.size() > 0) {
 			List<IT> listNewObject = new ArrayList<>();
 			beginTransaction();
@@ -101,9 +101,9 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 				commitTransaction();
 				pListObjects.clear();
 				pListObjects.addAll(listNewObject);
-			} catch (BatifreeException e) {
+			} catch (WebbatiException e) {
 				rollbackTransaction();
-				throw new BatifreeException("Enregistrement de la liste des objets échoué à cause de : ", e);
+				throw new WebbatiException("Enregistrement de la liste des objets échoué à cause de : ", e);
 			} finally {
 				closeTransaction();
 			}
@@ -111,7 +111,7 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 	}
 
 	@Override
-	public void delete(ID pId) throws BatifreeException {
+	public void delete(ID pId) throws WebbatiException {
 		if (pId != null) {
 			try {
 				beginTransaction();
@@ -119,9 +119,9 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 				getDao().delete(pId);
 
 				commitTransaction();
-			} catch (BatifreeException e) {
+			} catch (WebbatiException e) {
 				rollbackTransaction();
-				throw new BatifreeException("Suppression de l'objet avec l'id=" + pId + " échoué à cause de : ", e);
+				throw new WebbatiException("Suppression de l'objet avec l'id=" + pId + " échoué à cause de : ", e);
 			} finally {
 				closeTransaction();
 			}
@@ -129,16 +129,16 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 	}
 
 	@Override
-	public void delete(IT pMetier) throws BatifreeException {
+	public void delete(IT pMetier) throws WebbatiException {
 		if (pMetier != null) {
 			beginTransaction();
 			try {
 				getDao().delete(pMetier);
 
 				commitTransaction();
-			} catch (BatifreeException e) {
+			} catch (WebbatiException e) {
 				rollbackTransaction();
-				throw new BatifreeException("Suppression du " + pMetier.getClass().getSimpleName() + " avec l'id=" + pMetier.getId()
+				throw new WebbatiException("Suppression du " + pMetier.getClass().getSimpleName() + " avec l'id=" + pMetier.getId()
 				        + " échoué à cause de : ", e);
 			} finally {
 				closeTransaction();
@@ -147,7 +147,7 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 	}
 
 	@Override
-	public void delete(List<IT> pListObjects) throws BatifreeException {
+	public void delete(List<IT> pListObjects) throws WebbatiException {
 		if (pListObjects != null && pListObjects.size() > 0) {
 			beginTransaction();
 
@@ -159,9 +159,9 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 				}
 
 				commitTransaction();
-			} catch (BatifreeException e) {
+			} catch (WebbatiException e) {
 				rollbackTransaction();
-				throw new BatifreeException("Suppression de la liste des objets échoué à cause de : ", e);
+				throw new WebbatiException("Suppression de la liste des objets échoué à cause de : ", e);
 			} finally {
 				closeTransaction();
 			}
@@ -176,10 +176,10 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 	 * @param pDao dao
 	 * @param <IMETIER> IMetier
 	 * @param <IDD> Serializable
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
 	protected <IMETIER extends IMetier<IDD>, IDD extends Serializable> void deleteMetierFromNewListMetier(List<IMETIER> pListActual,
-	        List<IMETIER> pListNew, IDao<IMETIER, IDD> pDao) throws BatifreeException {
+	        List<IMETIER> pListNew, IDao<IMETIER, IDD> pDao) throws WebbatiException {
 		if (pListActual != null && pListNew != null) {
 			getDao().deleteMetierFromNewListMetier(pListActual, pListNew, pDao);
 		}
@@ -223,12 +223,12 @@ public abstract class ManagerImpl<IT extends IMetier<ID>, ID extends Serializabl
 	}
 
 	@Override
-	public void deleteAll() throws BatifreeException {
+	public void deleteAll() throws WebbatiException {
 		delete(getList(0));
 	}
 
 	@Override
-	public IT refresh(IT pObject) throws BatifreeException {
+	public IT refresh(IT pObject) throws WebbatiException {
 		if (pObject != null) {
 			return getById(pObject.getId());
 		}

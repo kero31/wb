@@ -21,8 +21,8 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<jaxws:endpoint xmlns:tns="http://webservice/" id="batifree.webservice"
-		implementor="batifree.webservice.Webservice" wsdlLocation="wsdl/webservice.wsdl"
+	<jaxws:endpoint xmlns:tns="http://webservice/" id="webbati.webservice"
+		implementor="webbati.webservice.Webservice" wsdlLocation="wsdl/webservice.wsdl"
 		endpointName="tns:WebservicePort" serviceName="tns:WebserviceService"
 		address="/WebservicePort">
 		<jaxws:features>
@@ -33,11 +33,11 @@
 	<!-- Add Security Bean -->
 	<import resource="securityBeans.xml" />
 
-	<!-- Configuration des beans - BATIFREE -->
-	<context:component-scan base-package="batifree.api.dao.hibernate.impl" />
-	<context:component-scan base-package="batifree.api.dao.hibernate.util" />
-	<context:component-scan base-package="batifree.api.manager.impl" />
-	<context:component-scan base-package="batifree.api.application.impl" />
+	<!-- Configuration des beans - WEBBATI -->
+	<context:component-scan base-package="webbati.api.dao.hibernate.impl" />
+	<context:component-scan base-package="webbati.api.dao.hibernate.util" />
+	<context:component-scan base-package="webbati.api.manager.impl" />
+	<context:component-scan base-package="webbati.api.application.impl" />
 
 	<!-- Configuration des beans - ADMIN -->
 	<context:component-scan base-package="admin.api.dao.hibernate.impl" />
@@ -54,7 +54,7 @@
 
 	<!-- Configuration AOP -->
 	<aop:aspectj-autoproxy />
-	<context:component-scan base-package="batifree.api.aop" />
+	<context:component-scan base-package="webbati.api.aop" />
 	<context:component-scan base-package="common.api.aop" />
 
 </beans>

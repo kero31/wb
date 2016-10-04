@@ -7,7 +7,7 @@ package admin.api.metier.interfaces;
 import java.util.Date;
 import java.util.List;
 
-import common.api.exception.BatifreeException;
+import common.api.exception.WebbatiException;
 import common.api.metier.interfaces.IMetier;
 
 /**
@@ -103,9 +103,9 @@ public interface IUserAppli extends IMetier<Integer> {
 	 * Retourne la liste des rôles.
 	 * 
 	 * @return Liste des rôles
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IRole> getListRole() throws BatifreeException;
+	List<IRole> getListRole() throws WebbatiException;
 
 	/**
 	 * Met à jour la liste des rôles.
@@ -118,17 +118,17 @@ public interface IUserAppli extends IMetier<Integer> {
 	 * Retourne la liste des projets.
 	 * 
 	 * @return Liste des projets
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	List<IUserproject> getListUserproject() throws BatifreeException;
+	List<IUserproject> getListUserproject() throws WebbatiException;
 
 	/**
 	 * Retourne le userappli parent
 	 * 
 	 * @return userappli parent
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	IUserAppli getUserappliParent() throws BatifreeException;
+	IUserAppli getUserappliParent() throws WebbatiException;
 
 	/**
 	 * Met à jour le userappli parent

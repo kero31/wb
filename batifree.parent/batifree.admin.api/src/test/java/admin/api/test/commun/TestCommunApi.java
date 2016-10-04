@@ -11,8 +11,8 @@ import org.springframework.util.StopWatch;
 import common.api.application.impl.UserAppImpl;
 import common.api.application.interfaces.IApplicationCommun;
 import common.api.application.interfaces.ITransaction;
-import common.api.exception.BatifreeException;
-import common.api.exception.BatifreeUserException;
+import common.api.exception.WebbatiException;
+import common.api.exception.WebbatiUserException;
 
 /**
  * Classe <TestCommunApi>.
@@ -55,7 +55,7 @@ public abstract class TestCommunApi {
 	/**
 	 * Charge le login avec le mot de passe.
 	 */
-	protected void loadUserByUsernamePassword() throws BatifreeUserException, BatifreeException {
+	protected void loadUserByUsernamePassword() throws WebbatiUserException, WebbatiException {
 	}
 
 	/**
@@ -63,7 +63,7 @@ public abstract class TestCommunApi {
 	 * 
 	 * @return l'application
 	 */
-	protected abstract IApplicationCommun getApplication() throws BatifreeException;
+	protected abstract IApplicationCommun getApplication() throws WebbatiException;
 
 	/**
 	 * Retourne le contexte.
@@ -91,16 +91,16 @@ public abstract class TestCommunApi {
 	 * 
 	 * @return la transaction
 	 */
-	protected ITransaction getTransaction() throws BatifreeException {
+	protected ITransaction getTransaction() throws WebbatiException {
 		return appCommun.getUserService().getTransaction();
 	}
 
 	/**
 	 * Ferme la transaction.
 	 * 
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected void closeTransaction() throws BatifreeException {
+	protected void closeTransaction() throws WebbatiException {
 		ITransaction transaction = getTransaction();
 		if (transaction != null) {
 			transaction.close();
@@ -110,9 +110,9 @@ public abstract class TestCommunApi {
 	/**
 	 * Commence une transaction.
 	 * 
-	 * @throws BatifreeException
+	 * @throws WebbatiException
 	 */
-	protected void beginTransaction() throws BatifreeException {
+	protected void beginTransaction() throws WebbatiException {
 		ITransaction transaction = getTransaction();
 		if (transaction != null) {
 			transaction.beginTransaction();
@@ -123,9 +123,9 @@ public abstract class TestCommunApi {
 	 * Fait un rollback.
 	 * 
 	 * 
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	protected void rollbackTransaction() throws BatifreeException {
+	protected void rollbackTransaction() throws WebbatiException {
 		ITransaction transaction = getTransaction();
 		if (transaction != null) {
 			transaction.rollback();
@@ -136,9 +136,9 @@ public abstract class TestCommunApi {
 	 * Fait un commit.
 	 * 
 	 * 
-	 * @throws BatifreeException BatifreeException
+	 * @throws WebbatiException WebbatiException
 	 */
-	protected void commitTransaction() throws BatifreeException {
+	protected void commitTransaction() throws WebbatiException {
 		ITransaction transaction = getTransaction();
 		if (transaction != null) {
 			transaction.commit();
