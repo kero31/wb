@@ -1,6 +1,0 @@
-analyseLocally=false
-eclipse.preferences.version=1
-extraProperties=sonar.jdbc.username\=sonar\r\nsonar.jdbc.url\=jdbc\:mysql\://localhost\:3306/sonar\r\nsonar.jdbc.driver\=com.mysql.jdbc.Driver\r\nsonar.jdbc.password\=sonar
-projectKey=webbati\:webbati.admin.api
-serverUrl=http\://localhost\:9000
-version=2
