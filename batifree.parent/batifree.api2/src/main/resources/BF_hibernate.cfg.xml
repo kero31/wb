@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.password">root_WEBBATI_webbatiadmin</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/webbatim</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.default_schema">webbatim</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.hibenate.format_sql">true</property>
+		<property name="hibernate.javax.persistence.validation.mode">none</property>
+		<property name="hibernate.search.autoregister_listeners">false</property>
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- Liste des fichiers de Mapping hbm -->
+		<mapping class="webbati.api.metier.ejb.Activite" />
+		<mapping class="webbati.api.metier.ejb.Materiaux" />
+		<mapping class="webbati.api.metier.ejb.Etat" />
+		<mapping class="webbati.api.metier.ejb.Contact" />
+		<mapping class="webbati.api.metier.ejb.Localisation" />
+		<mapping class="webbati.api.metier.ejb.SoustraitantEtude" />
+		<mapping class="webbati.api.metier.ejb.Detailcnt" />
+		<mapping class="webbati.api.metier.ejb.Avoir" />
+		<mapping class="webbati.api.metier.ejb.TacheLotEtude" />
+		<mapping class="webbati.api.metier.ejb.Etude" />
+		<mapping class="webbati.api.metier.ejb.Groupecnt" />
+		<mapping class="webbati.api.metier.ejb.Pays" />
+		<mapping class="webbati.api.metier.ejb.Unite" />
+		<mapping class="webbati.api.metier.ejb.Diverscnt" />
+		<mapping class="webbati.api.metier.ejb.Mainoeuvre" />
+		<mapping class="webbati.api.metier.ejb.Situation" />
+		<mapping class="webbati.api.metier.ejb.MainoeuvreEtude" />
+		<mapping class="webbati.api.metier.ejb.Fournisseur" />
+		<mapping class="webbati.api.metier.ejb.TacheLotBib" />
+		<mapping class="webbati.api.metier.ejb.TacheLot" />
+		<mapping class="webbati.api.metier.ejb.Soustraitant" />
+		<mapping class="webbati.api.metier.ejb.FournisseurMateriaux" />
+		<mapping class="webbati.api.metier.ejb.Facture" />
+		<mapping class="webbati.api.metier.ejb.Accesdroit" />
+		<mapping class="webbati.api.metier.ejb.MainoeuvreBib" />
+		<mapping class="webbati.api.metier.ejb.Acompte" />
+		<mapping class="webbati.api.metier.ejb.Bibliotheque" />
+		<mapping class="webbati.api.metier.ejb.Famille" />
+		<mapping class="webbati.api.metier.ejb.Client" />
+		<mapping class="webbati.api.metier.ejb.Engin" />
+		<mapping class="webbati.api.metier.ejb.Binaire" />
+		<mapping class="webbati.api.metier.ejb.MateriauxEtude" />
+		<mapping class="webbati.api.metier.ejb.MateriauxBib" />
+		<mapping class="webbati.api.metier.ejb.Tva" />
+		<mapping class="webbati.api.metier.ejb.Codification" />
+		<mapping class="webbati.api.metier.ejb.SoustraitantBib" />
+		<mapping class="webbati.api.metier.ejb.Coordonneecnt" />
+		<mapping class="webbati.api.metier.ejb.Image" />
+		<mapping class="webbati.api.metier.ejb.Skin" />
+		<mapping class="webbati.api.metier.ejb.Categorie" />
+		<mapping class="webbati.api.metier.ejb.EnginEtude" />
+		<mapping class="webbati.api.metier.ejb.EcheancierReglement" />
+		<mapping class="webbati.api.metier.ejb.Devis" />
+		<mapping class="webbati.api.metier.ejb.Chantier" />
+		<mapping class="webbati.api.metier.ejb.Civilite" />
+		<mapping class="webbati.api.metier.ejb.Affaire" />
+		<mapping class="webbati.api.metier.ejb.Echeancier" />
+		<mapping class="webbati.api.metier.ejb.Reglement" />
+		<mapping class="webbati.api.metier.ejb.EnginBib" />
+		<mapping class="webbati.api.metier.ejb.Chargeaffaire" />
+		<mapping class="webbati.api.metier.ejb.Preference" />
+		<mapping class="webbati.api.metier.ejb.ModePaiement" />
+
+	</session-factory>
+</hibernate-configuration>

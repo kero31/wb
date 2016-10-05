@@ -1,0 +1,143 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>webbati</groupId>
+	<artifactId>webbati.parent</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>webbati.parent</name>
+
+	<modules>
+		<module>webbati.common.api</module>
+		<module>webbati.common.web</module>
+
+		<module>webbati.admin.api</module>
+		<module>webbati.admin.cmd</module>
+		<!-- A voir plus tard
+		<module>webbati.admin.web.jsf</module> -->
+
+		<module>webbati.api</module>
+		<module>webbati.web.jsf</module>
+	</modules>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Maven Plugin Repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		
+	    <plugins>
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-javadoc-plugin</artifactId>
+	        <version>2.10.4</version>
+	        <configuration>
+	        	<aggregate>true</aggregate>
+	        	<reportOutputDirectory>${project.build.directory}/../Documentation</reportOutputDirectory>
+          		<failOnError>false</failOnError>
+	        </configuration>
+	      </plugin>
+	    </plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- <sonar.jdbc.url>jdbc:h2:tcp://localhost:9092/sonar</sonar.jdbc.url> 
+					<sonar.jdbc.driver>org.h2.Driver</sonar.jdbc.driver> <sonar.jdbc.username>sonar</sonar.jdbc.username> 
+					<sonar.jdbc.password>sonar</sonar.jdbc.password> -->
+				<sonar.jdbc.url>jdbc:mysql://${sonar.jdbc.mysql.host}:${sonar.jdbc.mysql.port}/sonar</sonar.jdbc.url>
+				<sonar.jdbc.driver>com.mysql.jdbc.Driver</sonar.jdbc.driver>
+				<sonar.jdbc.username>sonar</sonar.jdbc.username>
+				<sonar.jdbc.password>sonar</sonar.jdbc.password>
+				<!-- La ligne ci-dessous n'est utile que si le port par défaut (9000) 
+					est modifié dans le fichier de configuration. -->
+				<!-- <sonar.host.url>http://url-serveur:1234</sonar.host.url> -->
+			</properties>
+		</profile>
+	</profiles>
+
+	<properties>
+		<spring.version>4.1.1.RELEASE</spring.version>
+		<aspectj.version>1.8.2</aspectj.version>
+		<spring-security.version>3.2.5.RELEASE</spring-security.version>
+		
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.version>4.10</junit.version>
+		<sonar.jdbc.mysql.host></sonar.jdbc.mysql.host>
+		<sonar.jdbc.mysql.port></sonar.jdbc.mysql.port>
+	</properties>
+
+	<dependencies>	
+		<!-- Javadoc -->
+		<dependency>
+		    <groupId>org.eclipse.tycho</groupId>
+		    <artifactId>org.eclipse.jdt.core</artifactId>
+		    <version>3.12.0.v20160516-2131</version>
+		</dependency>
+	
+		<!-- JUnit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+
+	</dependencies>
+</project>

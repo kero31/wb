@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:soap="http://cxf.apache.org/bindings/soap" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+		http://cxf.apache.org/jaxws 
+		http://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/core 
+		http://cxf.apache.org/schemas/core.xsd
+		http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- WebService -->
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<jaxws:endpoint xmlns:tns="http://webservice/" id="webbati.webservice"
+		implementor="webbati.webservice.Webservice" wsdlLocation="wsdl/webservice.wsdl"
+		endpointName="tns:WebservicePort" serviceName="tns:WebserviceService"
+		address="/WebservicePort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+
+	<!-- Add Security Bean -->
+	<import resource="securityBeans.xml" />
+
+	<!-- Configuration des beans - WEBBATI -->
+	<context:component-scan base-package="webbati.api.dao.hibernate.impl" />
+	<context:component-scan base-package="webbati.api.dao.hibernate.util" />
+	<context:component-scan base-package="webbati.api.manager.impl" />
+	<context:component-scan base-package="webbati.api.application.impl" />
+
+	<!-- Configuration des beans - ADMIN -->
+	<context:component-scan base-package="admin.api.dao.hibernate.impl" />
+	<context:component-scan base-package="admin.api.dao.hibernate.util" />
+	<context:component-scan base-package="admin.api.manager.impl" />
+	<context:component-scan base-package="admin.api.application.impl" />
+
+	<!-- Configuration des beans - COMMON -->
+	<context:component-scan base-package="common.api.dao.hibernate.impl" />
+	<context:component-scan base-package="common.api.dao.hibernate.util" />
+	<context:component-scan base-package="common.api.manager.impl" />
+	<context:component-scan base-package="common.api.application.impl" />
+	<context:component-scan base-package="common.api.util" />
+
+	<!-- Configuration AOP -->
+	<aop:aspectj-autoproxy />
+	<context:component-scan base-package="webbati.api.aop" />
+	<context:component-scan base-package="common.api.aop" />
+
+</beans>
