@@ -1,25 +1,89 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>webbati.web.angularjs</artifactId>
-  <packaging>war</packaging>
-  
-  <parent>
-  	<artifactId>webbati.parent</artifactId>
-  	<groupId>webbati</groupId>
-  	<version>1.0</version>
-  </parent>
-  
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.6</version>
-        <configuration>
-          <warSourceDirectory>WebContent</warSourceDirectory>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>webbati.web.angularjs</artifactId>
+	<packaging>war</packaging>
+
+	<parent>
+		<artifactId>webbati.parent</artifactId>
+		<groupId>webbati</groupId>
+		<version>1.0</version>
+	</parent>
+
+	<properties>
+		<!-- Plugins -->
+		<version.plugin.war>2.6</version.plugin.war>
+		<version.plugin.jgitflow>1.0-m3</version.plugin.jgitflow>
+		<version.plugin.wildfly>1.1.0.Alpha1</version.plugin.wildfly>
+		
+		<!-- Dependencies -->
+		<version.dependency.jersey>1.19</version.dependency.jersey>
+		<javax.ejb.version>3.2</javax.ejb.version>
+		<javax.persistence.api.version>1.0.2</javax.persistence.api.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${version.plugin.war}</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>${version.plugin.jgitflow}</version>
+				<configuration>
+					<noDeploy>true</noDeploy>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>${version.plugin.wildfly}</version>
+			</plugin>
+
+
+		</plugins>
+	</build>
+	
+	<dependencies>
+		<!-- RESTful web service: Jersey -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>${version.dependency.jersey}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-servlet</artifactId>
+			<version>${version.dependency.jersey}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>${version.dependency.jersey}</version>
+		</dependency>
+
+		<!-- EJB -->
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>javax.ejb-api</artifactId>
+			<version>${javax.ejb.version}</version>
+		</dependency>
+
+		<!-- Persistence -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+
+	</dependencies>
+
 </project>
